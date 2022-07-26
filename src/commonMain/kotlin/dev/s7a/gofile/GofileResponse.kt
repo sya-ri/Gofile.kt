@@ -3,7 +3,7 @@ package dev.s7a.gofile
 import kotlinx.serialization.Serializable
 
 /**
- * Response types of gofile.io.
+ * Response types of Gofile.io.
  */
 sealed interface GofileResponse<T> {
     /**

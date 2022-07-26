@@ -11,7 +11,7 @@ import io.ktor.http.HttpMethod
 import io.ktor.serialization.kotlinx.json.json
 
 /**
- * Gofile.io client using a pre-setup [HttpClient]
+ * Gofile.io client that uses a pre-setup [HttpClient].
  *
  * @property client [HttpClient]
  */
@@ -31,19 +31,19 @@ class GofileClient(private val client: HttpClient) {
     }
 
     /**
-     * Gofile.io client using the default engine [HttpClient]
+     * Gofile.io client that uses an auto-setup [HttpClient].
      */
     constructor() : this(HttpClient(Companion::setupClient))
 
     /**
-     * Gofile.io client using an automatically setup client
+     * Gofile.io client that uses an auto-setup [HttpClient].
      *
      * @param engine [HttpClientEngine]
      */
     constructor(engine: HttpClientEngine) : this(HttpClient(engine, Companion::setupClient))
 
     /**
-     * Gofile.io client using an automatically setup client
+     * Gofile.io client that uses an auto-setup [HttpClient].
      *
      * @param factory [HttpClientEngineFactory]
      */
