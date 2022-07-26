@@ -7,7 +7,6 @@ import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.HttpClientEngineFactory
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.request
-import io.ktor.http.HttpMethod
 import io.ktor.serialization.kotlinx.json.json
 
 /**
@@ -49,10 +48,10 @@ class GofileClient(private val client: HttpClient) {
      */
     constructor(factory: HttpClientEngineFactory<*>) : this(factory.create())
 
-    private suspend inline fun <reified T : GofileResponse<R>, R> request(urlString: String, method: HttpMethod): Result<R> {
+    private suspend inline fun <reified T : GofileResponse<R>, R> request(request: GofileRequest): Result<R> {
         return runCatching {
-            client.request(urlString) {
-                this.method = method
+            client.request(request.urlString) {
+                this.method = request.method
             }
         }.map { response ->
             val body = response.body<T>()
@@ -69,7 +68,7 @@ class GofileClient(private val client: HttpClient) {
      * @see getServerName
      */
     suspend fun getServer(): Result<GofileResponse.GetServer.Data> {
-        return request<GofileResponse.GetServer, GofileResponse.GetServer.Data>("https://api.gofile.io/getServer", HttpMethod.Get).map { it }
+        return request<GofileResponse.GetServer, GofileResponse.GetServer.Data>(GofileRequest.GetServer).map { it }
     }
 
     /**
