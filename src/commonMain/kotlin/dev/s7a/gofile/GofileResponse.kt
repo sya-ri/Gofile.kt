@@ -35,4 +35,23 @@ sealed interface GofileResponse<T> {
         @Serializable
         data class Data(val server: String)
     }
+
+    /**
+     * Returns the file upload result.
+     *
+     * `https://{server}.gofile.io/uploadFile`
+     */
+    @Serializable
+    data class UploadFile(override val status: String, override val data: Data?) : GofileResponse<UploadFile.Data> {
+        /**
+         * @property downloadPage A url to download the uploaded file.
+         * @property code A code to download the uploaded file.
+         * @property parentFolder The parent folder id of the uploaded file.
+         * @property fileId A id of the uploaded file.
+         * @property fileName A name of the upload file.
+         * @property md5 A checksum of the uploaded file.
+         */
+        @Serializable
+        data class Data(val downloadPage: String, val code: String, val parentFolder: String, val fileId: String, val fileName: String, val md5: String)
+    }
 }

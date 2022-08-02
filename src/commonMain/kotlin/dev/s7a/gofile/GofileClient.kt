@@ -52,6 +52,7 @@ class GofileClient(private val client: HttpClient) {
         return runCatching {
             client.request(request.urlString) {
                 this.method = request.method
+                request.buildAction(this)
             }
         }.map { response ->
             val body = response.body<T>()
@@ -78,5 +79,29 @@ class GofileClient(private val client: HttpClient) {
      */
     suspend fun getServerName(): String? {
         return getServer().getOrNull()?.server
+    }
+
+    /**
+     * Upload one file on a specific server.
+     * If you specify a folderId, the file will be added to this folder.
+     *
+     * `https://{server}.gofile.io/uploadFile`
+     *
+     * @param fileName File name.
+     * @param fileContent Bytes of file data
+     * @param contentType A two-part identifier for file formats and format contents transmitted on the Internet.
+     *                    See also [media-types](https://www.iana.org/assignments/media-types/media-types.xhtml)
+     * @param token The access token of an account. Can be retrieved from the profile page.
+     *              If valid, the file will be added to this account.
+     *              If undefined, a guest account will be created to receive the file.
+     * @param folderId The ID of a folder.
+     *                 If valid, the file will be added to this folder.
+     *                 If undefined, a new folder will be created to receive the file.
+     *                 When using the folderId, you must pass the account token.
+     * @param server Server to upload to. If you specify null, it will use the best available.
+     */
+    suspend fun uploadFile(fileName: String, fileContent: ByteArray, contentType: String, token: String? = null, folderId: String? = null, server: String? = null): Result<GofileResponse.UploadFile.Data> {
+        val serverName = server ?: getServer().fold(onSuccess = { it.server }, onFailure = { return Result.failure(it) })
+        return request<GofileResponse.UploadFile, GofileResponse.UploadFile.Data>(GofileRequest.UploadFile(fileName, fileContent, contentType, token, folderId, serverName))
     }
 }
