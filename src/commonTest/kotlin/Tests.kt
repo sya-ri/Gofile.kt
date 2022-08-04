@@ -1,4 +1,5 @@
 import dev.s7a.gofile.GofileClient
+import dev.s7a.gofile.GofileFolderOption
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
 import io.ktor.client.engine.mock.respondError
@@ -107,5 +108,44 @@ class Tests {
             }
             assertFalse(GofileClient(mockEngine).createFolder("aefb20bd-1a19-4194-8c31-e750fbfcf0db", "myFolder", "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM"))
         }
+    }
+
+    @Test
+    fun setFolderOption_should_be_successful() {
+        runTest {
+            val mockEngine = MockEngine {
+                respond(
+                    content = """
+                        {
+                          "status": "ok",
+                          "data": {}
+                        }
+                    """.trimIndent().let(::ByteReadChannel),
+                    status = HttpStatusCode.OK,
+                    headers = headersOf(HttpHeaders.ContentType, "application/json")
+                )
+            }
+            assertTrue(GofileClient(mockEngine).setFolderOption("aefb20bd-1a19-4194-8c31-e750fbfcf0db", GofileFolderOption.Description("Test+description"), "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM"))
+        }
+    }
+
+    @Test
+    fun setFolderOption_can_handle_error() {
+        runTest {
+            val mockEngine = MockEngine {
+                respondError(HttpStatusCode.InternalServerError)
+            }
+            assertFalse(GofileClient(mockEngine).setFolderOption("aefb20bd-1a19-4194-8c31-e750fbfcf0db", GofileFolderOption.Description("Test+description"), "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM"))
+        }
+    }
+
+    @Test
+    fun assert_GofileFolderOption() {
+        assertEquals("true", GofileFolderOption.Public(true).value)
+        assertEquals("false", GofileFolderOption.Public(false).value)
+        assertEquals("pass", GofileFolderOption.Password("pass").value)
+        assertEquals("abc", GofileFolderOption.Description("abc").value)
+        assertEquals("1659636061790", GofileFolderOption.Expire(1659636061790).value)
+        assertEquals("abc,def", GofileFolderOption.Tags("abc", "def").value)
     }
 }

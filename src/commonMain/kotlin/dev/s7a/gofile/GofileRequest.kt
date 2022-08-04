@@ -95,4 +95,24 @@ sealed interface GofileRequest {
             builder.parameter("token", token)
         }
     }
+
+    /**
+     * Set an option on a folder.
+     *
+     * `https://api.gofile.io/setFolderOption`
+     *
+     * @property folderId The folder ID.
+     * @property option The option.
+     * @property token The access token of an account. Can be retrieved from the profile page.
+     */
+    class SetFolderOption(val folderId: String, val option: GofileFolderOption, val token: String) : GofileRequest {
+        override val method = HttpMethod.Put
+        override val urlString = "https://api.gofile.io/setFolderOption"
+        override fun buildAction(builder: HttpRequestBuilder) {
+            builder.parameter("folderId", folderId)
+            builder.parameter("option", option.name)
+            builder.parameter("value", option.value)
+            builder.parameter("token", token)
+        }
+    }
 }

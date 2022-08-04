@@ -117,4 +117,17 @@ class GofileClient(private val client: HttpClient) {
     suspend fun createFolder(parentFolderId: String, folderName: String, token: String): Boolean {
         return request<GofileResponse.CreateFolder, Unit>(GofileRequest.CreateFolder(parentFolderId, folderName, token)).isSuccess
     }
+
+    /**
+     * Set an option on a folder.
+     *
+     * `https://api.gofile.io/setFolderOption`
+     *
+     * @param folderId The folder ID.
+     * @param option The option.
+     * @param token The access token of an account. Can be retrieved from the profile page.
+     */
+    suspend fun setFolderOption(folderId: String, option: GofileFolderOption, token: String): Boolean {
+        return request<GofileResponse.SetFolderOption, Unit>(GofileRequest.SetFolderOption(folderId, option, token)).isSuccess
+    }
 }

@@ -62,4 +62,12 @@ sealed interface GofileResponse<T> {
      */
     @Serializable
     data class CreateFolder(override val status: String, override val data: Unit?) : GofileResponse<Unit>
+
+    /**
+     * Set an option on a folder.
+     *
+     * `https://api.gofile.io/setFolderOption`
+     */
+    @Serializable
+    data class SetFolderOption(override val status: String, override val data: Unit?) : GofileResponse<Unit>
 }
