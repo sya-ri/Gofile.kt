@@ -3,6 +3,7 @@ package dev.s7a.gofile
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.forms.MultiPartFormDataContent
 import io.ktor.client.request.forms.formData
+import io.ktor.client.request.parameter
 import io.ktor.client.request.setBody
 import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
@@ -57,11 +58,11 @@ sealed interface GofileRequest {
         override val method = HttpMethod.Post
         override val urlString = "https://$server.gofile.io/uploadFile"
         override fun buildAction(builder: HttpRequestBuilder) {
+            if (token != null) builder.parameter("token", token)
+            if (folderId != null) builder.parameter("folderId", folderId)
             builder.setBody(
                 MultiPartFormDataContent(
                     formData {
-                        if (token != null) append("token", token)
-                        if (folderId != null) append("folderId", folderId)
                         append(
                             "file",
                             fileContent,
@@ -88,6 +89,10 @@ sealed interface GofileRequest {
     class CreateFolder(val parentFolderId: String, val folderName: String, val token: String) : GofileRequest {
         override val method = HttpMethod.Put
         override val urlString = "https://api.gofile.io/createFolder"
-        override fun buildAction(builder: HttpRequestBuilder) {}
+        override fun buildAction(builder: HttpRequestBuilder) {
+            builder.parameter("parentFolderId", parentFolderId)
+            builder.parameter("folderName", folderName)
+            builder.parameter("token", token)
+        }
     }
 }
