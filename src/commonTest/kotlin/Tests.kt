@@ -11,6 +11,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
@@ -76,6 +77,35 @@ class Tests {
                 This is a test message.
             """.trimIndent().toByteArray()
             assertTrue(GofileClient(mockEngine).uploadFile(fileName, fileContent, "text/plain", server = "store1").isSuccess)
+        }
+    }
+
+    @Test
+    fun createFolder_should_be_successful() {
+        runTest {
+            val mockEngine = MockEngine {
+                respond(
+                    content = """
+                        {
+                          "status": "ok",
+                          "data": {}
+                        }
+                    """.trimIndent().let(::ByteReadChannel),
+                    status = HttpStatusCode.OK,
+                    headers = headersOf(HttpHeaders.ContentType, "application/json")
+                )
+            }
+            assertTrue(GofileClient(mockEngine).createFolder("aefb20bd-1a19-4194-8c31-e750fbfcf0db", "myFolder", "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM"))
+        }
+    }
+
+    @Test
+    fun createFolder_can_handle_error() {
+        runTest {
+            val mockEngine = MockEngine {
+                respondError(HttpStatusCode.InternalServerError)
+            }
+            assertFalse(GofileClient(mockEngine).createFolder("aefb20bd-1a19-4194-8c31-e750fbfcf0db", "myFolder", "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM"))
         }
     }
 }

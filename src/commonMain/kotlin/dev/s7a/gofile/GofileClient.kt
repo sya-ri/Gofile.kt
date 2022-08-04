@@ -104,4 +104,17 @@ class GofileClient(private val client: HttpClient) {
         val serverName = server ?: getServer().fold(onSuccess = { it.server }, onFailure = { return Result.failure(it) })
         return request<GofileResponse.UploadFile, GofileResponse.UploadFile.Data>(GofileRequest.UploadFile(fileName, fileContent, contentType, token, folderId, serverName))
     }
+
+    /**
+     * Create a new folder.
+     *
+     * `https://api.gofile.io/createFolder`
+     *
+     * @param parentFolderId The parent folder ID.
+     * @param folderName The name of the created folder.
+     * @param token The access token of an account. Can be retrieved from the profile page.
+     */
+    suspend fun createFolder(parentFolderId: String, folderName: String, token: String): Boolean {
+        return request<GofileResponse.CreateFolder, Unit>(GofileRequest.CreateFolder(parentFolderId, folderName, token)).isSuccess
+    }
 }

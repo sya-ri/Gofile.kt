@@ -75,4 +75,19 @@ sealed interface GofileRequest {
             )
         }
     }
+
+    /**
+     * Create a new folder.
+     *
+     * `https://api.gofile.io/createFolder`
+     *
+     * @property parentFolderId The parent folder ID.
+     * @property folderName The name of the created folder.
+     * @property token The access token of an account. Can be retrieved from the profile page.
+     */
+    class CreateFolder(val parentFolderId: String, val folderName: String, val token: String) : GofileRequest {
+        override val method = HttpMethod.Put
+        override val urlString = "https://api.gofile.io/createFolder"
+        override fun buildAction(builder: HttpRequestBuilder) {}
+    }
 }

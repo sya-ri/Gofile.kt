@@ -54,4 +54,12 @@ sealed interface GofileResponse<T> {
         @Serializable
         data class Data(val downloadPage: String, val code: String, val parentFolder: String, val fileId: String, val fileName: String, val md5: String)
     }
+
+    /**
+     * Create a new folder.
+     *
+     * `https://api.gofile.io/createFolder`
+     */
+    @Serializable
+    data class CreateFolder(override val status: String, override val data: Unit?) : GofileResponse<Unit>
 }
