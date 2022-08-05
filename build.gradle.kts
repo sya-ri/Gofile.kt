@@ -1,6 +1,7 @@
 plugins {
     kotlin("multiplatform") version "1.7.10"
     kotlin("plugin.serialization") version "1.7.10"
+    id("org.jetbrains.kotlinx.kover") version "0.6.0-Beta"
 }
 
 group = "dev.s7a"
