@@ -53,7 +53,7 @@ sealed interface GofileResponse<T> {
          * @property guestToken If you don't specify a token in the request, Gofile.io will create a guest token.
          */
         @Serializable
-        data class Data(val downloadPage: String, val code: String, val parentFolder: String, val fileId: String, val fileName: String, val md5: String, val guestToken: String?)
+        data class Data(val downloadPage: String, val code: String, val parentFolder: String, val fileId: String, val fileName: String, val md5: String, val guestToken: String? = null)
     }
 
     /**
