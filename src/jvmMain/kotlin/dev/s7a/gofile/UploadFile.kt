@@ -26,7 +26,7 @@ suspend fun GofileClient.uploadFile(file: File, token: String? = null, folderId:
     val contentType = withContext(Dispatchers.IO) {
         Files.probeContentType(Path(file.name))
     } ?: return Result.failure(UnknownContentTypeException(file))
-    return uploadFile(file.name, file.readBytes(), contentType, token, folderId, server)
+    return uploadFile(file, contentType, token, folderId, server)
 }
 
 /**
