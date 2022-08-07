@@ -10,7 +10,7 @@ class UrlTests {
 
     @Test
     fun expected_uploadFile_url() {
-        assertUrl("https://_server.gofile.io/uploadFile?token=_token&folderId=_folderId") {
+        assertUrl("https://_server.gofile.io/uploadFile") { // Parameters are in multipart/form-data
             uploadFile("", byteArrayOf(), "", "_token", "_folderId", "_server")
         }
     }

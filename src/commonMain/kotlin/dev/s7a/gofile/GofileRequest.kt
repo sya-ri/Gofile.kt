@@ -58,11 +58,11 @@ sealed interface GofileRequest {
         override val method = HttpMethod.Post
         override val urlString = "https://$server.gofile.io/uploadFile"
         override fun buildAction(builder: HttpRequestBuilder) {
-            if (token != null) builder.parameter("token", token)
-            if (folderId != null) builder.parameter("folderId", folderId)
             builder.setBody(
                 MultiPartFormDataContent(
                     formData {
+                        if (token != null) append("token", token)
+                        if (folderId != null) append("folderId", folderId)
                         append(
                             "file",
                             fileContent,
