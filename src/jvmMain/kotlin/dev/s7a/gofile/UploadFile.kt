@@ -25,7 +25,7 @@ import kotlin.io.path.Path
 suspend fun GofileClient.uploadFile(file: File, token: String? = null, folderId: String? = null, server: String? = null): Result<GofileResponse.UploadFile.Data> {
     val contentType = withContext(Dispatchers.IO) {
         Files.probeContentType(Path(file.name))
-    }
+    } ?: return Result.failure(UnknownContentTypeException(file))
     return uploadFile(file.name, file.readBytes(), contentType, token, folderId, server)
 }
 
