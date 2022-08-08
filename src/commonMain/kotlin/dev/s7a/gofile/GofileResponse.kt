@@ -71,4 +71,12 @@ sealed interface GofileResponse<T> {
      */
     @Serializable
     data class SetFolderOption(override val status: String, override val data: Unit?) : GofileResponse<Unit>
+
+    /**
+     * Copy one or multiple contents to another folder.
+     *
+     * `https://api.gofile.io/copyContent`
+     */
+    @Serializable
+    data class CopyContent(override val status: String, override val data: Unit?) : GofileResponse<Unit>
 }

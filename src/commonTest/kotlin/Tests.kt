@@ -148,4 +148,33 @@ class Tests {
         assertEquals("1659636061790", GofileFolderOption.Expire(1659636061790).value)
         assertEquals("abc,def", GofileFolderOption.Tags("abc", "def").value)
     }
+
+    @Test
+    fun copyContent_should_be_successful() {
+        runTest {
+            val mockEngine = MockEngine {
+                respond(
+                    content = """
+                        {
+                          "status": "ok",
+                          "data": {}
+                        }
+                    """.trimIndent().let(::ByteReadChannel),
+                    status = HttpStatusCode.OK,
+                    headers = headersOf(HttpHeaders.ContentType, "application/json")
+                )
+            }
+            assertTrue(GofileClient(mockEngine).copyContent("74cdb7aa-c7e5-4451-5314-f14b4c48c4c1", "18c320d4-c123-4aad-82f5-5ceae39fca1c", "01n3MXauGU6ZNt347nujBrayPF1hM3nJ"))
+        }
+    }
+
+    @Test
+    fun copyContent_can_handle_error() {
+        runTest {
+            val mockEngine = MockEngine {
+                respondError(HttpStatusCode.InternalServerError)
+            }
+            assertFalse(GofileClient(mockEngine).copyContent("74cdb7aa-c7e5-4451-5314-f14b4c48c4c1", "18c320d4-c123-4aad-82f5-5ceae39fca1c", "01n3MXauGU6ZNt347nujBrayPF1hM3nJ"))
+        }
+    }
 }

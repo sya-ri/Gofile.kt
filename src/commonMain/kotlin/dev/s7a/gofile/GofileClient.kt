@@ -130,4 +130,30 @@ class GofileClient(private val client: HttpClient) {
     suspend fun setFolderOption(folderId: String, option: GofileFolderOption, token: String): Boolean {
         return request<GofileResponse.SetFolderOption, Unit>(GofileRequest.SetFolderOption(folderId, option, token)).isSuccess
     }
+
+    /**
+     * Copy one contents to another folder.
+     *
+     * `https://api.gofile.io/copyContent`
+     *
+     * @param contentId ContentId to copy (files or folders).
+     * @param folderIdDest Destination folder ID.
+     * @param token The access token of an account. Can be retrieved from the profile page.
+     */
+    suspend fun copyContent(contentId: String, folderIdDest: String, token: String): Boolean {
+        return copyContent(listOf(contentId), folderIdDest, token)
+    }
+
+    /**
+     * Copy one or multiple contents to another folder.
+     *
+     * `https://api.gofile.io/copyContent`
+     *
+     * @param contentsId ContentId to copy (files or folders).
+     * @param folderIdDest Destination folder ID.
+     * @param token The access token of an account. Can be retrieved from the profile page.
+     */
+    suspend fun copyContent(contentsId: List<String>, folderIdDest: String, token: String): Boolean {
+        return request<GofileResponse.CopyContent, Unit>(GofileRequest.CopyContent(contentsId, folderIdDest, token)).isSuccess
+    }
 }

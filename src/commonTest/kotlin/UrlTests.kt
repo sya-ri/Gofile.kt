@@ -40,4 +40,14 @@ class UrlTests {
             setFolderOption("_folderId", GofileFolderOption.Tags("t", "a", "g", "s"), "_token")
         }
     }
+
+    @Test
+    fun expected_copyContent_url() {
+        assertUrl("https://api.gofile.io/copyContent?contentsId=a&folderIdDest=_folderIdDest&token=_token") {
+            copyContent("a", "_folderIdDest", "_token")
+        }
+        assertUrl("https://api.gofile.io/copyContent?contentsId=a,b,c&folderIdDest=_folderIdDest&token=_token") {
+            copyContent(listOf("a", "b", "c"), "_folderIdDest", "_token")
+        }
+    }
 }

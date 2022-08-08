@@ -115,4 +115,23 @@ sealed interface GofileRequest {
             builder.parameter("token", token)
         }
     }
+
+    /**
+     * Copy one or multiple contents to another folder.
+     *
+     * `https://api.gofile.io/copyContent`
+     *
+     * @property contentsId ContentId to copy (files or folders).
+     * @property folderIdDest Destination folder ID.
+     * @property token The access token of an account. Can be retrieved from the profile page.
+     */
+    class CopyContent(val contentsId: List<String>, val folderIdDest: String, val token: String) : GofileRequest {
+        override val method = HttpMethod.Put
+        override val urlString = "https://api.gofile.io/copyContent"
+        override fun buildAction(builder: HttpRequestBuilder) {
+            builder.parameter("contentsId", contentsId.joinToString(","))
+            builder.parameter("folderIdDest", folderIdDest)
+            builder.parameter("token", token)
+        }
+    }
 }
