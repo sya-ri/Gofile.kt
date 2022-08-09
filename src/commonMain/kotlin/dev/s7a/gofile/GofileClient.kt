@@ -23,7 +23,7 @@ class GofileClient(private val client: HttpClient) {
          * @param expectSuccess [HttpClientConfig.expectSuccess]
          * @param ignoreUnknownKeys [kotlinx.serialization.json.JsonBuilder.ignoreUnknownKeys]
          */
-        fun setupClient(client: HttpClientConfig<*>, expectSuccess: Boolean = true, ignoreUnknownKeys: Boolean = false) {
+        fun setupClient(client: HttpClientConfig<*>, expectSuccess: Boolean = false, ignoreUnknownKeys: Boolean = false) {
             client.run {
                 this.expectSuccess = expectSuccess
                 install(ContentNegotiation) {
@@ -62,8 +62,9 @@ class GofileClient(private val client: HttpClient) {
                 this.method = request.method
                 request.buildAction(this)
             }
-        }.map { response ->
-            val body = response.body<T>()
+        }.mapCatching { response ->
+            response to response.body<T>()
+        }.map { (response, body) ->
             val data = body.data?.takeIf { body.isOk } ?: return Result.failure(GofileStatusException(response, body.status))
             return Result.success(data)
         }

@@ -1,5 +1,6 @@
 import dev.s7a.gofile.GofileClient
 import dev.s7a.gofile.GofileFolderOption
+import dev.s7a.gofile.GofileStatusException
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
 import io.ktor.client.engine.mock.respondError
@@ -13,6 +14,7 @@ import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
+import kotlin.test.assertIs
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
@@ -36,6 +38,27 @@ class Tests {
                 )
             }
             assertEquals("store1", GofileClient(mockEngine).getServerName())
+        }
+    }
+
+    @Test
+    fun illegal_status_can_be_handled() {
+        runTest {
+            val mockEngine = MockEngine {
+                respond(
+                    content = """
+                        {
+                          "status": "no-auth",
+                          "data": {}
+                        }
+                    """.trimIndent().let(::ByteReadChannel),
+                    status = HttpStatusCode.Unauthorized,
+                    headers = headersOf(HttpHeaders.ContentType, "application/json")
+                )
+            }
+            val exception = GofileClient(mockEngine).getServer().exceptionOrNull()
+            assertIs<GofileStatusException>(exception)
+            assertEquals("no-auth", exception.status)
         }
     }
 
