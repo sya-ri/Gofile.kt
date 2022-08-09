@@ -6,10 +6,15 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
 import io.ktor.utils.io.ByteReadChannel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.withContext
+import java.nio.file.Files
+import kotlin.io.path.Path
 import kotlin.io.path.createTempDirectory
 import kotlin.test.Test
+import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -44,6 +49,11 @@ class TestsJvm {
                     Hello!!
                     This is a test message.
                 """.trimIndent()
+            )
+            assertNotNull(
+                withContext(Dispatchers.IO) {
+                    Files.probeContentType(Path(file.name))
+                }
             )
             assertTrue(GofileClient(mockEngine).uploadFile(file, server = "store1").isSuccess)
         }
