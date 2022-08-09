@@ -77,7 +77,7 @@ class GofileClient(private val client: HttpClient) {
      * @see getServerName
      */
     suspend fun getServer(): Result<GofileResponse.GetServer.Data> {
-        return request<GofileResponse.GetServer, GofileResponse.GetServer.Data>(GofileRequest.GetServer).map { it }
+        return request<GofileResponse.GetServer, GofileResponse.GetServer.Data>(GofileRequest.GetServer)
     }
 
     /**
