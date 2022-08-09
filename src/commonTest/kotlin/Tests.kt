@@ -89,14 +89,22 @@ class Tests {
                     content = """
                         {
                           "status": "ok",
-                          "data": {}
+                          "data": {
+                            "id": "4991e6d7-5217-46ae-af3d-c9174adae924",
+                            "type": "folder",
+                            "name": "myFolder",
+                            "parentFolder": "aefb20bd-1a19-4194-8c31-e750fbfcf0db"
+                            "createTime": 1660015930,
+                            "childs": [],
+                            "code": "Z19n9a"
+                          }
                         }
                     """.trimIndent().let(::ByteReadChannel),
                     status = HttpStatusCode.OK,
                     headers = headersOf(HttpHeaders.ContentType, "application/json")
                 )
             }
-            assertTrue(GofileClient(mockEngine).createFolder("aefb20bd-1a19-4194-8c31-e750fbfcf0db", "myFolder", "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM"))
+            assertTrue(GofileClient(mockEngine).createFolder("aefb20bd-1a19-4194-8c31-e750fbfcf0db", "myFolder", "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)
         }
     }
 
@@ -106,7 +114,7 @@ class Tests {
             val mockEngine = MockEngine {
                 respondError(HttpStatusCode.InternalServerError)
             }
-            assertFalse(GofileClient(mockEngine).createFolder("aefb20bd-1a19-4194-8c31-e750fbfcf0db", "myFolder", "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM"))
+            assertFalse(GofileClient(mockEngine).createFolder("aefb20bd-1a19-4194-8c31-e750fbfcf0db", "myFolder", "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)
         }
     }
 

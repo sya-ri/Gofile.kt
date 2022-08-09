@@ -114,8 +114,8 @@ class GofileClient(private val client: HttpClient) {
      * @param folderName The name of the created folder.
      * @param token The access token of an account. Can be retrieved from the profile page.
      */
-    suspend fun createFolder(parentFolderId: String, folderName: String, token: String): Boolean {
-        return request<GofileResponse.CreateFolder, Unit>(GofileRequest.CreateFolder(parentFolderId, folderName, token)).isSuccess
+    suspend fun createFolder(parentFolderId: String, folderName: String, token: String): Result<GofileResponse.CreateFolder.Data> {
+        return request<GofileResponse.CreateFolder, GofileResponse.CreateFolder.Data>(GofileRequest.CreateFolder(parentFolderId, folderName, token))
     }
 
     /**

@@ -62,7 +62,19 @@ sealed interface GofileResponse<T> {
      * `https://api.gofile.io/createFolder`
      */
     @Serializable
-    data class CreateFolder(override val status: String, override val data: Unit?) : GofileResponse<Unit>
+    data class CreateFolder(override val status: String, override val data: Data?) : GofileResponse<CreateFolder.Data> {
+        /**
+         * @property id A id of the created folder.
+         * @property type Content type.
+         * @property name A name of the created folder.
+         * @property parentFolder The parent folder id of the created folder.
+         * @property createTime Creation time.
+         * @property childs Files and folders the folder.
+         * @property code A code to open the folder.
+         */
+        @Serializable
+        data class Data(val id: String, val type: String, val name: String, val parentFolder: String, val createTime: Long, val childs: List<String>, val code: String)
+    }
 
     /**
      * Set an option on a folder.
