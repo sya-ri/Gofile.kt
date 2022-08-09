@@ -9,10 +9,11 @@ import kotlin.io.path.writeText
 
 suspend fun main() {
     val client = GofileClient()
+    val token: String? = System.getenv("GOFILE_TOKEN")
     val file = createTempFile(suffix = ".txt").apply {
         writeText("Hello world.")
     }.toFile()
-    client.uploadFile(file).fold(
+    client.uploadFile(file, token = token).fold(
         onSuccess = { println("Download page: ${it.downloadPage}") },
         onFailure = Throwable::printStackTrace
     )
