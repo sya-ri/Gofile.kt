@@ -1,13 +1,14 @@
 package dev.s7a.gofile
 
 import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.client.request.forms.FormDataContent
 import io.ktor.client.request.forms.MultiPartFormDataContent
 import io.ktor.client.request.forms.formData
-import io.ktor.client.request.parameter
 import io.ktor.client.request.setBody
 import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
+import io.ktor.http.Parameters
 
 /**
  * Request types of Gofile.io.
@@ -90,9 +91,15 @@ sealed interface GofileRequest {
         override val method = HttpMethod.Put
         override val urlString = "https://api.gofile.io/createFolder"
         override fun buildAction(builder: HttpRequestBuilder) {
-            builder.parameter("parentFolderId", parentFolderId)
-            builder.parameter("folderName", folderName)
-            builder.parameter("token", token)
+            builder.setBody(
+                FormDataContent(
+                    Parameters.build {
+                        append("parentFolderId", parentFolderId)
+                        append("folderName", folderName)
+                        append("token", token)
+                    }
+                )
+            )
         }
     }
 
@@ -109,10 +116,16 @@ sealed interface GofileRequest {
         override val method = HttpMethod.Put
         override val urlString = "https://api.gofile.io/setFolderOption"
         override fun buildAction(builder: HttpRequestBuilder) {
-            builder.parameter("folderId", folderId)
-            builder.parameter("option", option.name)
-            builder.parameter("value", option.value)
-            builder.parameter("token", token)
+            builder.setBody(
+                FormDataContent(
+                    Parameters.build {
+                        append("folderId", folderId)
+                        append("option", option.name)
+                        append("value", option.value)
+                        append("token", token)
+                    }
+                )
+            )
         }
     }
 
@@ -129,9 +142,15 @@ sealed interface GofileRequest {
         override val method = HttpMethod.Put
         override val urlString = "https://api.gofile.io/copyContent"
         override fun buildAction(builder: HttpRequestBuilder) {
-            builder.parameter("contentsId", contentsId.joinToString(","))
-            builder.parameter("folderIdDest", folderIdDest)
-            builder.parameter("token", token)
+            builder.setBody(
+                FormDataContent(
+                    Parameters.build {
+                        append("contentsId", contentsId.joinToString(","))
+                        append("folderIdDest", folderIdDest)
+                        append("token", token)
+                    }
+                )
+            )
         }
     }
 
@@ -147,8 +166,14 @@ sealed interface GofileRequest {
         override val method = HttpMethod.Delete
         override val urlString = "https://api.gofile.io/deleteContent"
         override fun buildAction(builder: HttpRequestBuilder) {
-            builder.parameter("contentsId", contentsId.joinToString(","))
-            builder.parameter("token", token)
+            builder.setBody(
+                FormDataContent(
+                    Parameters.build {
+                        append("contentsId", contentsId.joinToString(","))
+                        append("token", token)
+                    }
+                )
+            )
         }
     }
 }
