@@ -21,7 +21,6 @@ class GofileClient(private val client: HttpClient) {
          */
         fun setupClient(client: HttpClientConfig<*>) {
             client.run {
-                expectSuccess = true
                 install(ContentNegotiation) {
                     json()
                 }
