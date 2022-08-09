@@ -8,6 +8,7 @@ import io.ktor.client.engine.HttpClientEngineFactory
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.request
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
 
 /**
  * Gofile.io client that uses a pre-setup [HttpClient].
@@ -18,12 +19,19 @@ class GofileClient(private val client: HttpClient) {
     companion object {
         /**
          * Set up [HttpClient] for [GofileClient].
+         *
+         * @param expectSuccess [HttpClientConfig.expectSuccess]
+         * @param ignoreUnknownKeys [kotlinx.serialization.json.JsonBuilder.ignoreUnknownKeys]
          */
-        fun setupClient(client: HttpClientConfig<*>) {
+        fun setupClient(client: HttpClientConfig<*>, expectSuccess: Boolean = true, ignoreUnknownKeys: Boolean = false) {
             client.run {
-                expectSuccess = true
+                this.expectSuccess = expectSuccess
                 install(ContentNegotiation) {
-                    json()
+                    json(
+                        Json {
+                            this.ignoreUnknownKeys = ignoreUnknownKeys
+                        }
+                    )
                 }
             }
         }
