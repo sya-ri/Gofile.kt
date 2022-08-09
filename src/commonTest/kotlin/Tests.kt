@@ -116,7 +116,7 @@ class Tests {
                             "id": "4991e6d7-5217-46ae-af3d-c9174adae924",
                             "type": "folder",
                             "name": "myFolder",
-                            "parentFolder": "aefb20bd-1a19-4194-8c31-e750fbfcf0db"
+                            "parentFolder": "aefb20bd-1a19-4194-8c31-e750fbfcf0db",
                             "createTime": 1660015930,
                             "childs": [],
                             "code": "Z19n9a"

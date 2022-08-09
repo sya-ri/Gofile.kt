@@ -56,17 +56,19 @@ class GofileClient(private val client: HttpClient) {
      */
     constructor(factory: HttpClientEngineFactory<*>) : this(factory.create())
 
-    private suspend inline fun <reified T : GofileResponse<R>, R> request(request: GofileRequest): Result<R> {
+    private suspend inline fun <reified T> request(request: GofileRequest): Result<T> {
         return runCatching {
             client.request(request.urlString) {
                 this.method = request.method
                 request.buildAction(this)
             }
         }.mapCatching { response ->
-            response to response.body<T>()
+            response to response.body<GofileResponse<T>>()
         }.map { (response, body) ->
-            val data = body.data?.takeIf { body.isOk } ?: return Result.failure(GofileStatusException(response, body.status))
-            return Result.success(data)
+            return when (body) {
+                is GofileResponse.Ok -> Result.success(body.data)
+                is GofileResponse.Error -> Result.failure(GofileStatusException(response, body.status))
+            }
         }
     }
 
@@ -77,8 +79,8 @@ class GofileClient(private val client: HttpClient) {
      *
      * @see getServerName
      */
-    suspend fun getServer(): Result<GofileResponse.GetServer.Data> {
-        return request<GofileResponse.GetServer, GofileResponse.GetServer.Data>(GofileRequest.GetServer)
+    suspend fun getServer(): Result<GofileResponse.GetServer> {
+        return request(GofileRequest.GetServer)
     }
 
     /**
@@ -109,9 +111,9 @@ class GofileClient(private val client: HttpClient) {
      *                 When using the folderId, you must pass the account token.
      * @param server Server to upload to. If you specify null, it will use the best available.
      */
-    suspend fun uploadFile(fileName: String, fileContent: ByteArray, contentType: String, token: String? = null, folderId: String? = null, server: String? = null): Result<GofileResponse.UploadFile.Data> {
+    suspend fun uploadFile(fileName: String, fileContent: ByteArray, contentType: String, token: String? = null, folderId: String? = null, server: String? = null): Result<GofileResponse.UploadFile> {
         val serverName = server ?: getServer().fold(onSuccess = { it.server }, onFailure = { return Result.failure(it) })
-        return request<GofileResponse.UploadFile, GofileResponse.UploadFile.Data>(GofileRequest.UploadFile(fileName, fileContent, contentType, token, folderId, serverName))
+        return request(GofileRequest.UploadFile(fileName, fileContent, contentType, token, folderId, serverName))
     }
 
     /**
@@ -123,8 +125,8 @@ class GofileClient(private val client: HttpClient) {
      * @param folderName The name of the created folder.
      * @param token The access token of an account. Can be retrieved from the profile page.
      */
-    suspend fun createFolder(parentFolderId: String, folderName: String, token: String): Result<GofileResponse.CreateFolder.Data> {
-        return request<GofileResponse.CreateFolder, GofileResponse.CreateFolder.Data>(GofileRequest.CreateFolder(parentFolderId, folderName, token))
+    suspend fun createFolder(parentFolderId: String, folderName: String, token: String): Result<GofileResponse.CreateFolder> {
+        return request(GofileRequest.CreateFolder(parentFolderId, folderName, token))
     }
 
     /**
@@ -137,7 +139,7 @@ class GofileClient(private val client: HttpClient) {
      * @param token The access token of an account. Can be retrieved from the profile page.
      */
     suspend fun setFolderOption(folderId: String, option: GofileFolderOption, token: String): Boolean {
-        return request<GofileResponse.SetFolderOption, Unit>(GofileRequest.SetFolderOption(folderId, option, token)).isSuccess
+        return request<Unit>(GofileRequest.SetFolderOption(folderId, option, token)).isSuccess
     }
 
     /**
@@ -163,7 +165,7 @@ class GofileClient(private val client: HttpClient) {
      * @param token The access token of an account. Can be retrieved from the profile page.
      */
     suspend fun copyContent(contentsId: List<String>, folderIdDest: String, token: String): Boolean {
-        return request<GofileResponse.CopyContent, Unit>(GofileRequest.CopyContent(contentsId, folderIdDest, token)).isSuccess
+        return request<Unit>(GofileRequest.CopyContent(contentsId, folderIdDest, token)).isSuccess
     }
 
     /**
@@ -187,6 +189,6 @@ class GofileClient(private val client: HttpClient) {
      * @param token The access token of an account. Can be retrieved from the profile page.
      */
     suspend fun deleteContent(contentsId: List<String>, token: String): Boolean {
-        return request<GofileResponse.DeleteContent, Unit>(GofileRequest.DeleteContent(contentsId, token)).isSuccess
+        return request<Unit>(GofileRequest.DeleteContent(contentsId, token)).isSuccess
     }
 }
