@@ -50,4 +50,14 @@ class UrlTests {
             copyContent(listOf("a", "b", "c"), "_folderIdDest", "_token")
         }
     }
+
+    @Test
+    fun expected_deleteContent_url() {
+        assertUrl("https://api.gofile.io/deleteContent?contentsId=a&token=_token") {
+            deleteContent("a", "_token")
+        }
+        assertUrl("https://api.gofile.io/deleteContent?contentsId=a,b,c&token=_token") {
+            deleteContent(listOf("a", "b", "c"), "_token")
+        }
+    }
 }

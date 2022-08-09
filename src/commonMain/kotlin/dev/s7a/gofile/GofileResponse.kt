@@ -79,4 +79,12 @@ sealed interface GofileResponse<T> {
      */
     @Serializable
     data class CopyContent(override val status: String, override val data: Unit?) : GofileResponse<Unit>
+
+    /**
+     * Delete one or multiple files/folders.
+     *
+     * `https://api.gofile.io/deleteContent`
+     */
+    @Serializable
+    data class DeleteContent(override val status: String, override val data: Unit?) : GofileResponse<Unit>
 }

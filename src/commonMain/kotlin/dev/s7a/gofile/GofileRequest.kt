@@ -134,4 +134,21 @@ sealed interface GofileRequest {
             builder.parameter("token", token)
         }
     }
+
+    /**
+     * Delete one or multiple files/folders.
+     *
+     * `https://api.gofile.io/deleteContent`
+     *
+     * @property contentsId ContentId to delete (files or folders).
+     * @property token The access token of an account. Can be retrieved from the profile page.
+     */
+    class DeleteContent(val contentsId: List<String>, val token: String) : GofileRequest {
+        override val method = HttpMethod.Delete
+        override val urlString = "https://api.gofile.io/deleteContent"
+        override fun buildAction(builder: HttpRequestBuilder) {
+            builder.parameter("contentsId", contentsId.joinToString(","))
+            builder.parameter("token", token)
+        }
+    }
 }

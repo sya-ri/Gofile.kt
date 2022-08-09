@@ -132,7 +132,7 @@ class GofileClient(private val client: HttpClient) {
     }
 
     /**
-     * Copy one contents to another folder.
+     * Copy one or multiple contents to another folder.
      *
      * `https://api.gofile.io/copyContent`
      *
@@ -155,5 +155,29 @@ class GofileClient(private val client: HttpClient) {
      */
     suspend fun copyContent(contentsId: List<String>, folderIdDest: String, token: String): Boolean {
         return request<GofileResponse.CopyContent, Unit>(GofileRequest.CopyContent(contentsId, folderIdDest, token)).isSuccess
+    }
+
+    /**
+     * Delete one or multiple files/folders.
+     *
+     * `https://api.gofile.io/deleteContent`
+     *
+     * @param contentId ContentId to delete (files or folders).
+     * @param token The access token of an account. Can be retrieved from the profile page.
+     */
+    suspend fun deleteContent(contentId: String, token: String): Boolean {
+        return deleteContent(listOf(contentId), token)
+    }
+
+    /**
+     * Delete one or multiple files/folders.
+     *
+     * `https://api.gofile.io/deleteContent`
+     *
+     * @param contentsId ContentId to delete (files or folders).
+     * @param token The access token of an account. Can be retrieved from the profile page.
+     */
+    suspend fun deleteContent(contentsId: List<String>, token: String): Boolean {
+        return request<GofileResponse.DeleteContent, Unit>(GofileRequest.DeleteContent(contentsId, token)).isSuccess
     }
 }
