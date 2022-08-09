@@ -18,11 +18,6 @@ import kotlin.test.assertTrue
 @OptIn(ExperimentalCoroutinesApi::class)
 class TestsJvm {
     @Test
-    fun contentType_is_expected() {
-        assertNotNull(Files.probeContentType(Path("test.txt")))
-    }
-
-    @Test
     fun uploadFile_should_be_successful() {
         runTest {
             val mockEngine = MockEngine {
@@ -53,7 +48,7 @@ class TestsJvm {
                     This is a test message.
                 """.trimIndent()
             )
-            assertTrue(GofileClient(mockEngine).uploadFile(file, server = "store1").isSuccess)
+            assertTrue(GofileClient(mockEngine).uploadFile(file, "text/plain", server = "store1").isSuccess)
         }
     }
 }
