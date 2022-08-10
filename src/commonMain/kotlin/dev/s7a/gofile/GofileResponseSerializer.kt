@@ -13,6 +13,7 @@ import kotlinx.serialization.json.JsonDecoder
 import kotlinx.serialization.json.JsonEncoder
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
 
@@ -33,6 +34,7 @@ class GofileResponseSerializer<T>(private val dataSerializer: KSerializer<T>) : 
             "Error",
             buildClassSerialDescriptor("Error") {
                 element<String>("status")
+                element<JsonObject>("data", isOptional = true)
             }
         )
     }
@@ -41,12 +43,15 @@ class GofileResponseSerializer<T>(private val dataSerializer: KSerializer<T>) : 
         require(decoder is JsonDecoder)
         val element = decoder.decodeJsonElement() as? JsonObject ?: throw IllegalArgumentException("decoder.decodeJsonElement() must be JsonObject")
         val statusElement = element["status"] ?: throw IllegalArgumentException("element must contain status")
+        val dataElement = element["data"]
         return when (val status = statusElement.jsonPrimitive.content) {
             "ok" -> {
-                val dataElement = element["data"] ?: throw IllegalArgumentException("element must contain data")
+                if (dataElement == null) throw IllegalArgumentException("element must contain data")
                 GofileResponse.Ok(decoder.json.decodeFromJsonElement(dataSerializer, dataElement))
             }
-            else -> GofileResponse.Error(status)
+            else -> {
+                GofileResponse.Error(status, dataElement?.jsonObject)
+            }
         }
     }
 
@@ -60,6 +65,9 @@ class GofileResponseSerializer<T>(private val dataSerializer: KSerializer<T>) : 
                 }
                 is GofileResponse.Error -> {
                     put("status", value.status)
+                    if (value.data != null) {
+                        put("data", value.data)
+                    }
                 }
             }
         }

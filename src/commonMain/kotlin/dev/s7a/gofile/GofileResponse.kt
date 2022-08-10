@@ -1,6 +1,7 @@
 package dev.s7a.gofile
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonObject
 
 /**
  * Response types of Gofile.io.
@@ -17,7 +18,7 @@ sealed class GofileResponse<out T> {
      * Gofile.io returned some error.
      */
     @Serializable
-    data class Error(val status: String) : GofileResponse<Nothing>()
+    data class Error(val status: String, val data: JsonObject? = null) : GofileResponse<Nothing>()
 
     /**
      * @property server The best server available to receive files.
