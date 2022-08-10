@@ -167,7 +167,7 @@ class GofileClient(private val client: HttpClient) {
      * @param contentId ContentId to delete (files or folders).
      * @param token The access token of an account. Can be retrieved from the profile page.
      */
-    suspend fun deleteContent(contentId: String, token: String): Result<Unit> {
+    suspend fun deleteContent(contentId: String, token: String): Result<Map<String, String>> {
         return deleteContent(listOf(contentId), token)
     }
 
@@ -179,7 +179,7 @@ class GofileClient(private val client: HttpClient) {
      * @param contentsId ContentId to delete (files or folders).
      * @param token The access token of an account. Can be retrieved from the profile page.
      */
-    suspend fun deleteContent(contentsId: List<String>, token: String): Result<Unit> {
+    suspend fun deleteContent(contentsId: List<String>, token: String): Result<Map<String, String>> {
         return request(GofileRequest.DeleteContent(contentsId, token))
     }
 }
