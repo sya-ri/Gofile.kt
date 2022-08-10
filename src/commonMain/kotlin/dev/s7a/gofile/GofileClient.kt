@@ -129,8 +129,8 @@ class GofileClient(private val client: HttpClient) {
      * @param option The option.
      * @param token The access token of an account. Can be retrieved from the profile page.
      */
-    suspend fun setFolderOption(folderId: String, option: GofileFolderOption, token: String): Boolean {
-        return request<Unit>(GofileRequest.SetFolderOption(folderId, option, token)).isSuccess
+    suspend fun setFolderOption(folderId: String, option: GofileFolderOption, token: String): Result<Unit> {
+        return request(GofileRequest.SetFolderOption(folderId, option, token))
     }
 
     /**
@@ -142,7 +142,7 @@ class GofileClient(private val client: HttpClient) {
      * @param folderIdDest Destination folder ID.
      * @param token The access token of an account. Can be retrieved from the profile page.
      */
-    suspend fun copyContent(contentId: String, folderIdDest: String, token: String): Boolean {
+    suspend fun copyContent(contentId: String, folderIdDest: String, token: String): Result<Unit> {
         return copyContent(listOf(contentId), folderIdDest, token)
     }
 
@@ -155,8 +155,8 @@ class GofileClient(private val client: HttpClient) {
      * @param folderIdDest Destination folder ID.
      * @param token The access token of an account. Can be retrieved from the profile page.
      */
-    suspend fun copyContent(contentsId: List<String>, folderIdDest: String, token: String): Boolean {
-        return request<Unit>(GofileRequest.CopyContent(contentsId, folderIdDest, token)).isSuccess
+    suspend fun copyContent(contentsId: List<String>, folderIdDest: String, token: String): Result<Unit> {
+        return request(GofileRequest.CopyContent(contentsId, folderIdDest, token))
     }
 
     /**
@@ -167,7 +167,7 @@ class GofileClient(private val client: HttpClient) {
      * @param contentId ContentId to delete (files or folders).
      * @param token The access token of an account. Can be retrieved from the profile page.
      */
-    suspend fun deleteContent(contentId: String, token: String): Boolean {
+    suspend fun deleteContent(contentId: String, token: String): Result<Unit> {
         return deleteContent(listOf(contentId), token)
     }
 
@@ -179,7 +179,7 @@ class GofileClient(private val client: HttpClient) {
      * @param contentsId ContentId to delete (files or folders).
      * @param token The access token of an account. Can be retrieved from the profile page.
      */
-    suspend fun deleteContent(contentsId: List<String>, token: String): Boolean {
-        return request<Unit>(GofileRequest.DeleteContent(contentsId, token)).isSuccess
+    suspend fun deleteContent(contentsId: List<String>, token: String): Result<Unit> {
+        return request(GofileRequest.DeleteContent(contentsId, token))
     }
 }

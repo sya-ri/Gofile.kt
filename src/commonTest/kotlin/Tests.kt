@@ -156,7 +156,7 @@ class Tests {
                     headers = headersOf(HttpHeaders.ContentType, "application/json")
                 )
             }
-            assertTrue(GofileClient(mockEngine).setFolderOption("aefb20bd-1a19-4194-8c31-e750fbfcf0db", GofileFolderOption.Description("Test+description"), "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM"))
+            assertTrue(GofileClient(mockEngine).setFolderOption("aefb20bd-1a19-4194-8c31-e750fbfcf0db", GofileFolderOption.Description("Test+description"), "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)
         }
     }
 
@@ -166,7 +166,7 @@ class Tests {
             val mockEngine = MockEngine {
                 respondError(HttpStatusCode.InternalServerError)
             }
-            assertFalse(GofileClient(mockEngine).setFolderOption("aefb20bd-1a19-4194-8c31-e750fbfcf0db", GofileFolderOption.Description("Test+description"), "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM"))
+            assertFalse(GofileClient(mockEngine).setFolderOption("aefb20bd-1a19-4194-8c31-e750fbfcf0db", GofileFolderOption.Description("Test+description"), "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)
         }
     }
 
@@ -195,7 +195,7 @@ class Tests {
                     headers = headersOf(HttpHeaders.ContentType, "application/json")
                 )
             }
-            assertTrue(GofileClient(mockEngine).copyContent("74cdb7aa-c7e5-4451-5314-f14b4c48c4c1", "18c320d4-c123-4aad-82f5-5ceae39fca1c", "01n3MXauGU6ZNt347nujBrayPF1hM3nJ"))
+            assertTrue(GofileClient(mockEngine).copyContent("74cdb7aa-c7e5-4451-5314-f14b4c48c4c1", "18c320d4-c123-4aad-82f5-5ceae39fca1c", "01n3MXauGU6ZNt347nujBrayPF1hM3nJ").isSuccess)
         }
     }
 
@@ -205,7 +205,7 @@ class Tests {
             val mockEngine = MockEngine {
                 respondError(HttpStatusCode.InternalServerError)
             }
-            assertFalse(GofileClient(mockEngine).copyContent("74cdb7aa-c7e5-4451-5314-f14b4c48c4c1", "18c320d4-c123-4aad-82f5-5ceae39fca1c", "01n3MXauGU6ZNt347nujBrayPF1hM3nJ"))
+            assertFalse(GofileClient(mockEngine).copyContent("74cdb7aa-c7e5-4451-5314-f14b4c48c4c1", "18c320d4-c123-4aad-82f5-5ceae39fca1c", "01n3MXauGU6ZNt347nujBrayPF1hM3nJ").isSuccess)
         }
     }
 
@@ -224,7 +224,7 @@ class Tests {
                     headers = headersOf(HttpHeaders.ContentType, "application/json")
                 )
             }
-            assertTrue(GofileClient(mockEngine).deleteContent("41c45aa2-4f81-424d-b943-81e854dbecfd%2C74bdb74f-c7e3-4968-8327-f14c4c48c4c6", "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM"))
+            assertTrue(GofileClient(mockEngine).deleteContent("41c45aa2-4f81-424d-b943-81e854dbecfd%2C74bdb74f-c7e3-4968-8327-f14c4c48c4c6", "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)
         }
     }
 
@@ -234,7 +234,7 @@ class Tests {
             val mockEngine = MockEngine {
                 respondError(HttpStatusCode.InternalServerError)
             }
-            assertFalse(GofileClient(mockEngine).deleteContent("41c45aa2-4f81-424d-b943-81e854dbecfd%2C74bdb74f-c7e3-4968-8327-f14c4c48c4c6", "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM"))
+            assertFalse(GofileClient(mockEngine).deleteContent("41c45aa2-4f81-424d-b943-81e854dbecfd%2C74bdb74f-c7e3-4968-8327-f14c4c48c4c6", "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)
         }
     }
 }
