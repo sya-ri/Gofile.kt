@@ -26,4 +26,4 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages
+        uses: actions/deploy-pages@v1
