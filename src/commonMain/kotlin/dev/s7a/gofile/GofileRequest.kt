@@ -4,6 +4,7 @@ import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.forms.FormDataContent
 import io.ktor.client.request.forms.MultiPartFormDataContent
 import io.ktor.client.request.forms.formData
+import io.ktor.client.request.parameter
 import io.ktor.client.request.setBody
 import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
@@ -174,6 +175,25 @@ sealed interface GofileRequest {
                     }
                 )
             )
+        }
+    }
+
+    /**
+     * Retrieving specific account information.
+     *
+     * `https://api.gofile.io/getAccountDetails`
+     *
+     * @property token The access token of an account. Can be retrieved from the profile page.
+     * @property allDetails If set, all details will be returned. If undefined, minimal information will be returned.
+     */
+    class GetAccountDetails(val token: String, val allDetails: Boolean) : GofileRequest {
+        override val method = HttpMethod.Get
+        override val urlString = "https://api.gofile.io/getAccountDetails"
+        override fun buildAction(builder: HttpRequestBuilder) {
+            builder.parameter("token", token)
+            if (allDetails) {
+                builder.parameter("allDetails", true)
+            }
         }
     }
 }

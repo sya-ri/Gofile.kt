@@ -49,4 +49,19 @@ sealed class GofileResponse<out T> {
      */
     @Serializable
     data class CreateFolder(val id: String, val type: String, val name: String, val parentFolder: String, val createTime: Long, val childs: List<String>, val code: String)
+
+    /**
+     * @property token The access token of an account.
+     * @property email The email of an account.
+     * @property tier The tier of an account.
+     * @property rootFolder The root folder id.
+     * @property filesCount A number of files.
+     * @property filesCountLimit
+     * @property totalSize A size of all files.
+     * @property totalSizeLimit
+     * @property total30DDLTraffic
+     * @property total30DDLTrafficLimit
+     */
+    @Serializable
+    data class GetAccountDetails(val token: String, val email: String, val tier: String, val rootFolder: String, val filesCount: Int, val filesCountLimit: Int?, val totalSize: Int, val totalSizeLimit: Int?, val total30DDLTraffic: Int, val total30DDLTrafficLimit: Int?)
 }

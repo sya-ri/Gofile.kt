@@ -17,12 +17,19 @@ suspend fun main() {
     val uploadFile = client.uploadFile(file, token = token).getOrThrow()
     println("uploadFile: $uploadFile")
     if (token == null) token = uploadFile.guestToken ?: return
+    val accountDetails = client.getAccountDetails(token).getOrThrow()
+    println("accountDetails: $accountDetails")
+    val accountDetailsAll = client.getAccountDetailsAll(token).getOrThrow()
+    println("accountDetailsAll: $accountDetailsAll")
     val createFolder = client.createFolder(uploadFile.parentFolder, "new-folder", token).getOrThrow()
     println("createFolder: $createFolder")
     client.setFolderOption(createFolder.id, GofileFolderOption.Description("description"), token).getOrThrow()
     client.setFolderOption(createFolder.id, GofileFolderOption.Expire(1660106197), token).getOrThrow()
     client.setFolderOption(createFolder.id, GofileFolderOption.Password("password"), token).getOrThrow()
     client.setFolderOption(createFolder.id, GofileFolderOption.Tags("t", "a", "g", "s"), token).getOrThrow()
+    if (accountDetails.tier != "guest" && accountDetails.tier != "standard") {
+        client.copyContent(uploadFile.fileId, createFolder.id, token).getOrThrow()
+    }
     val deleteContent = client.deleteContent(uploadFile.fileId, token).getOrThrow()
     println("deleteContent: $deleteContent")
 }

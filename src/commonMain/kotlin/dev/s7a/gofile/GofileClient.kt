@@ -182,4 +182,28 @@ class GofileClient(private val client: HttpClient) {
     suspend fun deleteContent(contentsId: List<String>, token: String): Result<Map<String, String>> {
         return request(GofileRequest.DeleteContent(contentsId, token))
     }
+
+    /**
+     * Retrieving specific account information.
+     *
+     * `https://api.gofile.io/getAccountDetails`
+     *
+     * @param token The access token of an account. Can be retrieved from the profile page.
+     * @see getAccountDetailsAll
+     */
+    suspend fun getAccountDetails(token: String): Result<GofileResponse.GetAccountDetails> {
+        return request(GofileRequest.GetAccountDetails(token, false))
+    }
+
+    /**
+     * Retrieving specific account information.
+     *
+     * `https://api.gofile.io/getAccountDetails?allDetails=true`
+     *
+     * @see token The access token of an account. Can be retrieved from the profile page.
+     * @see getAccountDetails
+     */
+    suspend fun getAccountDetailsAll(token: String): Result<GofileResponse.GetAccountDetails> {
+        return request(GofileRequest.GetAccountDetails(token, true))
+    }
 }

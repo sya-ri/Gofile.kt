@@ -237,4 +237,46 @@ class Tests {
             assertFalse(GofileClient(mockEngine).deleteContent("41c45aa2-4f81-424d-b943-81e854dbecfd%2C74bdb74f-c7e3-4968-8327-f14c4c48c4c6", "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)
         }
     }
+
+    @Test
+    fun getAccountDetails_should_be_successful() {
+        runTest {
+            val mockEngine = MockEngine {
+                respond(
+                    content = """
+                        {
+                          "status": "ok",
+                          "data": {
+                            "token": "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM",
+                            "email": "email@domain.tld",
+                            "tier": "standard",
+                            "rootFolder": "2aecea58-84e6-420d-b2b9-68b4add8418d",
+                            "filesCount": 0,
+                            "filesCountLimit": null,
+                            "totalSize": 0,
+                            "totalSizeLimit": null,
+                            "total30DDLTraffic": 0,
+                            "total30DDLTrafficLimit": null
+                          }
+                        }
+                    """.trimIndent().let(::ByteReadChannel),
+                    status = HttpStatusCode.OK,
+                    headers = headersOf(HttpHeaders.ContentType, "application/json")
+                )
+            }
+            assertTrue(GofileClient(mockEngine).getAccountDetails("ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)
+            assertTrue(GofileClient(mockEngine).getAccountDetailsAll("ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)
+        }
+    }
+
+    @Test
+    fun getAccountDetails_can_handle_error() {
+        runTest {
+            val mockEngine = MockEngine {
+                respondError(HttpStatusCode.InternalServerError)
+            }
+            assertFalse(GofileClient(mockEngine).getAccountDetails("ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)
+            assertFalse(GofileClient(mockEngine).getAccountDetailsAll("ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)
+        }
+    }
 }

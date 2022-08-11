@@ -25,4 +25,4 @@ https://gofile.io/api
 - [x] setFolderOption
 - [x] copyContent
 - [x] deleteContent
-- [ ] getAccountDetails
+- [x] getAccountDetails
