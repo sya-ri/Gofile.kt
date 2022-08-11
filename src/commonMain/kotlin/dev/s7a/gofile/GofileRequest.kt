@@ -130,7 +130,7 @@ sealed interface GofileRequest {
     }
 
     /**
-     * Copy one or multiple contents to another folder.
+     * Copy one or multiple contents to another folder. **Only available to premium users.**
      *
      * `https://api.gofile.io/copyContent`
      *
