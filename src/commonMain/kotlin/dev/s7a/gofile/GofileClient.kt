@@ -184,7 +184,7 @@ class GofileClient(private val client: HttpClient) {
     }
 
     /**
-     * Retrieving specific account information.
+     * Retrieving specific account information. **The statistics are updated every 24 hours.**
      *
      * `https://api.gofile.io/getAccountDetails`
      *

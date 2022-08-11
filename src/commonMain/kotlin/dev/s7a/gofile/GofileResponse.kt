@@ -51,6 +51,8 @@ sealed class GofileResponse<out T> {
     data class CreateFolder(val id: String, val type: String, val name: String, val parentFolder: String, val createTime: Long, val childs: List<String>, val code: String)
 
     /**
+     * **The statistics are updated every 24 hours.**
+     *
      * @property token The access token of an account.
      * @property email The email of an account.
      * @property tier The tier of an account.
