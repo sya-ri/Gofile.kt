@@ -4,6 +4,7 @@ package dev.s7a.example.gofile
 
 import dev.s7a.gofile.GofileClient
 import dev.s7a.gofile.GofileFolderOption
+import dev.s7a.gofile.GofileTier
 import dev.s7a.gofile.uploadFile
 import kotlin.io.path.createTempFile
 import kotlin.io.path.writeText
@@ -27,7 +28,7 @@ suspend fun main() {
     client.setFolderOption(createFolder.id, GofileFolderOption.Expire(1660106197), token).getOrThrow()
     client.setFolderOption(createFolder.id, GofileFolderOption.Password("password"), token).getOrThrow()
     client.setFolderOption(createFolder.id, GofileFolderOption.Tags("t", "a", "g", "s"), token).getOrThrow()
-    if (accountDetails.tier != "guest" && accountDetails.tier != "standard") {
+    if (accountDetails.tier != GofileTier.Guest && accountDetails.tier != GofileTier.Standard) {
         client.copyContent(uploadFile.fileId, createFolder.id, token).getOrThrow()
     }
     val deleteContent = client.deleteContent(uploadFile.fileId, token).getOrThrow()

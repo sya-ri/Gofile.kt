@@ -63,5 +63,5 @@ sealed class GofileResponse<out T> {
      * @property total30DDLTrafficLimit
      */
     @Serializable
-    data class GetAccountDetails(val token: String, val email: String, val tier: String, val rootFolder: String, val filesCount: Int, val filesCountLimit: Int?, val totalSize: Int, val totalSizeLimit: Int?, val total30DDLTraffic: Int, val total30DDLTrafficLimit: Int?)
+    data class GetAccountDetails(val token: String, val email: String, val tier: GofileTier, val rootFolder: String, val filesCount: Int, val filesCountLimit: Int?, val totalSize: Int, val totalSizeLimit: Int?, val total30DDLTraffic: Int, val total30DDLTrafficLimit: Int?)
 }
