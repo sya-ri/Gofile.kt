@@ -56,7 +56,7 @@ sealed interface GofileRequest {
      *                    When using the folderId, you must pass the account token.
      * @property server Server to upload to.
      */
-    class UploadFile(val fileName: String, val fileContent: ByteArray, val contentType: String, val token: String?, val folderId: String?, val server: String) : GofileRequest {
+    data class UploadFile(val fileName: String, val fileContent: ByteArray, val contentType: String, val token: String?, val folderId: String?, val server: String) : GofileRequest {
         override val method = HttpMethod.Post
         override val urlString = "https://$server.gofile.io/uploadFile"
         override fun buildAction(builder: HttpRequestBuilder) {
@@ -77,6 +77,32 @@ sealed interface GofileRequest {
                 )
             )
         }
+
+        override fun equals(other: Any?): Boolean {
+            if (this === other) return true
+            if (other == null || this::class != other::class) return false
+
+            other as UploadFile
+
+            if (fileName != other.fileName) return false
+            if (!fileContent.contentEquals(other.fileContent)) return false
+            if (contentType != other.contentType) return false
+            if (token != other.token) return false
+            if (folderId != other.folderId) return false
+            if (server != other.server) return false
+
+            return true
+        }
+
+        override fun hashCode(): Int {
+            var result = fileName.hashCode()
+            result = 31 * result + fileContent.contentHashCode()
+            result = 31 * result + contentType.hashCode()
+            result = 31 * result + (token?.hashCode() ?: 0)
+            result = 31 * result + (folderId?.hashCode() ?: 0)
+            result = 31 * result + server.hashCode()
+            return result
+        }
     }
 
     /**
@@ -88,7 +114,7 @@ sealed interface GofileRequest {
      * @property folderName The name of the created folder.
      * @property token The access token of an account. Can be retrieved from the profile page.
      */
-    class CreateFolder(val parentFolderId: String, val folderName: String, val token: String) : GofileRequest {
+    data class CreateFolder(val parentFolderId: String, val folderName: String, val token: String) : GofileRequest {
         override val method = HttpMethod.Put
         override val urlString = "https://api.gofile.io/createFolder"
         override fun buildAction(builder: HttpRequestBuilder) {
@@ -113,7 +139,7 @@ sealed interface GofileRequest {
      * @property option The option.
      * @property token The access token of an account. Can be retrieved from the profile page.
      */
-    class SetFolderOption(val folderId: String, val option: GofileFolderOption, val token: String) : GofileRequest {
+    data class SetFolderOption(val folderId: String, val option: GofileFolderOption, val token: String) : GofileRequest {
         override val method = HttpMethod.Put
         override val urlString = "https://api.gofile.io/setFolderOption"
         override fun buildAction(builder: HttpRequestBuilder) {
@@ -139,7 +165,7 @@ sealed interface GofileRequest {
      * @property folderIdDest Destination folder ID.
      * @property token The access token of an account. Can be retrieved from the profile page.
      */
-    class CopyContent(val contentsId: List<String>, val folderIdDest: String, val token: String) : GofileRequest {
+    data class CopyContent(val contentsId: List<String>, val folderIdDest: String, val token: String) : GofileRequest {
         override val method = HttpMethod.Put
         override val urlString = "https://api.gofile.io/copyContent"
         override fun buildAction(builder: HttpRequestBuilder) {
@@ -163,7 +189,7 @@ sealed interface GofileRequest {
      * @property contentsId ContentId to delete (files or folders).
      * @property token The access token of an account. Can be retrieved from the profile page.
      */
-    class DeleteContent(val contentsId: List<String>, val token: String) : GofileRequest {
+    data class DeleteContent(val contentsId: List<String>, val token: String) : GofileRequest {
         override val method = HttpMethod.Delete
         override val urlString = "https://api.gofile.io/deleteContent"
         override fun buildAction(builder: HttpRequestBuilder) {
@@ -185,7 +211,7 @@ sealed interface GofileRequest {
      *
      * @property token The access token of an account. Can be retrieved from the profile page.
      */
-    class GetAccountDetails(val token: String) : GofileRequest {
+    data class GetAccountDetails(val token: String) : GofileRequest {
         override val method = HttpMethod.Get
         override val urlString = "https://api.gofile.io/getAccountDetails"
         override fun buildAction(builder: HttpRequestBuilder) {
