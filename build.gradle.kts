@@ -88,6 +88,13 @@ tasks.withType<DokkaTask>().configureEach {
 tasks.named("dokkaHtml") {
     val dokkaDir = projectDir.resolve("dokka")
 
+    doFirst {
+        dokkaDir.listFiles()?.forEach { file ->
+            if (file != null && file.isDirectory && file.name.endsWith("-SNAPSHOT")) {
+                file.deleteRecursively()
+            }
+        }
+    }
     doLast {
         dokkaDir.resolve("index.html").writeText(
             """
