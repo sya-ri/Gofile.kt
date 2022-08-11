@@ -86,7 +86,7 @@ tasks.withType<DokkaTask>().configureEach {
 }
 
 task("dokka") {
-    dependsOn(":api:dokkaHtml")
+    dependsOn(":dokkaHtml")
 
     doLast {
         projectDir.resolve("dokka/index.html").writeText(
