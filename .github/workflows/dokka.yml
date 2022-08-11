@@ -15,8 +15,8 @@ jobs:
           java-version: 17
           cache: gradle
       - name: Build
-        run: ./gradlew dokka
-      - name: Deploy
+        run: ./gradlew dokkaHtml
+      - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v1
         with:
           path: ./dokka

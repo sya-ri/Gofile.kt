@@ -85,11 +85,11 @@ tasks.withType<DokkaTask>().configureEach {
     )
 }
 
-task("dokka") {
-    dependsOn(":dokkaHtml")
+tasks.named("dokkaHtml") {
+    val dokkaDir = projectDir.resolve("dokka")
 
     doLast {
-        projectDir.resolve("dokka/index.html").writeText(
+        dokkaDir.resolve("index.html").writeText(
             """
                 <!DOCTYPE html>
                 <meta charset="utf-8">
