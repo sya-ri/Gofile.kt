@@ -15,14 +15,14 @@ suspend fun main() {
         writeText("Hello world.")
     }.toFile()
     val uploadFile = client.uploadFile(file, token = token).getOrThrow()
-    println("Download page: ${uploadFile.downloadPage}")
+    println("uploadFile: $uploadFile")
     if (token == null) token = uploadFile.guestToken ?: return
     val createFolder = client.createFolder(uploadFile.parentFolder, "new-folder", token).getOrThrow()
+    println("createFolder: $createFolder")
     client.setFolderOption(createFolder.id, GofileFolderOption.Description("description"), token).getOrThrow()
     client.setFolderOption(createFolder.id, GofileFolderOption.Expire(1660106197), token).getOrThrow()
     client.setFolderOption(createFolder.id, GofileFolderOption.Password("password"), token).getOrThrow()
     client.setFolderOption(createFolder.id, GofileFolderOption.Tags("t", "a", "g", "s"), token).getOrThrow()
-    // Only premium user
-    // client.copyContent(uploadFile.fileId, createFolder.id, token).getOrThrow()
-    client.deleteContent(uploadFile.fileId, token).getOrThrow()
+    val deleteContent = client.deleteContent(uploadFile.fileId, token).getOrThrow()
+    println("deleteContent: $deleteContent")
 }
