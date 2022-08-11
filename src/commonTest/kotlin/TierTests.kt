@@ -1,5 +1,4 @@
 import dev.s7a.gofile.GofileTier
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -42,19 +41,19 @@ class TierTests {
             """
                 "guest"
             """.trimIndent(),
-            Json.encodeToString<GofileTier>(GofileTier.Guest)
+            Json.encodeToString(GofileTier.serializer(), GofileTier.Guest)
         )
         assertEquals(
             """
                 "standard"
             """.trimIndent(),
-            Json.encodeToString<GofileTier>(GofileTier.Standard)
+            Json.encodeToString(GofileTier.serializer(), GofileTier.Standard)
         )
         assertEquals(
             """
                 "other"
             """.trimIndent(),
-            Json.encodeToString<GofileTier>(GofileTier.Unknown("other"))
+            Json.encodeToString(GofileTier.serializer(), GofileTier.Unknown("other"))
         )
     }
 }
