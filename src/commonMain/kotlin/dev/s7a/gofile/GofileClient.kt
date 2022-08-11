@@ -189,21 +189,8 @@ class GofileClient(private val client: HttpClient) {
      * `https://api.gofile.io/getAccountDetails`
      *
      * @param token The access token of an account. Can be retrieved from the profile page.
-     * @see getAccountDetailsAll
      */
     suspend fun getAccountDetails(token: String): Result<GofileResponse.GetAccountDetails> {
-        return request(GofileRequest.GetAccountDetails(token, false))
-    }
-
-    /**
-     * Retrieving specific account information.
-     *
-     * `https://api.gofile.io/getAccountDetails?allDetails=true`
-     *
-     * @see token The access token of an account. Can be retrieved from the profile page.
-     * @see getAccountDetails
-     */
-    suspend fun getAccountDetailsAll(token: String): Result<GofileResponse.GetAccountDetails> {
-        return request(GofileRequest.GetAccountDetails(token, true))
+        return request(GofileRequest.GetAccountDetails(token))
     }
 }

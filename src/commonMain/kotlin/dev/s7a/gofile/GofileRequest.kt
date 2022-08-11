@@ -184,16 +184,12 @@ sealed interface GofileRequest {
      * `https://api.gofile.io/getAccountDetails`
      *
      * @property token The access token of an account. Can be retrieved from the profile page.
-     * @property allDetails If set, all details will be returned. If undefined, minimal information will be returned.
      */
-    class GetAccountDetails(val token: String, val allDetails: Boolean) : GofileRequest {
+    class GetAccountDetails(val token: String) : GofileRequest {
         override val method = HttpMethod.Get
         override val urlString = "https://api.gofile.io/getAccountDetails"
         override fun buildAction(builder: HttpRequestBuilder) {
             builder.parameter("token", token)
-            if (allDetails) {
-                builder.parameter("allDetails", true)
-            }
         }
     }
 }

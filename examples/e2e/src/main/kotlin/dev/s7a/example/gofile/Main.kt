@@ -20,8 +20,6 @@ suspend fun main() {
     if (token == null) token = uploadFile.guestToken ?: return
     val accountDetails = client.getAccountDetails(token).getOrThrow()
     println("accountDetails: $accountDetails")
-    val accountDetailsAll = client.getAccountDetailsAll(token).getOrThrow()
-    println("accountDetailsAll: $accountDetailsAll")
     val createFolder = client.createFolder(uploadFile.parentFolder, "new-folder", token).getOrThrow()
     println("createFolder: $createFolder")
     client.setFolderOption(createFolder.id, GofileFolderOption.Description("description"), token).getOrThrow()

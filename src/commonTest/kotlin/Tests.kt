@@ -265,7 +265,6 @@ class Tests {
                 )
             }
             assertTrue(GofileClient(mockEngine).getAccountDetails("ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)
-            assertTrue(GofileClient(mockEngine).getAccountDetailsAll("ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)
         }
     }
 
@@ -276,7 +275,6 @@ class Tests {
                 respondError(HttpStatusCode.InternalServerError)
             }
             assertFalse(GofileClient(mockEngine).getAccountDetails("ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)
-            assertFalse(GofileClient(mockEngine).getAccountDetailsAll("ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)
         }
     }
 }
