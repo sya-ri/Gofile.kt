@@ -1,3 +1,4 @@
+import dev.s7a.gofile.GofileGetServerResponse
 import dev.s7a.gofile.GofileResponse
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -14,7 +15,7 @@ class ResponseTypeTests {
             """
                 {"status":"ok","data":{"server":"_server"}}
             """.trimIndent(),
-            Json.encodeToString<GofileResponse<GofileResponse.GetServer>>(GofileResponse.Ok(GofileResponse.GetServer("_server")))
+            Json.encodeToString<GofileResponse<GofileGetServerResponse>>(GofileResponse.Ok(GofileGetServerResponse("_server")))
         )
     }
 
@@ -24,7 +25,7 @@ class ResponseTypeTests {
             """
                 {"status":"_status"}
             """.trimIndent(),
-            Json.encodeToString<GofileResponse<GofileResponse.GetServer>>(GofileResponse.Error("_status"))
+            Json.encodeToString<GofileResponse<GofileGetServerResponse>>(GofileResponse.Error("_status"))
         )
     }
 
@@ -34,18 +35,18 @@ class ResponseTypeTests {
             """
                 {"status":"_status","data":{"a":"1","b":"2"}}
             """.trimIndent(),
-            Json.encodeToString<GofileResponse<GofileResponse.GetServer>>(GofileResponse.Error("_status", JsonObject(mapOf("a" to JsonPrimitive("1"), "b" to JsonPrimitive("2")))))
+            Json.encodeToString<GofileResponse<GofileGetServerResponse>>(GofileResponse.Error("_status", JsonObject(mapOf("a" to JsonPrimitive("1"), "b" to JsonPrimitive("2")))))
         )
     }
 
     @Test
     fun decode_ok() {
         assertEquals(
-            GofileResponse.Ok(GofileResponse.GetServer("_server")),
+            GofileResponse.Ok(GofileGetServerResponse("_server")),
             """
                 {"status":"ok","data":{"server":"_server"}}
             """.trimIndent().let {
-                Json.decodeFromString<GofileResponse<GofileResponse.GetServer>>(it)
+                Json.decodeFromString<GofileResponse<GofileGetServerResponse>>(it)
             }
         )
     }
@@ -57,7 +58,7 @@ class ResponseTypeTests {
             """
                 {"status":"_status"}
             """.trimIndent().let {
-                Json.decodeFromString<GofileResponse<GofileResponse.GetServer>>(it)
+                Json.decodeFromString<GofileResponse<GofileGetServerResponse>>(it)
             }
         )
     }
@@ -69,7 +70,7 @@ class ResponseTypeTests {
             """
                 {"status":"_status","data":{}}
             """.trimIndent().let {
-                Json.decodeFromString<GofileResponse<GofileResponse.GetServer>>(it)
+                Json.decodeFromString<GofileResponse<GofileGetServerResponse>>(it)
             }
         )
     }
@@ -81,7 +82,7 @@ class ResponseTypeTests {
             """
                 {"status":"_status","data":{"a":"1","b":"2"}}
             """.trimIndent().let {
-                Json.decodeFromString<GofileResponse<GofileResponse.GetServer>>(it)
+                Json.decodeFromString<GofileResponse<GofileGetServerResponse>>(it)
             }
         )
     }
