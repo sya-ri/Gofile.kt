@@ -26,7 +26,7 @@ suspend fun main() {
     client.setFolderOption(createFolder.id, GofileFolderOption.Expire(1660106197), token).getOrThrow()
     client.setFolderOption(createFolder.id, GofileFolderOption.Password("password"), token).getOrThrow()
     client.setFolderOption(createFolder.id, GofileFolderOption.Tags("t", "a", "g", "s"), token).getOrThrow()
-    if (accountDetails.tier != GofileTier.Guest && accountDetails.tier != GofileTier.Standard) {
+    if (accountDetails.tier == GofileTier.Donor) {
         client.copyContent(uploadFile.fileId, createFolder.id, token).getOrThrow()
     }
     val deleteContent = client.deleteContent(uploadFile.fileId, token).getOrThrow()

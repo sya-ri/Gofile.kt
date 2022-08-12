@@ -34,6 +34,11 @@ sealed class GofileTier(open val name: String) {
     object Standard : GofileTier("standard")
 
     /**
+     * Subscriber.
+     */
+    object Donor : GofileTier("donor")
+
+    /**
      * Other users.
      */
     class Unknown(override val name: String) : GofileTier(name)
@@ -45,6 +50,7 @@ sealed class GofileTier(open val name: String) {
         fun from(name: String) = when (name) {
             Guest.name -> Guest
             Standard.name -> Standard
+            Donor.name -> Donor
             else -> Unknown(name)
         }
     }
