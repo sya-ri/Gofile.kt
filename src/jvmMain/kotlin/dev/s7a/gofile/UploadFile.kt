@@ -22,7 +22,7 @@ import kotlin.io.path.Path
  *                 When using the folderId, you must pass the account token.
  * @param server Server to upload to. If you specify null, it will use the best available.
  */
-suspend fun GofileClient.uploadFile(file: File, token: String? = null, folderId: String? = null, server: String? = null): Result<GofileResponse.UploadFile> {
+suspend fun GofileClient.uploadFile(file: File, token: String? = null, folderId: String? = null, server: String? = null): Result<GofileUploadFileResponse> {
     val contentType = withContext(Dispatchers.IO) {
         Files.probeContentType(Path(file.name))
     } ?: return Result.failure(UnknownContentTypeException(file))
@@ -47,6 +47,6 @@ suspend fun GofileClient.uploadFile(file: File, token: String? = null, folderId:
  *                 When using the folderId, you must pass the account token.
  * @param server Server to upload to. If you specify null, it will use the best available.
  */
-suspend fun GofileClient.uploadFile(file: File, contentType: String, token: String? = null, folderId: String? = null, server: String? = null): Result<GofileResponse.UploadFile> {
+suspend fun GofileClient.uploadFile(file: File, contentType: String, token: String? = null, folderId: String? = null, server: String? = null): Result<GofileUploadFileResponse> {
     return uploadFile(file.name, file.readBytes(), contentType, token, folderId, server)
 }
