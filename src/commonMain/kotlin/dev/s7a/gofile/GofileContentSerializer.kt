@@ -30,7 +30,7 @@ import kotlinx.serialization.json.long
 import kotlinx.serialization.json.put
 
 /**
- * Serializer for [GofileContent]
+ * Serializer for [GofileContent].
  */
 class GofileContentSerializer : KSerializer<GofileContent> {
     @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)

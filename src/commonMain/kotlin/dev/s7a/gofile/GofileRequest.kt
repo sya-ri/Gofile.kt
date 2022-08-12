@@ -26,7 +26,7 @@ sealed interface GofileRequest {
     val urlString: String
 
     /**
-     * A process to HttpRequestBuilder.
+     * A process to [HttpRequestBuilder].
      */
     fun buildAction(builder: HttpRequestBuilder)
 

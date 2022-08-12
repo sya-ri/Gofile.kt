@@ -2,6 +2,9 @@ package dev.s7a.gofile
 
 import kotlinx.serialization.Serializable
 
+/**
+ * @see GofileClient.getContent
+ */
 @Serializable(with = GofileContentSerializer::class)
 sealed class GofileContent {
     /**
@@ -19,11 +22,11 @@ sealed class GofileContent {
     /**
      * Folder.
      *
-     * @property isOwner Whether the user is the owner of the folder.
-     * @property id id of the folder.
-     * @property name Name of the folder.
-     * @property parentFolder id of the prent folder.
-     * @property code Code of the folder.
+     * @property isOwner Whether the user is the owner.
+     * @property id Content id.
+     * @property name Name.
+     * @property parentFolder Content id of the prent folder.
+     * @property code Code.
      * @property createTime Create time.
      * @property public Whether anyone can access it.
      * @property childs File or folder id list.

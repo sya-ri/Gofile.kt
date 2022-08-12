@@ -9,12 +9,12 @@ import kotlinx.serialization.json.JsonObject
 @Serializable(with = GofileResponseSerializer::class)
 sealed class GofileResponse<out T> {
     /**
-     * If Gofile.io returns "ok" status, you can handle data.
+     * Gofile.io returns "ok" status.
      */
     data class Ok<out T>(val data: T) : GofileResponse<T>()
 
     /**
-     * Gofile.io returned some error.
+     * Gofile.io returns some error.
      */
     data class Error(val status: String, val data: JsonObject? = null) : GofileResponse<Nothing>()
 

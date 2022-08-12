@@ -7,7 +7,7 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 
 /**
- * Serializer for [GofileTier]
+ * Serializer for [GofileTier].
  */
 class GofileTierSerializer : KSerializer<GofileTier> {
     override val descriptor = PrimitiveSerialDescriptor("GofileTier", PrimitiveKind.STRING)

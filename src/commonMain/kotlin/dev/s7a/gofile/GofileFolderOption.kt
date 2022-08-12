@@ -12,31 +12,31 @@ sealed class GofileFolderOption(val name: String) {
     abstract val value: String
 
     /**
-     * Is pubic.
+     * Whether anyone can access it.
      */
     data class Public(val isPublic: Boolean) : GofileFolderOption("public") {
         override val value = isPublic.toString()
     }
 
     /**
-     * The password.
+     * Password is required for access.
      */
     data class Password(override val value: String) : GofileFolderOption("password")
 
     /**
-     * The description.
+     * Description.
      */
     data class Description(override val value: String) : GofileFolderOption("description")
 
     /**
-     * The expiration date in the form of unix timestamp.
+     * Expiration date in the form of unix timestamp.
      */
     data class Expire(val timestamp: Long) : GofileFolderOption("expire") {
         override val value = timestamp.toString()
     }
 
     /**
-     * The tags.
+     * Tags.
      */
     data class Tags(val values: List<String>) : GofileFolderOption("tags") {
         constructor(vararg value: String) : this(value.toList())

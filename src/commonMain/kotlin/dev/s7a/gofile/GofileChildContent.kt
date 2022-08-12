@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 @Serializable(with = GofileChildContentSerializer::class)
 sealed class GofileChildContent {
     /**
-     * id of the folder or file.
+     * Content id.
      */
     abstract val id: String
 
@@ -18,12 +18,12 @@ sealed class GofileChildContent {
     abstract val type: GofileContentType
 
     /**
-     * Name of the folder or file.
+     * Name.
      */
     abstract val name: String
 
     /**
-     * id of the parent folder.
+     * Content id of the parent folder.
      */
     abstract val parentFolder: String
 
@@ -36,8 +36,8 @@ sealed class GofileChildContent {
      * @property size File size.
      * @property downloadCount Total number of downloads.
      * @property md5 Checksum of the file.
-     * @property mimetype Content-type of the file.
-     * @property serverChoosen The server using for the direct link.
+     * @property mimetype Content-type.
+     * @property serverChoosen Server name using for the direct link.
      * @property directLink Download link.
      * @property link Download page link.
      * @property thumbnail Thumbnail link.
@@ -65,7 +65,7 @@ sealed class GofileChildContent {
      * @property public Whether anyone can access it.
      * @property password Whether a password is required for access.
      * @property description Description.
-     * @property expire Expiration datetime.
+     * @property expire Expiration date in the form of unix timestamp.
      * @property tags Tags.
      */
     data class Folder(

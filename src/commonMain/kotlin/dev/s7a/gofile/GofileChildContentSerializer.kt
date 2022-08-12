@@ -24,7 +24,7 @@ import kotlinx.serialization.json.long
 import kotlinx.serialization.json.put
 
 /**
- * Serializer for [GofileChildContent]
+ * Serializer for [GofileChildContent].
  */
 class GofileChildContentSerializer : KSerializer<GofileChildContent> {
     @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)

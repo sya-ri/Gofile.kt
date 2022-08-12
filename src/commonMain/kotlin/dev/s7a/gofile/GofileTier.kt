@@ -34,7 +34,7 @@ sealed class GofileTier(open val name: String) {
     object Standard : GofileTier("standard")
 
     /**
-     * Subscriber.
+     * Premium users.
      */
     object Donor : GofileTier("donor")
 

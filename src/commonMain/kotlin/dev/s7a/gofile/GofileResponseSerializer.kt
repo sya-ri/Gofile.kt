@@ -18,7 +18,7 @@ import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
 
 /**
- * Serializer for [GofileResponse]
+ * Serializer for [GofileResponse].
  */
 class GofileResponseSerializer<T>(private val dataSerializer: KSerializer<T>) : KSerializer<GofileResponse<T>> {
     @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
