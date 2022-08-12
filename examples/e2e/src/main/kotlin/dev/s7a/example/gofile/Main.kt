@@ -6,6 +6,7 @@ import dev.s7a.gofile.GofileClient
 import dev.s7a.gofile.GofileFolderOption
 import dev.s7a.gofile.GofileTier
 import dev.s7a.gofile.uploadFile
+import java.util.Calendar
 import kotlin.io.path.createTempFile
 import kotlin.io.path.writeText
 
@@ -23,11 +24,15 @@ suspend fun main() {
     val createFolder = client.createFolder(uploadFile.parentFolder, "new-folder", token).getOrThrow()
     println("createFolder: $createFolder")
     client.setFolderOption(createFolder.id, GofileFolderOption.Description("description"), token).getOrThrow()
-    client.setFolderOption(createFolder.id, GofileFolderOption.Expire(1660106197), token).getOrThrow()
+    client.setFolderOption(createFolder.id, GofileFolderOption.Expire(Calendar.getInstance().apply { add(Calendar.DAY_OF_MONTH, 1) }.toInstant().epochSecond), token).getOrThrow()
     client.setFolderOption(createFolder.id, GofileFolderOption.Password("password"), token).getOrThrow()
     client.setFolderOption(createFolder.id, GofileFolderOption.Tags("t", "a", "g", "s"), token).getOrThrow()
     if (accountDetails.tier == GofileTier.Donor) {
         client.copyContent(uploadFile.fileId, createFolder.id, token).getOrThrow()
+        val getContentFile = client.getContent(uploadFile.fileId, token).getOrThrow()
+        println("getContentFile: $getContentFile")
+        val getContentFolder = client.getContent(createFolder.id, token).getOrThrow()
+        println("getContentFolder: $getContentFolder")
     }
     val deleteContent = client.deleteContent(uploadFile.fileId, token).getOrThrow()
     println("deleteContent: $deleteContent")
