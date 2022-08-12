@@ -93,7 +93,7 @@ class GofileChildContentSerializer : KSerializer<GofileChildContent> {
                 val password = element["password"]?.jsonPrimitive?.boolean ?: false
                 val description = element["description"]?.jsonPrimitive?.content
                 val expire = element["expire"]?.jsonPrimitive?.long
-                val tags = element["tags"]?.jsonPrimitive?.content
+                val tags = element["tags"]?.jsonPrimitive?.content?.split(",").orEmpty()
                 GofileChildContent.Folder(id, name, parentFolder, createTime, childs, code, public, password, description, expire, tags)
             }
         }
@@ -125,7 +125,7 @@ class GofileChildContentSerializer : KSerializer<GofileChildContent> {
                     if (value.password) put("password", true)
                     if (value.description != null) put("description", value.description)
                     if (value.expire != null) put("expire", value.expire)
-                    if (value.tags != null) put("tags", value.tags)
+                    if (value.tags.isNotEmpty()) put("tags", value.tags.joinToString(","))
                 }
             }
         }

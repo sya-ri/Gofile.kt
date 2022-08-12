@@ -79,7 +79,7 @@ sealed class GofileChildContent {
         val password: Boolean = false,
         val description: String? = null,
         val expire: Long? = null,
-        val tags: String? = null
+        val tags: List<String> = emptyList()
     ) : GofileChildContent() {
         override val type = GofileContentType.Folder
     }

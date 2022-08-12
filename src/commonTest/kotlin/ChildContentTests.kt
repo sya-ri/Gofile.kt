@@ -112,7 +112,7 @@ class ChildContentTests {
                     password = true,
                     "_description",
                     987654321,
-                    "t,a,g,s"
+                    listOf("t", "a", "g", "s")
                 )
             )
         )
@@ -241,7 +241,7 @@ class ChildContentTests {
                 password = true,
                 "_description",
                 987654321,
-                "t,a,g,s"
+                listOf("t", "a", "g", "s")
             ),
             json.decodeFromString(
                 GofileChildContent.serializer(),

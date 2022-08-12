@@ -181,7 +181,7 @@ class ContentTests {
                             password = true,
                             "_description3",
                             12345,
-                            "t,a,g,s,3"
+                            listOf("t", "a", "g", "s", "3")
                         )
                     )
                 )
@@ -299,7 +299,7 @@ class ContentTests {
                         password = true,
                         "_description3",
                         12345,
-                        "t,a,g,s,3"
+                        listOf("t", "a", "g", "s", "3")
                     )
                 )
             ),
