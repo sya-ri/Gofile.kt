@@ -34,7 +34,15 @@ sealed class GofileResponse<out T> {
      * @property guestToken If you don't specify a token in the request, Gofile.io will create a guest token.
      */
     @Serializable
-    data class UploadFile(val downloadPage: String, val code: String, val parentFolder: String, val fileId: String, val fileName: String, val md5: String, val guestToken: String? = null)
+    data class UploadFile(
+        val downloadPage: String,
+        val code: String,
+        val parentFolder: String,
+        val fileId: String,
+        val fileName: String,
+        val md5: String,
+        val guestToken: String? = null
+    )
 
     /**
      * @property id A id of the created folder.
@@ -46,7 +54,15 @@ sealed class GofileResponse<out T> {
      * @property code A code to open the folder.
      */
     @Serializable
-    data class CreateFolder(val id: String, val type: String, val name: String, val parentFolder: String, val createTime: Long, val childs: List<String>, val code: String)
+    data class CreateFolder(
+        val id: String,
+        val type: String,
+        val name: String,
+        val parentFolder: String,
+        val createTime: Long,
+        val childs: List<String>,
+        val code: String
+    )
 
     /**
      * **The statistics are updated every 24 hours.**
@@ -64,5 +80,17 @@ sealed class GofileResponse<out T> {
      * @property total30DDLTrafficLimit Limit of [total30DDLTraffic].
      */
     @Serializable
-    data class GetAccountDetails(val token: String, val email: String, val tier: GofileTier, val tierAmount: Int? = null, val rootFolder: String, val filesCount: Int, val filesCountLimit: Int?, val totalSize: Double, val totalSizeLimit: Double?, val total30DDLTraffic: Double, val total30DDLTrafficLimit: Double?)
+    data class GetAccountDetails(
+        val token: String,
+        val email: String,
+        val tier: GofileTier,
+        val tierAmount: Int? = null,
+        val rootFolder: String,
+        val filesCount: Int,
+        val filesCountLimit: Int?,
+        val totalSize: Double,
+        val totalSizeLimit: Double?,
+        val total30DDLTraffic: Double,
+        val total30DDLTrafficLimit: Double?
+    )
 }
