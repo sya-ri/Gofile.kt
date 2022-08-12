@@ -25,6 +25,15 @@ class TierTests {
             )
         )
         assertEquals(
+            GofileTier.Donor,
+            Json.decodeFromString(
+                GofileTier.serializer(),
+                """
+                    "donor"
+                """.trimIndent()
+            )
+        )
+        assertEquals(
             GofileTier.Unknown("other"),
             Json.decodeFromString(
                 GofileTier.serializer(),
@@ -48,6 +57,12 @@ class TierTests {
                 "standard"
             """.trimIndent(),
             Json.encodeToString(GofileTier.serializer(), GofileTier.Standard)
+        )
+        assertEquals(
+            """
+                "donor"
+            """.trimIndent(),
+            Json.encodeToString(GofileTier.serializer(), GofileTier.Donor)
         )
         assertEquals(
             """
