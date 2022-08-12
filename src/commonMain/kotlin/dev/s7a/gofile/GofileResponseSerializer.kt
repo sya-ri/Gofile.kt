@@ -20,7 +20,7 @@ import kotlinx.serialization.json.put
 /**
  * Serializer for [GofileResponse].
  */
-class GofileResponseSerializer<T>(private val dataSerializer: KSerializer<T>) : KSerializer<GofileResponse<T>> {
+internal class GofileResponseSerializer<T>(private val dataSerializer: KSerializer<T>) : KSerializer<GofileResponse<T>> {
     @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
     override val descriptor = buildSerialDescriptor("GofileResponse", PolymorphicKind.SEALED) {
         element(

@@ -14,7 +14,7 @@ import io.ktor.http.Parameters
 /**
  * Request types of Gofile.io.
  */
-sealed interface GofileRequest {
+internal sealed interface GofileRequest {
     /**
      * Http method.
      */

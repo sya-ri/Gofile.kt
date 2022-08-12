@@ -39,7 +39,7 @@ class Tests {
                     headers = headersOf(HttpHeaders.ContentType, "application/json")
                 )
             }
-            assertEquals("store1", GofileClient(mockEngine).getServerName())
+            assertEquals("store1", GofileClient(mockEngine).getServer().getOrNull()?.server)
         }
     }
 
@@ -70,7 +70,7 @@ class Tests {
             val mockEngine = MockEngine {
                 respondError(HttpStatusCode.InternalServerError)
             }
-            assertNull(GofileClient(mockEngine).getServerName())
+            assertNull(GofileClient(mockEngine).getServer().getOrNull())
         }
     }
 
