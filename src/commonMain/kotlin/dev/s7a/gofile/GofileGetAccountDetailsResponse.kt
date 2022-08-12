@@ -16,6 +16,7 @@ import kotlinx.serialization.Serializable
  * @property totalSizeLimit Limit of [totalSize].
  * @property total30DDLTraffic DDL traffic increases when someone downloads your content through a direct link. It is counted for the last 30 days. Downloads from the website are unlimited.
  * @property total30DDLTrafficLimit Limit of [total30DDLTraffic].
+ * @see GofileClient.getAccountDetails
  */
 @Serializable
 data class GofileGetAccountDetailsResponse(

@@ -10,6 +10,7 @@ import kotlinx.serialization.Serializable
  * @property fileName A name of the upload file.
  * @property md5 A checksum of the uploaded file.
  * @property guestToken If you don't specify a token in the request, Gofile.io will create a guest token.
+ * @see GofileClient.uploadFile
  */
 @Serializable
 data class GofileUploadFileResponse(

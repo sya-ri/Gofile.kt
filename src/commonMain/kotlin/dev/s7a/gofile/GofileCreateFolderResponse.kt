@@ -10,6 +10,7 @@ import kotlinx.serialization.Serializable
  * @property createTime Creation time.
  * @property childs Files and folders the folder.
  * @property code A code to open the folder.
+ * @see GofileClient.createFolder
  */
 @Serializable
 data class GofileCreateFolderResponse(
