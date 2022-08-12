@@ -108,6 +108,18 @@ class GofileClient(private val client: HttpClient) {
     }
 
     /**
+     * Get a specific content details. **Only available to premium users.**
+     *
+     * `https://api.gofile.io/getContent`
+     *
+     * @param contentId The content ID.
+     * @param token The access token of an account. Can be retrieved from the profile page.
+     */
+    suspend fun getContent(contentId: String, token: String): Result<GofileContent> {
+        return request(GofileRequest.GetContent(contentId, token))
+    }
+
+    /**
      * Create a new folder.
      *
      * `https://api.gofile.io/createFolder`

@@ -22,7 +22,7 @@ https://gofile.io/api
 
 - [x] getServer
 - [x] uploadFile
-- [ ] getContent
+- [x] getContent
 - [x] createFolder
 - [x] setFolderOption
 - [x] copyContent

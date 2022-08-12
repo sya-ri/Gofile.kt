@@ -106,6 +106,23 @@ sealed interface GofileRequest {
     }
 
     /**
+     * Get a specific content details. **Only available to premium users.**
+     *
+     * `https://api.gofile.io/getContent`
+     *
+     * @property contentId The content ID.
+     * @property token The access token of an account. Can be retrieved from the profile page.
+     */
+    data class GetContent(val contentId: String, val token: String) : GofileRequest {
+        override val method = HttpMethod.Get
+        override val urlString = "https://api.gofile.io/getContent"
+        override fun buildAction(builder: HttpRequestBuilder) {
+            builder.parameter("contentId", contentId)
+            builder.parameter("token", token)
+        }
+    }
+
+    /**
      * Create a new folder.
      *
      * `https://api.gofile.io/createFolder`

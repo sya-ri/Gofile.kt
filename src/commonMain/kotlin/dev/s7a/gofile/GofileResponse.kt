@@ -45,7 +45,7 @@ sealed class GofileResponse<out T> {
     )
 
     /**
-     * @property id A id of the created folder.
+     * @property id An id of the created folder.
      * @property type Content type.
      * @property name A name of the created folder.
      * @property parentFolder The parent folder id of the created folder.

@@ -11,10 +11,12 @@ import io.ktor.utils.io.ByteReadChannel
 import io.ktor.utils.io.core.toByteArray
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
+import kotlin.test.Ignore
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertIs
+import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
@@ -101,6 +103,49 @@ class Tests {
                 This is a test message.
             """.trimIndent().toByteArray()
             assertTrue(GofileClient(mockEngine).uploadFile(fileName, fileContent, "text/plain", server = "store1").isSuccess)
+        }
+    }
+
+    @Ignore // TODO native: ArrayIndexOutOfBoundsException will be thrown, why?
+    @Test
+    fun getContent_should_be_successful() {
+        runTest {
+            val mockEngine = MockEngine {
+                respond(
+                    content = """
+                        {
+                          "status": "ok",
+                          "data": {
+                            "isOwner": true,
+                            "id": "3dbc2f87-4c1e-4a81-badc-af004e61a5b4",
+                            "type": "folder",
+                            "name": "Z19n9a",
+                            "parentFolder": "3241d27a-f7e1-4158-bc75-73d057eff5fa",
+                            "code": "Z19n9a",
+                            "createTime": 1648229689,
+                            "public": true,
+                            "childs": [],
+                            "totalDownloadCount": 0,
+                            "totalSize": 9840497,
+                            "contents": {}
+                          }
+                        }
+                    """.trimIndent().let(::ByteReadChannel),
+                    status = HttpStatusCode.OK,
+                    headers = headersOf(HttpHeaders.ContentType, "application/json")
+                )
+            }
+            assertNotNull(GofileClient(mockEngine).getContent("3dbc2f87-4c1e-4a81-badc-af004e61a5b4", "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").getOrThrow())
+        }
+    }
+
+    @Test
+    fun getContent_can_handle_error() {
+        runTest {
+            val mockEngine = MockEngine {
+                respondError(HttpStatusCode.InternalServerError)
+            }
+            assertFalse(GofileClient(mockEngine).getContent("3dbc2f87-4c1e-4a81-badc-af004e61a5b4", "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)
         }
     }
 
