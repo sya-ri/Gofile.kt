@@ -56,7 +56,7 @@ sealed class GofileResponse<out T> {
     @Serializable
     data class CreateFolder(
         val id: String,
-        val type: String,
+        val type: GofileContentType,
         val name: String,
         val parentFolder: String,
         val createTime: Long,
