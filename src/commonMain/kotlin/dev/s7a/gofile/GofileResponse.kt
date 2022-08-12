@@ -11,13 +11,11 @@ sealed class GofileResponse<out T> {
     /**
      * If Gofile.io returns "ok" status, you can handle data.
      */
-    @Serializable
     data class Ok<out T>(val data: T) : GofileResponse<T>()
 
     /**
      * Gofile.io returned some error.
      */
-    @Serializable
     data class Error(val status: String, val data: JsonObject? = null) : GofileResponse<Nothing>()
 
     /**
