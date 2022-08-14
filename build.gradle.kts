@@ -108,3 +108,21 @@ tasks.named("dokkaHtml") {
         }
     }
 }
+
+publishing {
+    repositories {
+        maven {
+            url = uri(
+                if (version.toString().endsWith("SNAPSHOT")) {
+                    "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                } else {
+                    "https://s01.oss.sonatype.org/content/groups/staging/"
+                }
+            )
+            credentials {
+                username = project.properties["credentials.username"].toString()
+                password = project.properties["credentials.password"].toString()
+            }
+        }
+    }
+}
