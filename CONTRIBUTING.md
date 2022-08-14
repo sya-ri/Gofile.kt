@@ -8,6 +8,7 @@ Must edit the others if they change any of the following:
 
 | File                                                              | Place(s)                        |
 |-------------------------------------------------------------------|---------------------------------|
+| [README.md](README.md#installation)                               | Installation                    |
 | [build.gradle.kts](build.gradle.kts)                              | `version`                       |
 | [`examples/e2e`: build.gradle.kts](examples/e2e/build.gradle.kts) | `version` <br /> `dependencies` |
 

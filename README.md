@@ -16,15 +16,72 @@ A kotlin wrapper for the [Gofile.io](https://gofile.io) API.
 
 ## Features
 
-### Supported endpoints
+- Support multiplatform.
+  - [x] JVM
+  - [x] JS
+  - [x] Native
+- Supports all endpoints.
+  - [x] getServer
+  - [x] uploadFile
+  - [x] getContent
+  - [x] createFolder
+  - [x] setFolderOption
+  - [x] copyContent
+  - [x] deleteContent
+  - [x] getAccountDetails
+- Support all account tiers.
+  - [x] Guest (without token)
+  - [x] Standard
+  - [x] Donor
+- Error handling using [Result](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/).
+- Asynchronous with [Ktor](https://ktor.io).
 
-https://gofile.io/api
+## Installation
 
-- [x] getServer
-- [x] uploadFile
-- [x] getContent
-- [x] createFolder
-- [x] setFolderOption
-- [x] copyContent
-- [x] deleteContent
-- [x] getAccountDetails
+### Add dependency
+
+You also need to add Ktor client engine.
+
+#### build.gradle.kts
+
+```kt
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("dev.s7a:gofile:1.0.0")
+    // See also: https://ktor.io/docs/http-client-engines.html
+    // implementation("io.ktor:ktor-client-???:$ktor_version")
+}
+```
+
+#### build.gradle
+
+```groovy
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "dev.s7a:gofile:1.0.0"
+    // See also: https://ktor.io/docs/http-client-engines.html
+    // implementation "io.ktor:ktor-client-???:$ktor_version"
+}
+```
+
+### Main.kt
+
+```kt
+import dev.s7a.gofile.GofileClient
+
+fun main() {
+    val client = GofileClient() // Automatically find the engine
+    // client.uploadFile(), etc...
+}
+```
+
+## Documentation
+
+- [API Document](https://gh.s7a.dev/Gofile.kt)
+- [Examples](examples)
