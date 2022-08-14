@@ -2,7 +2,7 @@ plugins {
     kotlin("multiplatform") version "1.7.10"
 }
 
-version = "1.0.0-SNAPSHOT"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -29,7 +29,7 @@ kotlin {
     sourceSets {
         val nativeMain by getting {
             dependencies {
-                implementation("dev.s7a:gofile:1.0.0-SNAPSHOT")
+                implementation("dev.s7a:gofile:1.0.0")
                 implementation("io.ktor:ktor-client-cio:2.1.0")
                 implementation("com.squareup.okio:okio:3.2.0")
             }
