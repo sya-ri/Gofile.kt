@@ -10,7 +10,7 @@
 [![Test status](https://img.shields.io/github/workflow/status/sya-ri/Gofile.kt/Test/master?label=Test&logo=github)](.github/workflows/test.yml)
 [![Dokka status](https://img.shields.io/github/workflow/status/sya-ri/Gofile.kt/Dokka/master?label=Dokka&logo=github)](.github/workflows/dokka.yml)
 
-A kotlin wrapper for the https://gofile.io API.
+A kotlin wrapper for the [Gofile.io](https://gofile.io) API.
 
 </span>
 
