@@ -6,6 +6,7 @@ plugins {
     id("org.jetbrains.kotlinx.kover") version "0.6.0-Beta"
     id("org.jetbrains.dokka") version "1.7.10"
     `maven-publish`
+    signing
 }
 
 group = "dev.s7a"
@@ -109,6 +110,10 @@ tasks.named("dokkaHtml") {
     }
 }
 
+val javadocJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("javadoc")
+}
+
 publishing {
     repositories {
         maven {
@@ -116,7 +121,7 @@ publishing {
                 if (version.toString().endsWith("SNAPSHOT")) {
                     "https://s01.oss.sonatype.org/content/repositories/snapshots/"
                 } else {
-                    "https://s01.oss.sonatype.org/content/groups/staging/"
+                    "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
                 }
             )
             credentials {
@@ -125,4 +130,33 @@ publishing {
             }
         }
     }
+    publications.withType<MavenPublication> {
+        artifact(javadocJar.get())
+        pom {
+            name.set("Gofile.kt")
+            description.set("A kotlin wrapper for the Gofile.io API")
+            url.set("https://github.com/sya-ri/Gofile.kt")
+
+            licenses {
+                license {
+                    name.set("Apache License 2.0")
+                    url.set("https://www.apache.org/licenses/LICENSE-2.0")
+                }
+            }
+            developers {
+                developer {
+                    id.set("sya-ri")
+                    name.set("sya-ri")
+                    email.set("contact@s7a.dev")
+                }
+            }
+            scm {
+                url.set("https://github.com/sya-ri/Gofile.kt")
+            }
+        }
+    }
+}
+
+signing {
+    sign(publishing.publications)
 }
