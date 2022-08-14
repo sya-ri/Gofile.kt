@@ -10,6 +10,7 @@ Must edit the others if they change any of the following:
 |-------------------------------------------------------------------|---------------------------------|
 | [README.md](README.md#installation)                               | Installation                    |
 | [build.gradle.kts](build.gradle.kts)                              | `version`                       |
+| [`examples/jvm`: build.gradle.kts](examples/jvm/build.gradle.kts) | `version` <br /> `dependencies` |
 | [`examples/e2e`: build.gradle.kts](examples/e2e/build.gradle.kts) | `version` <br /> `dependencies` |
 
 ### Bump dependency
@@ -23,6 +24,7 @@ And write that version in the [README.md](README.md) badge.
 |-------------------------------------------------------------------|-----------|
 | [README.md](README.md)                                            | Badge     |
 | [build.gradle.kts](build.gradle.kts)                              | `plugins` |
+| [`examples/jvm`: build.gradle.kts](examples/jvm/build.gradle.kts) | `plugins` |
 | [`examples/e2e`: build.gradle.kts](examples/e2e/build.gradle.kts) | `plugins` |
 
 #### Ktor
@@ -32,6 +34,7 @@ Use the same version for all dependencies related to Ktor.
 | File                                                              | Place(s)       |
 |-------------------------------------------------------------------|----------------|
 | [build.gradle.kts](build.gradle.kts)                              | `dependencies` |
+| [`examples/jvm`: build.gradle.kts](examples/jvm/build.gradle.kts) | `dependencies` |
 | [`examples/e2e`: build.gradle.kts](examples/e2e/build.gradle.kts) | `dependencies` |
 
 #### Dokka
