@@ -45,6 +45,16 @@ Use the same version for dokka and dokkaPlugin.
 |--------------------------------------|--------------------------------|
 | [build.gradle.kts](build.gradle.kts) | `plugins` <br /> `dokkaPlugin` |
 
+#### Shadow
+
+Use the same version for all examples.
+
+| File                                                              | Place(s)  |
+|-------------------------------------------------------------------|-----------|
+| [`examples/jvm`: build.gradle.kts](examples/jvm/build.gradle.kts) | `plugins` |
+| [`examples/e2e`: build.gradle.kts](examples/e2e/build.gradle.kts) | `plugins` |
+
+
 ### Add new example
 
 Adding a new example, add it to the examples list.
