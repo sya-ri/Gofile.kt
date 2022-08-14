@@ -22,6 +22,9 @@ A native file upload CLI tool.
 
 ### Dependencies
 
+- `io.ktor:ktor-client-cio`
+- `com.squareup.okio:okio`
+
 ## [e2e](e2e): End-to-End Test
 
 Exhaustively verify whether the API works. It is for development and may not be useful as an example.

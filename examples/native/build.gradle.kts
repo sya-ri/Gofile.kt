@@ -7,6 +7,7 @@ version = "1.0.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 kotlin {
@@ -27,7 +28,13 @@ kotlin {
         }
     }
     sourceSets {
-        val nativeMain by getting
+        val nativeMain by getting {
+            dependencies {
+                implementation("dev.s7a:gofile:1.0.0-SNAPSHOT")
+                implementation("io.ktor:ktor-client-cio:2.1.0")
+                implementation("com.squareup.okio:okio:3.2.0")
+            }
+        }
         val nativeTest by getting
     }
 }
