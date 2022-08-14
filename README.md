@@ -85,3 +85,4 @@ fun main() {
 
 - [API Document](https://gh.s7a.dev/Gofile.kt)
 - [Examples](examples)
+- [CONTRIBUTING.md](CONTRIBUTING.md)
