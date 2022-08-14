@@ -2,7 +2,6 @@ plugins {
     kotlin("multiplatform") version "1.7.10"
 }
 
-group = "dev.s7a.example"
 version = "1.0.0-SNAPSHOT"
 
 repositories {
