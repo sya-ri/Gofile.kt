@@ -3,7 +3,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
 plugins {
     kotlin("multiplatform") version "1.7.10"
     kotlin("plugin.serialization") version "1.7.10"
-    id("org.jetbrains.kotlinx.kover") version "0.6.0-Beta"
+    id("org.jetbrains.kotlinx.kover") version "0.6.0"
     id("org.jetbrains.dokka") version "1.7.10"
     `maven-publish`
     signing
