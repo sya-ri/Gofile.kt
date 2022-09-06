@@ -46,7 +46,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-client-core:2.1.0")
-                implementation("io.ktor:ktor-client-content-negotiation:2.1.0")
+                implementation("io.ktor:ktor-client-content-negotiation:2.1.1")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:2.1.0")
             }
         }
