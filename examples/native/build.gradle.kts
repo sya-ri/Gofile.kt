@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform") version "1.7.10"
+    kotlin("multiplatform") version "1.7.20"
 }
 
 version = "1.0.0"
@@ -30,7 +30,7 @@ kotlin {
         val nativeMain by getting {
             dependencies {
                 implementation("dev.s7a:gofile:1.0.0")
-                implementation("io.ktor:ktor-client-cio:2.1.1")
+                implementation("io.ktor:ktor-client-cio:2.1.2")
                 implementation("com.squareup.okio:okio:3.2.0")
             }
         }

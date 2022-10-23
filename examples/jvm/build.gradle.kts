@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.7.10"
+    kotlin("jvm") version "1.7.20"
     id("com.github.johnrengelman.shadow") version "7.1.2"
     application
 }
@@ -13,7 +13,7 @@ repositories {
 
 dependencies {
     implementation("dev.s7a:gofile:1.0.0")
-    implementation("io.ktor:ktor-client-cio:2.1.1")
+    implementation("io.ktor:ktor-client-cio:2.1.2")
 }
 
 application {

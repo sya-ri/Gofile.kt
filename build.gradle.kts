@@ -1,10 +1,10 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
-    kotlin("multiplatform") version "1.7.10"
-    kotlin("plugin.serialization") version "1.7.10"
-    id("org.jetbrains.kotlinx.kover") version "0.6.0"
-    id("org.jetbrains.dokka") version "1.7.10"
+    kotlin("multiplatform") version "1.7.20"
+    kotlin("plugin.serialization") version "1.7.20"
+    id("org.jetbrains.kotlinx.kover") version "0.6.1"
+    id("org.jetbrains.dokka") version "1.7.20"
     `maven-publish`
     signing
 }
@@ -45,15 +45,15 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-core:2.1.1")
-                implementation("io.ktor:ktor-client-content-negotiation:2.1.1")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:2.1.1")
+                implementation("io.ktor:ktor-client-core:2.1.2")
+                implementation("io.ktor:ktor-client-content-negotiation:2.1.2")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:2.1.2")
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
-                implementation("io.ktor:ktor-client-mock:2.1.1")
+                implementation("io.ktor:ktor-client-mock:2.1.2")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
             }
         }
@@ -71,7 +71,7 @@ tasks.withType<DokkaTask>().configureEach {
     val version = version.toString()
 
     dependencies {
-        dokkaPlugin("org.jetbrains.dokka:versioning-plugin:1.7.10")
+        dokkaPlugin("org.jetbrains.dokka:versioning-plugin:1.7.20")
     }
     outputDirectory.set(file(dokkaDir.resolve(version)))
     pluginsMapConfiguration.set(
