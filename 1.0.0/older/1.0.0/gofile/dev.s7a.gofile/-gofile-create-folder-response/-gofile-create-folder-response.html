@@ -6,10 +6,18 @@
     <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
     <script>var pathToRoot = "../../../";</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
-const savedDarkMode = storage ? JSON.parse(storage) : false
-if(savedDarkMode === true){
-    document.getElementsByTagName("html")[0].classList.add("theme-dark")
-}</script>
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
 <link href="../../../styles/style.css" rel="Stylesheet">
 <link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
@@ -21,6 +29,7 @@ if(savedDarkMode === true){
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script>
 <link href="../../../styles/multimodule.css" rel="Stylesheet">
 </head>
 <body>
@@ -47,13 +56,11 @@ if(savedDarkMode === true){
     </div>
     <div id="main">
 <div class="main-content" id="content" pageids="gofile::dev.s7a.gofile/GofileCreateFolderResponse/GofileCreateFolderResponse/#kotlin.String#dev.s7a.gofile.GofileContentType#kotlin.String#kotlin.String#kotlin.Long#kotlin.collections.List[kotlin.String]#kotlin.String/PointingToDeclaration//788909594">
-  <div class="breadcrumbs"><a href="../../../index.html">gofile</a><span class="delimiter">/</span><a href="../index.html">dev.s7a.gofile</a><span class="delimiter">/</span><a href="index.html">GofileCreateFolderResponse</a><span class="delimiter">/</span><a href="-gofile-create-folder-response.html">GofileCreateFolderResponse</a></div>
+  <div class="breadcrumbs"><a href="../../../index.html">gofile</a><span class="delimiter">/</span><a href="../index.html">dev.s7a.gofile</a><span class="delimiter">/</span><a href="index.html">GofileCreateFolderResponse</a><span class="delimiter">/</span><span class="current">GofileCreateFolderResponse</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Gofile</span><wbr><span>Create</span><wbr><span>Folder</span><wbr><span><span>Response</span></span></h1>
   </div>
-  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
-<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-gofile-create-folder-response.html"><span class="token function">GofileCreateFolderResponse</span></a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;id<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;type<span class="token operator">: </span><a href="../-gofile-content-type/index.html">GofileContentType</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;name<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;parentFolder<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;createTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;childs<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;code<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>  </div>
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-gofile-create-folder-response.html"><span class="token function">GofileCreateFolderResponse</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">id<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">type<span class="token operator">: </span><a href="../-gofile-content-type/index.html">GofileContentType</a><span class="token punctuation">, </span></span><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">parentFolder<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">createTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">childs<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">code<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div></div>
 </div>
       <div class="footer">
         <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2022 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>

@@ -86,6 +86,8 @@ $dokka.location:dev.s7a.gofile/GofileContentSerializer/serialize/#kotlinx.serial
 $dokka.location:dev.s7a.gofile/GofileContentType.File///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}gofile/dev.s7a.gofile/-gofile-content-type/-file/index.html
 $dokka.location:dev.s7a.gofile/GofileContentType.Folder///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}gofile/dev.s7a.gofile/-gofile-content-type/-folder/index.html
 $dokka.location:dev.s7a.gofile/GofileContentType///PointingToDeclaration/gofile/dev.s7a.gofile/-gofile-content-type/index.html
+$dokka.location:dev.s7a.gofile/GofileContentType/valueOf/#kotlin.String/PointingToDeclaration/gofile/dev.s7a.gofile/-gofile-content-type/value-of.html
+$dokka.location:dev.s7a.gofile/GofileContentType/values/#/PointingToDeclaration/gofile/dev.s7a.gofile/-gofile-content-type/values.html
 $dokka.location:dev.s7a.gofile/GofileCreateFolderResponse///PointingToDeclaration/gofile/dev.s7a.gofile/-gofile-create-folder-response/index.html
 $dokka.location:dev.s7a.gofile/GofileCreateFolderResponse/GofileCreateFolderResponse/#kotlin.String#dev.s7a.gofile.GofileContentType#kotlin.String#kotlin.String#kotlin.Long#kotlin.collections.List[kotlin.String]#kotlin.String/PointingToDeclaration/gofile/dev.s7a.gofile/-gofile-create-folder-response/-gofile-create-folder-response.html
 $dokka.location:dev.s7a.gofile/GofileCreateFolderResponse/childs/#/PointingToDeclaration/gofile/dev.s7a.gofile/-gofile-create-folder-response/childs.html
