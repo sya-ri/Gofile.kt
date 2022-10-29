@@ -30,7 +30,7 @@ kotlin {
         val nativeMain by getting {
             dependencies {
                 implementation("dev.s7a:gofile:1.0.0")
-                implementation("io.ktor:ktor-client-cio:2.1.2")
+                implementation("io.ktor:ktor-client-cio:2.1.3")
                 implementation("com.squareup.okio:okio:3.2.0")
             }
         }
