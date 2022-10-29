@@ -2,7 +2,7 @@ plugins {
     kotlin("multiplatform") version "1.7.20"
 }
 
-version = "1.0.0"
+version = "1.0.1-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -29,7 +29,7 @@ kotlin {
     sourceSets {
         val nativeMain by getting {
             dependencies {
-                implementation("dev.s7a:gofile:1.0.0")
+                implementation("dev.s7a:gofile:1.0.1-SNAPSHOT")
                 if (hostOs == "Mac OS X") {
                     implementation("io.ktor:ktor-client-darwin:2.1.3")
                 } else {
