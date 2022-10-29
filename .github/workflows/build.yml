@@ -40,6 +40,8 @@ jobs:
         with:
           java-version: 17
           distribution: 'adopt'
+      - name: Publish to maven local
+        run: ./gradlew publishToMavenLocal
       - name: Build
         run: ./gradlew build
         working-directory: ${{ matrix.directory }}
