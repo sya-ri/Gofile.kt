@@ -9,8 +9,8 @@
 [![GitHub License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Maven Central](https://img.shields.io/maven-central/v/dev.s7a/gofile)](https://search.maven.org/artifact/dev.s7a/gofile)
 [![KDoc link](https://img.shields.io/badge/API_reference-KDoc-blue)](https://gh.s7a.dev/Gofile.kt)
-[![Test status](https://img.shields.io/github/workflow/status/sya-ri/Gofile.kt/Test/master?label=Test&logo=github)](.github/workflows/test.yml)
-[![Dokka status](https://img.shields.io/github/workflow/status/sya-ri/Gofile.kt/Dokka/master?label=Dokka&logo=github)](.github/workflows/dokka.yml)
+[![Test status](https://img.shields.io/github/actions/workflow/status/sya-ri/Gofile.kt/test.yml?branch=master&label=Test&logo=github)](.github/workflows/test.yml)
+[![Dokka status](https://img.shields.io/github/actions/workflow/status/sya-ri/Gofile.kt/dokka.yml?branch=master&label=Dokka&logo=github)](.github/workflows/dokka.yml)
 
 A kotlin wrapper for the [Gofile.io](https://gofile.io) API.
 
