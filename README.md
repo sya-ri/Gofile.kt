@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://gofile.io/dist/img/logo-small.png" alt="GoFile logo" width="80rem" />
+  <img src="https://gofile.io/dist/img/logo-small-70.png" alt="GoFile logo" width="80rem" />
   Gofile.kt
 </h1>
 
