@@ -4,7 +4,7 @@ plugins {
     kotlin("multiplatform") version "1.7.20"
     kotlin("plugin.serialization") version "1.7.20"
     id("org.jetbrains.kotlinx.kover") version "0.7.3"
-    id("org.jetbrains.dokka") version "1.8.20"
+    id("org.jetbrains.dokka") version "1.9.0"
     `maven-publish`
     signing
 }
