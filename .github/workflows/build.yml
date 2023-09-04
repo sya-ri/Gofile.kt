@@ -15,7 +15,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Clone repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup JDK
         uses: actions/setup-java@v3
         with:
@@ -34,7 +34,7 @@ jobs:
           - examples/native
     steps:
       - name: Clone repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup JDK
         uses: actions/setup-java@v3
         with:
@@ -50,7 +50,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Clone Repository (master)
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Clone Repository (gh-pages)
         run: git clone https://github.com/${{ github.repository }} -b gh-pages --depth 1 dokka || mkdir dokka
       - name: Setup Java
