@@ -71,7 +71,7 @@ tasks.withType<DokkaTask>().configureEach {
     val version = version.toString()
 
     dependencies {
-        dokkaPlugin("org.jetbrains.dokka:versioning-plugin:1.9.0")
+        dokkaPlugin("org.jetbrains.dokka:versioning-plugin:1.9.10")
     }
     outputDirectory.set(file(dokkaDir.resolve(version)))
     pluginsMapConfiguration.set(
