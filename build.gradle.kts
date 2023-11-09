@@ -1,7 +1,7 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
-    kotlin("multiplatform") version "1.7.20"
+    kotlin("multiplatform") version "1.9.20"
     kotlin("plugin.serialization") version "1.7.20"
     id("org.jetbrains.kotlinx.kover") version "0.7.4"
     id("org.jetbrains.dokka") version "1.9.10"
@@ -20,6 +20,7 @@ kotlin {
     jvm {
         compilations.all {
             kotlinOptions.jvmTarget = "1.8"
+            jvmToolchain(8)
         }
         withJava()
         testRuns["test"].executionTask.configure {
@@ -27,11 +28,8 @@ kotlin {
         }
     }
     js(IR) {
-        browser {
-            commonWebpackConfig {
-                cssSupport.enabled = true
-            }
-        }
+        browser()
+        nodejs()
     }
     val hostOs = System.getProperty("os.name")
     val isMingwX64 = hostOs.startsWith("Windows")
