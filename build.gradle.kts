@@ -156,8 +156,8 @@ publishing {
                 },
             )
             credentials {
-                username = project.properties["credentials.username"].toString()
-                password = project.properties["credentials.password"].toString()
+                username = properties["sonatypeUsername"].toString()
+                password = properties["sonatypePassword"].toString()
             }
         }
     }
