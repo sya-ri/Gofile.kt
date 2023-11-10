@@ -22,7 +22,7 @@ fun main() {
             onFailure = {
                 it.printStackTrace()
                 exitProcess(ExitCode.UploadFailed)
-            }
+            },
         )
     }
 }

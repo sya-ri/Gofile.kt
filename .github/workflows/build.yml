@@ -1,7 +1,7 @@
 name: Build
 on: [push]
 jobs:
-  test:
+  build:
     strategy:
       matrix:
         os:
@@ -21,10 +21,10 @@ jobs:
         with:
           java-version: ${{ matrix.java-version }}
           distribution: 'adopt'
-      - name: Run tests
-        run: ./gradlew check
+      - name: Build
+        run: ./gradlew build
   dokka:
-    needs: [test]
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - name: Clone Repository (master)

@@ -1,5 +1,8 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
+
+apply(plugin = "kotlin")
+
 plugins {
-    kotlin("jvm") version "1.9.20"
     id("com.github.johnrengelman.shadow") version "7.1.2"
     application
 }
@@ -14,6 +17,18 @@ repositories {
 dependencies {
     implementation("dev.s7a:gofile:1.1.0-SNAPSHOT")
     implementation("io.ktor:ktor-client-cio:2.3.6")
+}
+
+tasks.withType(KotlinJvmCompile::class.java).configureEach {
+    kotlinOptions.apply {
+        jvmTarget = "1.8"
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
 }
 
 application {

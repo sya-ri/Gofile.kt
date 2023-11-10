@@ -11,11 +11,15 @@ plugins {
     signing
 }
 
-group = "dev.s7a"
-version = "1.1.0-SNAPSHOT"
+allprojects {
+    apply(plugin = "org.jmailen.kotlinter")
 
-repositories {
-    mavenCentral()
+    group = "dev.s7a"
+    version = "1.1.0-SNAPSHOT"
+
+    repositories {
+        mavenCentral()
+    }
 }
 
 kotlin {
@@ -62,6 +66,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
                 implementation("io.ktor:ktor-client-core:2.3.6")
                 implementation("io.ktor:ktor-client-content-negotiation:2.3.6")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.6")
@@ -71,7 +76,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("test"))
                 implementation("io.ktor:ktor-client-mock:2.3.6")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
             }
         }
     }

@@ -2,13 +2,6 @@ plugins {
     kotlin("multiplatform") version "1.9.20"
 }
 
-version = "1.1.0-SNAPSHOT"
-
-repositories {
-    mavenCentral()
-    mavenLocal()
-}
-
 kotlin {
     macosX64 {
         binaries {
@@ -37,8 +30,18 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation("dev.s7a:gofile:1.1.0-SNAPSHOT")
+                implementation(project(":"))
                 implementation("com.squareup.okio:okio:3.2.0")
+            }
+        }
+        macosMain {
+            dependencies {
+                implementation("io.ktor:ktor-client-cio:2.3.6")
+            }
+        }
+        linuxMain {
+            dependencies {
+                implementation("io.ktor:ktor-client-cio:2.3.6")
             }
         }
         mingwMain {

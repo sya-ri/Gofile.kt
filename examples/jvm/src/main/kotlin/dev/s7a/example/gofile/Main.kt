@@ -18,15 +18,19 @@ suspend fun main() {
         onFailure = {
             it.printStackTrace()
             exitProcess(ExitCode.UploadFailed)
-        }
+        },
     )
 }
 
-private object ExitCode {
-    const val NoInputPath = 1
-    const val NoSuchFile = 2
-    const val IsNotFile = 3
-    const val UploadFailed = 4
+private enum class ExitCode {
+    NoInputPath,
+    NoSuchFile,
+    IsNotFile,
+    UploadFailed,
+}
+
+private fun exitProcess(exitCode: ExitCode): Nothing {
+    exitProcess(exitCode.ordinal + 1)
 }
 
 private fun inputFile(): File {
