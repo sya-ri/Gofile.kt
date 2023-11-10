@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
     kotlin("multiplatform") version "1.9.20"
-    kotlin("plugin.serialization") version "1.7.20"
+    kotlin("plugin.serialization") version "1.9.20"
     id("org.jetbrains.kotlinx.kover") version "0.7.4"
     id("org.jetbrains.dokka") version "1.9.10"
     id("org.jmailen.kotlinter") version "4.0.0"
