@@ -28,6 +28,12 @@ kotlin {
         nodejs()
     }
 
+    // Android
+    // androidNativeX86()
+    // androidNativeX64()
+    // androidNativeArm32()
+    // androidNativeArm64()
+
     // Linux
     linuxArm64()
     linuxX64()
@@ -50,6 +56,7 @@ kotlin {
     watchosArm32()
     watchosArm64()
     watchosSimulatorArm64()
+    // watchosDeviceArm64()
     watchosX64()
 
     sourceSets {
