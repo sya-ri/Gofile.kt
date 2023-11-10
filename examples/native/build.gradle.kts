@@ -15,6 +15,7 @@ kotlin {
         binaries {
             executable {
                 entryPoint = "dev.s7a.example.gofile.main"
+                freeCompilerArgs += "-Xdisable-phases=EscapeAnalysis"
             }
         }
     }
