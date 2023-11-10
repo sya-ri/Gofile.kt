@@ -77,7 +77,7 @@ repositories {
 }
 
 dependencies {
-    implementation("dev.s7a:gofile:1.0.0")
+    implementation("dev.s7a:gofile:1.1.0")
     // See also: https://ktor.io/docs/http-client-engines.html
     // implementation("io.ktor:ktor-client-???:$ktor_version")
 }
@@ -91,7 +91,7 @@ repositories {
 }
 
 dependencies {
-    implementation "dev.s7a:gofile:1.0.0"
+    implementation "dev.s7a:gofile:1.1.0"
     // See also: https://ktor.io/docs/http-client-engines.html
     // implementation "io.ktor:ktor-client-???:$ktor_version"
 }
