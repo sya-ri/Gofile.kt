@@ -13,7 +13,7 @@ repositories {
 
 dependencies {
     implementation("dev.s7a:gofile:1.0.1-SNAPSHOT")
-    implementation("io.ktor:ktor-client-cio:2.1.3")
+    implementation("io.ktor:ktor-client-cio:2.3.6")
 }
 
 application {

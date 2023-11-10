@@ -43,15 +43,15 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-core:2.2.4")
-                implementation("io.ktor:ktor-client-content-negotiation:2.2.4")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:2.2.4")
+                implementation("io.ktor:ktor-client-core:2.3.6")
+                implementation("io.ktor:ktor-client-content-negotiation:2.3.6")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.6")
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
-                implementation("io.ktor:ktor-client-mock:2.2.4")
+                implementation("io.ktor:ktor-client-mock:2.3.6")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
             }
         }
