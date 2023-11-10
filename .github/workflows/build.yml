@@ -22,7 +22,7 @@ jobs:
           java-version: ${{ matrix.java-version }}
           distribution: 'adopt'
       - name: Run tests
-        run: ./gradlew allTests
+        run: ./gradlew check
   build:
     needs: [test]
     runs-on: ubuntu-latest
