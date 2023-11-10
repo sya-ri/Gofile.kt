@@ -2,7 +2,7 @@ plugins {
     kotlin("multiplatform") version "1.9.20"
 }
 
-version = "1.0.1-SNAPSHOT"
+version = "1.1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -10,30 +10,41 @@ repositories {
 }
 
 kotlin {
-    val hostOs = System.getProperty("os.name")
-    val isMingwX64 = hostOs.startsWith("Windows")
-    val nativeTarget = when {
-        hostOs == "Mac OS X" -> macosX64("native")
-        hostOs == "Linux" -> linuxX64("native")
-        isMingwX64 -> mingwX64("native")
-        else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
-    }
-
-    nativeTarget.apply {
+    macosX64 {
         binaries {
             executable {
                 entryPoint = "dev.s7a.example.gofile.main"
             }
         }
     }
+
+    linuxX64 {
+        binaries {
+            executable {
+                entryPoint = "dev.s7a.example.gofile.main"
+            }
+        }
+    }
+
+    mingwX64 {
+        binaries {
+            executable {
+                entryPoint = "dev.s7a.example.gofile.main"
+            }
+        }
+    }
+
     sourceSets {
-        val nativeMain by getting {
+        commonMain {
             dependencies {
-                implementation("dev.s7a:gofile:1.0.1-SNAPSHOT")
-                implementation("io.ktor:ktor-client-cio:2.3.6")
+                implementation("dev.s7a:gofile:1.1.0-SNAPSHOT")
                 implementation("com.squareup.okio:okio:3.2.0")
             }
         }
-        val nativeTest by getting
+        mingwMain {
+            dependencies {
+                implementation("io.ktor:ktor-client-winhttp:2.3.6")
+            }
+        }
     }
 }

@@ -1,0 +1,70 @@
+name: Deploy
+on:
+  workflow_dispatch:
+
+env:
+  ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
+  ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}
+  ORG_GRADLE_PROJECT_signingKey: ${{ secrets.SIGNING_KEY }}
+  ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.SIGNING_PASSWORD }}
+
+jobs:
+  deploy-linux:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: 17
+          cache: gradle
+      - name: Linux deploy
+        run: |
+          ./gradlew publish --no-daemon --stacktrace
+  deploy-macos:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: 17
+          cache: gradle
+      - name: MacOS deploy
+        run: |
+          ./gradlew \
+            publishIosArm64PublicationToMavenRepository \
+            publishIosSimulatorArm64PublicationToMavenRepository \
+            publishIosX64PublicationToMavenRepository \
+            publishMacosArm64PublicationToMavenRepository \
+            publishMacosX64PublicationToMavenRepository \
+            publishWatchosArm32PublicationToMavenRepository \
+            publishWatchosArm64PublicationToMavenRepository \
+            publishWatchosDeviceArm64PublicationToMavenRepository \
+            publishWatchosSimulatorArm64PublicationToMavenRepository \
+            publishWatchosX64PublicationToMavenRepository \
+            publishTvosArm64PublicationToMavenRepository \
+            publishTvosSimulatorArm64PublicationToMavenRepository \
+            publishTvosX64PublicationToMavenRepository \
+            --no-daemon --stacktrace
+  deploy-windows:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: 17
+          cache: gradle
+      - name: Windows deploy
+        run: |
+          ./gradlew publishMingwX64PublicationToMavenRepository  --no-daemon --stacktrace

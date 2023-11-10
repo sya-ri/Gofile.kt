@@ -4,7 +4,7 @@ plugins {
     application
 }
 
-version = "1.0.1-SNAPSHOT"
+version = "1.1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    implementation("dev.s7a:gofile:1.0.1-SNAPSHOT")
+    implementation("dev.s7a:gofile:1.1.0-SNAPSHOT")
     implementation("io.ktor:ktor-client-cio:2.3.6")
 }
 
