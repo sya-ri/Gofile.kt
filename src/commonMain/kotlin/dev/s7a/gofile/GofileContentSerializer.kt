@@ -8,6 +8,7 @@ import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.descriptors.PolymorphicKind
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.buildClassSerialDescriptor
 import kotlinx.serialization.descriptors.buildSerialDescriptor
 import kotlinx.serialization.descriptors.element
@@ -32,9 +33,9 @@ import kotlinx.serialization.json.put
 /**
  * Serializer for [GofileContent].
  */
-class GofileContentSerializer : KSerializer<GofileContent> {
+public class GofileContentSerializer : KSerializer<GofileContent> {
     @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
-    override val descriptor = buildSerialDescriptor("GofileContent", PolymorphicKind.SEALED) {
+    override val descriptor: SerialDescriptor = buildSerialDescriptor("GofileContent", PolymorphicKind.SEALED) {
         element(
             "File",
             PrimitiveSerialDescriptor("File", PrimitiveKind.STRING)

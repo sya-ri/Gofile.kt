@@ -13,7 +13,7 @@ import kotlinx.serialization.Serializable
  * @see GofileClient.uploadFile
  */
 @Serializable
-data class GofileUploadFileResponse(
+public data class GofileUploadFileResponse(
     val downloadPage: String,
     val code: String,
     val parentFolder: String,

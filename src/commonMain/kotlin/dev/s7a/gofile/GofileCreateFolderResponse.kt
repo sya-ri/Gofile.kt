@@ -13,7 +13,7 @@ import kotlinx.serialization.Serializable
  * @see GofileClient.createFolder
  */
 @Serializable
-data class GofileCreateFolderResponse(
+public data class GofileCreateFolderResponse(
     val id: String,
     val type: GofileContentType,
     val name: String,

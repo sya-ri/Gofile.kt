@@ -15,12 +15,12 @@ import kotlinx.serialization.json.Json
  *
  * @property client [HttpClient]
  */
-class GofileClient(private val client: HttpClient) {
-    companion object {
+public class GofileClient(private val client: HttpClient) {
+    public companion object {
         /**
          * Set up [HttpClient] for [GofileClient].
          */
-        fun setupClient(client: HttpClientConfig<*>) {
+        public fun setupClient(client: HttpClientConfig<*>) {
             client.run {
                 install(ContentNegotiation) {
                     json(
@@ -36,21 +36,21 @@ class GofileClient(private val client: HttpClient) {
     /**
      * Gofile.io client that uses an auto-setup [HttpClient].
      */
-    constructor() : this(HttpClient(Companion::setupClient))
+    public constructor() : this(HttpClient(Companion::setupClient))
 
     /**
      * Gofile.io client that uses an auto-setup [HttpClient].
      *
      * @param engine [HttpClientEngine]
      */
-    constructor(engine: HttpClientEngine) : this(HttpClient(engine, Companion::setupClient))
+    public constructor(engine: HttpClientEngine) : this(HttpClient(engine, Companion::setupClient))
 
     /**
      * Gofile.io client that uses an auto-setup [HttpClient].
      *
      * @param factory [HttpClientEngineFactory]
      */
-    constructor(factory: HttpClientEngineFactory<*>) : this(factory.create())
+    public constructor(factory: HttpClientEngineFactory<*>) : this(factory.create())
 
     private suspend inline fun <reified T> request(request: GofileRequest): Result<T> {
         return runCatching {
@@ -73,7 +73,7 @@ class GofileClient(private val client: HttpClient) {
      *
      * `https://api.gofile.io/getServer`
      */
-    suspend fun getServer(): Result<GofileGetServerResponse> {
+    public suspend fun getServer(): Result<GofileGetServerResponse> {
         return request(GofileRequest.GetServer)
     }
 
@@ -96,7 +96,7 @@ class GofileClient(private val client: HttpClient) {
      *                 When using the folderId, you must pass the account token.
      * @param server Server to upload to. If you specify null, it will use the best available.
      */
-    suspend fun uploadFile(fileName: String, fileContent: ByteArray, contentType: String, token: String? = null, folderId: String? = null, server: String? = null): Result<GofileUploadFileResponse> {
+    public suspend fun uploadFile(fileName: String, fileContent: ByteArray, contentType: String, token: String? = null, folderId: String? = null, server: String? = null): Result<GofileUploadFileResponse> {
         val serverName = server ?: getServer().fold(onSuccess = { it.server }, onFailure = { return Result.failure(it) })
         return request(GofileRequest.UploadFile(fileName, fileContent, contentType, token, folderId, serverName))
     }
@@ -109,7 +109,7 @@ class GofileClient(private val client: HttpClient) {
      * @param contentId The content ID.
      * @param token The access token of an account. Can be retrieved from the profile page.
      */
-    suspend fun getContent(contentId: String, token: String): Result<GofileContent> {
+    public suspend fun getContent(contentId: String, token: String): Result<GofileContent> {
         return request(GofileRequest.GetContent(contentId, token))
     }
 
@@ -122,7 +122,7 @@ class GofileClient(private val client: HttpClient) {
      * @param folderName The name of the created folder.
      * @param token The access token of an account. Can be retrieved from the profile page.
      */
-    suspend fun createFolder(parentFolderId: String, folderName: String, token: String): Result<GofileCreateFolderResponse> {
+    public suspend fun createFolder(parentFolderId: String, folderName: String, token: String): Result<GofileCreateFolderResponse> {
         return request(GofileRequest.CreateFolder(parentFolderId, folderName, token))
     }
 
@@ -135,7 +135,7 @@ class GofileClient(private val client: HttpClient) {
      * @param option The option.
      * @param token The access token of an account. Can be retrieved from the profile page.
      */
-    suspend fun setOption(folderId: String, option: GofileOption, token: String): Result<Unit> {
+    public suspend fun setOption(folderId: String, option: GofileOption, token: String): Result<Unit> {
         return request(GofileRequest.SetOption(folderId, option, token))
     }
 
@@ -148,7 +148,7 @@ class GofileClient(private val client: HttpClient) {
      * @param folderIdDest Destination folder ID.
      * @param token The access token of an account. Can be retrieved from the profile page.
      */
-    suspend fun copyContent(contentId: String, folderIdDest: String, token: String): Result<Unit> {
+    public suspend fun copyContent(contentId: String, folderIdDest: String, token: String): Result<Unit> {
         return copyContent(listOf(contentId), folderIdDest, token)
     }
 
@@ -161,7 +161,7 @@ class GofileClient(private val client: HttpClient) {
      * @param folderIdDest Destination folder ID.
      * @param token The access token of an account. Can be retrieved from the profile page.
      */
-    suspend fun copyContent(contentsId: List<String>, folderIdDest: String, token: String): Result<Unit> {
+    public suspend fun copyContent(contentsId: List<String>, folderIdDest: String, token: String): Result<Unit> {
         return request(GofileRequest.CopyContent(contentsId, folderIdDest, token))
     }
 
@@ -173,7 +173,7 @@ class GofileClient(private val client: HttpClient) {
      * @param contentId ContentId to delete (files or folders).
      * @param token The access token of an account. Can be retrieved from the profile page.
      */
-    suspend fun deleteContent(contentId: String, token: String): Result<Map<String, String>> {
+    public suspend fun deleteContent(contentId: String, token: String): Result<Map<String, String>> {
         return deleteContent(listOf(contentId), token)
     }
 
@@ -185,7 +185,7 @@ class GofileClient(private val client: HttpClient) {
      * @param contentsId ContentId to delete (files or folders).
      * @param token The access token of an account. Can be retrieved from the profile page.
      */
-    suspend fun deleteContent(contentsId: List<String>, token: String): Result<Map<String, String>> {
+    public suspend fun deleteContent(contentsId: List<String>, token: String): Result<Map<String, String>> {
         return request(GofileRequest.DeleteContent(contentsId, token))
     }
 
@@ -196,7 +196,7 @@ class GofileClient(private val client: HttpClient) {
      *
      * @param token The access token of an account. Can be retrieved from the profile page.
      */
-    suspend fun getAccountDetails(token: String): Result<GofileGetAccountDetailsResponse> {
+    public suspend fun getAccountDetails(token: String): Result<GofileGetAccountDetailsResponse> {
         return request(GofileRequest.GetAccountDetails(token))
     }
 }

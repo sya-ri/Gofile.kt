@@ -7,4 +7,4 @@ import kotlinx.serialization.Serializable
  * @see GofileClient.getServer
  */
 @Serializable
-data class GofileGetServerResponse(val server: String)
+public data class GofileGetServerResponse(val server: String)

@@ -6,17 +6,17 @@ import kotlinx.serialization.Serializable
  * @see GofileClient.getContent
  */
 @Serializable(with = GofileContentSerializer::class)
-sealed class GofileContent {
+public sealed class GofileContent {
     /**
      * Content type.
      */
-    abstract val type: GofileContentType
+    public abstract val type: GofileContentType
 
     /**
      * File.
      */
-    object File : GofileContent() {
-        override val type = GofileContentType.File
+    public data object File : GofileContent() {
+        override val type: GofileContentType = GofileContentType.File
     }
 
     /**
@@ -34,7 +34,7 @@ sealed class GofileContent {
      * @property totalSize Total size of childs.
      * @property contents List of files or folders with [childs] as key.
      */
-    data class Folder(
+    public data class Folder(
         val isOwner: Boolean,
         val id: String,
         val name: String,
@@ -53,6 +53,6 @@ sealed class GofileContent {
             }
         }
 
-        override val type = GofileContentType.Folder
+        override val type: GofileContentType = GofileContentType.Folder
     }
 }

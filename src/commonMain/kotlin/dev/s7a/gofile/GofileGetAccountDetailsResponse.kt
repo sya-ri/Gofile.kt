@@ -17,7 +17,7 @@ import kotlinx.serialization.Serializable
  * @see GofileClient.getAccountDetails
  */
 @Serializable
-data class GofileGetAccountDetailsResponse(
+public data class GofileGetAccountDetailsResponse(
     val token: String,
     val email: String,
     val tier: GofileTier,

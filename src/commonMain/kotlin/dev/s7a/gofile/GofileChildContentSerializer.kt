@@ -4,6 +4,7 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PolymorphicKind
+import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.buildClassSerialDescriptor
 import kotlinx.serialization.descriptors.buildSerialDescriptor
 import kotlinx.serialization.descriptors.element
@@ -26,9 +27,9 @@ import kotlinx.serialization.json.put
 /**
  * Serializer for [GofileChildContent].
  */
-class GofileChildContentSerializer : KSerializer<GofileChildContent> {
+public class GofileChildContentSerializer : KSerializer<GofileChildContent> {
     @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
-    override val descriptor = buildSerialDescriptor("GofileChildContent", PolymorphicKind.SEALED) {
+    override val descriptor: SerialDescriptor = buildSerialDescriptor("GofileChildContent", PolymorphicKind.SEALED) {
         element(
             "File",
             buildClassSerialDescriptor("File") {

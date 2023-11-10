@@ -6,31 +6,31 @@ import kotlinx.serialization.Serializable
  * @see GofileContent.Folder.contents
  */
 @Serializable(with = GofileChildContentSerializer::class)
-sealed class GofileChildContent {
+public sealed class GofileChildContent {
     /**
      * Content id.
      */
-    abstract val id: String
+    public abstract val id: String
 
     /**
      * Content type.
      */
-    abstract val type: GofileContentType
+    public abstract val type: GofileContentType
 
     /**
      * Name.
      */
-    abstract val name: String
+    public abstract val name: String
 
     /**
      * Content id of the parent folder.
      */
-    abstract val parentFolder: String
+    public abstract val parentFolder: String
 
     /**
      * Create time.
      */
-    abstract val createTime: Long
+    public abstract val createTime: Long
 
     /**
      * @property size File size.
@@ -42,7 +42,7 @@ sealed class GofileChildContent {
      * @property link Download page link.
      * @property thumbnail Thumbnail link.
      */
-    data class File(
+    public data class File(
         override val id: String,
         override val name: String,
         override val parentFolder: String,
@@ -56,7 +56,7 @@ sealed class GofileChildContent {
         val link: String,
         val thumbnail: String? = null
     ) : GofileChildContent() {
-        override val type = GofileContentType.File
+        override val type: GofileContentType = GofileContentType.File
     }
 
     /**
@@ -68,7 +68,7 @@ sealed class GofileChildContent {
      * @property expire Expiration date in the form of unix timestamp.
      * @property tags Tags.
      */
-    data class Folder(
+    public data class Folder(
         override val id: String,
         override val name: String,
         override val parentFolder: String,
@@ -81,6 +81,6 @@ sealed class GofileChildContent {
         val expire: Long? = null,
         val tags: List<String> = emptyList()
     ) : GofileChildContent() {
-        override val type = GofileContentType.Folder
+        override val type: GofileContentType = GofileContentType.Folder
     }
 }

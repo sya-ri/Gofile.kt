@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
  * @see GofileResponse.GetAccountDetails.tier
  */
 @Serializable(with = GofileTierSerializer::class)
-sealed class GofileTier(open val name: String) {
+public sealed class GofileTier(public open val name: String) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || this::class != other::class) return false
@@ -26,28 +26,28 @@ sealed class GofileTier(open val name: String) {
     /**
      * Guest users.
      */
-    object Guest : GofileTier("guest")
+    public object Guest : GofileTier("guest")
 
     /**
      * Free plan users.
      */
-    object Standard : GofileTier("standard")
+    public object Standard : GofileTier("standard")
 
     /**
      * Premium users.
      */
-    object Donor : GofileTier("donor")
+    public object Donor : GofileTier("donor")
 
     /**
      * Other users.
      */
-    class Unknown(override val name: String) : GofileTier(name)
+    public class Unknown(override val name: String) : GofileTier(name)
 
-    companion object {
+    public companion object {
         /**
          * Get [GofileTier] from [name].
          */
-        fun from(name: String) = when (name) {
+        public fun from(name: String): GofileTier = when (name) {
             Guest.name -> Guest
             Standard.name -> Standard
             Donor.name -> Donor

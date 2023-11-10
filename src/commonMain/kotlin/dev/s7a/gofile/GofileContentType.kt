@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
  * File types.
  */
 @Serializable
-enum class GofileContentType {
+public enum class GofileContentType {
     /**
      * File.
      */

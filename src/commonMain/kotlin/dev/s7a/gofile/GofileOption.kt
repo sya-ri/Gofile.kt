@@ -5,49 +5,49 @@ package dev.s7a.gofile
  *
  * @property name Can be "public", "password", "description", "expire", "tags" or "directLink".
  */
-sealed class GofileOption(val name: String) {
+public sealed class GofileOption(public val name: String) {
     /**
      * The option value.
      */
-    abstract val value: String
+    public abstract val value: String
 
     /**
      * Whether anyone can access it.
      */
-    data class Public(val isPublic: Boolean) : GofileOption("public") {
-        override val value = isPublic.toString()
+    public data class Public(val isPublic: Boolean) : GofileOption("public") {
+        override val value: String = isPublic.toString()
     }
 
     /**
      * Password is required for access.
      */
-    data class Password(override val value: String) : GofileOption("password")
+    public data class Password(override val value: String) : GofileOption("password")
 
     /**
      * Description.
      */
-    data class Description(override val value: String) : GofileOption("description")
+    public data class Description(override val value: String) : GofileOption("description")
 
     /**
      * Expiration date in the form of unix timestamp.
      */
-    data class Expire(val timestamp: Long) : GofileOption("expire") {
-        override val value = timestamp.toString()
+    public data class Expire(val timestamp: Long) : GofileOption("expire") {
+        override val value: String = timestamp.toString()
     }
 
     /**
      * Tags.
      */
-    data class Tags(val values: List<String>) : GofileOption("tags") {
-        constructor(vararg value: String) : this(value.toList())
+    public data class Tags(val values: List<String>) : GofileOption("tags") {
+        public constructor(vararg value: String) : this(value.toList())
 
-        override val value = values.joinToString(",")
+        override val value: String = values.joinToString(",")
     }
 
     /**
      * The contentId must be a file.
      */
-    data class DirectLink(val directLink: Boolean) : GofileOption("directLink") {
-        override val value = directLink.toString()
+    public data class DirectLink(val directLink: Boolean) : GofileOption("directLink") {
+        override val value: String = directLink.toString()
     }
 }
