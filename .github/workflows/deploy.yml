@@ -10,7 +10,6 @@ env:
 
 jobs:
   deploy-linux:
-    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - name: Clone repository
@@ -25,7 +24,6 @@ jobs:
         run: |
           ./gradlew publish --no-daemon --stacktrace
   deploy-macos:
-    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - name: Clone repository
@@ -54,7 +52,6 @@ jobs:
             publishTvosX64PublicationToMavenRepository \
             --no-daemon --stacktrace
   deploy-windows:
-    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - name: Clone repository
