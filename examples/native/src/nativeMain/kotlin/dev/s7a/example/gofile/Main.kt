@@ -1,6 +1,7 @@
 package dev.s7a.example.gofile
 
 import dev.s7a.gofile.GofileClient
+import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.toKString
 import kotlinx.coroutines.runBlocking
 import okio.FileSystem
@@ -8,6 +9,7 @@ import okio.Path.Companion.toPath
 import platform.posix.getenv
 import kotlin.system.exitProcess
 
+@OptIn(ExperimentalForeignApi::class)
 fun main() {
     val token: String? = getenv("GOFILE_TOKEN")?.toKString()
     val client = GofileClient()
