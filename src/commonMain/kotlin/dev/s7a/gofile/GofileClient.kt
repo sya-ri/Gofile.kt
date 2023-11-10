@@ -8,6 +8,7 @@ import io.ktor.client.engine.HttpClientEngineFactory
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.request
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
 
 /**
  * Gofile.io client that uses a pre-setup [HttpClient].
@@ -22,7 +23,11 @@ class GofileClient(private val client: HttpClient) {
         fun setupClient(client: HttpClientConfig<*>) {
             client.run {
                 install(ContentNegotiation) {
-                    json()
+                    json(
+                        Json {
+                            ignoreUnknownKeys = true
+                        },
+                    )
                 }
             }
         }
@@ -124,14 +129,14 @@ class GofileClient(private val client: HttpClient) {
     /**
      * Set an option on a folder.
      *
-     * `https://api.gofile.io/setFolderOption`
+     * `https://api.gofile.io/setOption`
      *
      * @param folderId The folder ID.
      * @param option The option.
      * @param token The access token of an account. Can be retrieved from the profile page.
      */
-    suspend fun setFolderOption(folderId: String, option: GofileFolderOption, token: String): Result<Unit> {
-        return request(GofileRequest.SetFolderOption(folderId, option, token))
+    suspend fun setOption(folderId: String, option: GofileOption, token: String): Result<Unit> {
+        return request(GofileRequest.SetOption(folderId, option, token))
     }
 
     /**

@@ -71,10 +71,10 @@ internal sealed interface GofileRequest {
                             Headers.build {
                                 append(HttpHeaders.ContentType, contentType)
                                 append(HttpHeaders.ContentDisposition, "filename=\"${fileName}\"")
-                            }
+                            },
                         )
-                    }
-                )
+                    },
+                ),
             )
         }
 
@@ -141,34 +141,34 @@ internal sealed interface GofileRequest {
                         append("parentFolderId", parentFolderId)
                         append("folderName", folderName)
                         append("token", token)
-                    }
-                )
+                    },
+                ),
             )
         }
     }
 
     /**
-     * Set an option on a folder.
+     * Set an option.
      *
-     * `https://api.gofile.io/setFolderOption`
+     * `https://api.gofile.io/setOption`
      *
-     * @property folderId The folder ID.
+     * @property contentId The content ID.
      * @property option The option.
      * @property token The access token of an account. Can be retrieved from the profile page.
      */
-    data class SetFolderOption(val folderId: String, val option: GofileFolderOption, val token: String) : GofileRequest {
+    data class SetOption(val contentId: String, val option: GofileOption, val token: String) : GofileRequest {
         override val method = HttpMethod.Put
-        override val urlString = "https://api.gofile.io/setFolderOption"
+        override val urlString = "https://api.gofile.io/setOption"
         override fun buildAction(builder: HttpRequestBuilder) {
             builder.setBody(
                 FormDataContent(
                     Parameters.build {
-                        append("folderId", folderId)
+                        append("contentId", contentId)
                         append("option", option.name)
                         append("value", option.value)
                         append("token", token)
-                    }
-                )
+                    },
+                ),
             )
         }
     }
@@ -192,8 +192,8 @@ internal sealed interface GofileRequest {
                         append("contentsId", contentsId.joinToString(","))
                         append("folderIdDest", folderIdDest)
                         append("token", token)
-                    }
-                )
+                    },
+                ),
             )
         }
     }
@@ -215,8 +215,8 @@ internal sealed interface GofileRequest {
                     Parameters.build {
                         append("contentsId", contentsId.joinToString(","))
                         append("token", token)
-                    }
-                )
+                    },
+                ),
             )
         }
     }

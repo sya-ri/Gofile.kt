@@ -21,12 +21,12 @@ A kotlin wrapper for the [Gofile.io](https://gofile.io) API.
   - [x] JVM
   - [x] JS
   - [x] Native
-- Supports all endpoints.
+- Supports all endpoints. (API Version: 2023-04-20)
   - [x] getServer
   - [x] uploadFile
   - [x] getContent
   - [x] createFolder
-  - [x] setFolderOption
+  - [x] setOption
   - [x] copyContent
   - [x] deleteContent
   - [x] getAccountDetails

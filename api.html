@@ -1,0 +1,492 @@
+<div id="mainContent" class="col"><div class="row">
+    <div class="col">
+        <div class="contentCard p-2">
+            <h3 class="text-center">API</h3>
+            <hr>
+            <div class="row justify-content-lg-center">
+                <div class="col-lg-6">
+                    <div role="alert" class="alert alert-secondary border border-primary text-white">
+                        <p>Please be aware that Gofile is currently in BETA, and the API may experience modifications. We encourage you to check back regularly for updates. If you have any inquiries, please feel free to reach out to us via the <a class="ajaxLink" href="/contact">contact</a> page.</p>
+                        <p>Last update: 2023-04-20</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p>The Gofile system operates using accounts, files, and folders. With this API, you can manage an efficient file storage system. All files are organized within folders, and each folder is associated with an account. Every account has at least one root folder, which cannot be deleted. </p>
+                    <p>If you upload a file without specifying any parameters, a guest account and a root folder will be created, and the file will be uploaded to a new folder within the root folder. If you wish to upload multiple files, you must first upload the initial file, then obtain the folderId from the response of the request. You can then upload the remaining files one at a time, specifying the folderId as a parameter.</p>
+                    <p>Endpoints marked with the following icon <i class="bi bi-person-fill-lock"></i> require a premium account.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-getServer">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-getServerCollapse" aria-expanded="true" aria-controls="panelsStayOpen-getServerCollapse">
+                                    <span class="badge text-bg-primary me-1">GET</span> https://api.gofile.io/getServer </button>
+                            </h2>
+                            <div id="panelsStayOpen-getServerCollapse" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-getServer">
+                                <div class="accordion-body">
+                                    <p>Returns the best server available to receive files.</p>
+                                    <p>
+                                        <strong>Curl example</strong><br>
+                                    </p><pre><code class="hljs language-bash">curl https://api.gofile.io/getServer</code></pre>
+                                    <p></p>
+                                    <p>
+                                        <strong>JavaScript example</strong><br>
+                                    </p>
+                                    <pre>                    <code class="hljs language-javascript">
+<span class="hljs-title function_">fetch</span>(<span class="hljs-string">'https://api.gofile.io/getServer'</span>)
+  .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.<span class="hljs-title function_">json</span>())
+  .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+    <span class="hljs-keyword">if</span> (data.<span class="hljs-property">status</span> === <span class="hljs-string">'ok'</span>) {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data.<span class="hljs-property">data</span>.<span class="hljs-property">server</span>)
+    }
+  })
+  .<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(error))
+                    </code>
+                  </pre>
+                                    <p>
+                                        <strong>Response example</strong><br>
+                                    </p>
+                                    <pre>                    <code class="hljs language-json">
+<span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"ok"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"server"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"store1"</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+                    </code>
+                  </pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-uploadFile">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-uploadFileCollapse" aria-expanded="true" aria-controls="panelsStayOpen-uploadFileCollapse">
+                                    <span class="badge text-bg-success me-1">POST</span><span class="badge text-bg-secondary me-1">multipart/form-data</span> https://{server}.gofile.io/uploadFile </button>
+                            </h2>
+                            <div id="panelsStayOpen-uploadFileCollapse" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-uploadFile">
+                                <div class="accordion-body">
+                                    <p>Upload one file on a specific server.<br> If you specify a folderId, the file will be added to this folder.</p>
+                                    <strong>Parameters</strong><br>
+                                    <ul>
+                                        <li>
+                                            <small><span class="badge text-bg-danger me-1">required</span></small><strong>file</strong><br> Must contain one file.<br> If you want to upload multiple files, call uploadFile again and specify the folderId of the first file uploaded. </li>
+                                        <li>
+                                            <small><span class="badge text-bg-secondary me-1">optional</span></small><strong>token</strong><br> The access token of an account. Can be retrieved from the profile page.<br> If valid, the file will be added to this account.<br> If undefined, a guest account will be created to receive the file. </li>
+                                        <li>
+                                            <small><span class="badge text-bg-secondary me-1">optional</span></small><strong>folderId</strong><br> The ID of a folder.<br> If valid, the file will be added to this folder.<br> If undefined, a new folder will be created to receive the file.<br> When using the folderId, you must pass the account token. </li>
+                                    </ul>
+                                    <p>
+                                        <strong>Curl example</strong><br>
+                                    </p><pre><code class="hljs language-bash">curl -F file=@someFile.txt https://store1.gofile.io/uploadFile</code></pre>
+                                    <p></p>
+                                    <p>
+                                        <strong>JavaScript example</strong><br>
+                                    </p>
+                                    <pre>                    <code class="hljs language-javascript">
+<span class="hljs-keyword">const</span> formData = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormData</span>();
+formData.<span class="hljs-title function_">append</span>(<span class="hljs-string">'file'</span>, fileInput.<span class="hljs-property">files</span>[<span class="hljs-number">0</span>]);
+<span class="hljs-title function_">fetch</span>(<span class="hljs-string">'https://store1.gofile.io/uploadFile'</span>, {
+    <span class="hljs-attr">method</span>: <span class="hljs-string">'POST'</span>,
+    <span class="hljs-attr">body</span>: formData,
+  })
+  .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.<span class="hljs-title function_">json</span>())
+  .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+    <span class="hljs-keyword">if</span> (data.<span class="hljs-property">status</span> === <span class="hljs-string">'ok'</span>) {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data.<span class="hljs-property">data</span>)
+    }
+  })
+  .<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(error))
+                    </code>
+                  </pre>
+                                    <p>
+                                        <strong>Response example</strong><br>
+                                    </p>
+                                    <pre>                    <code class="hljs language-json">
+<span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"ok"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"downloadPage"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"https://gofile.io/d/Z19n9a"</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"code"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"Z19n9a"</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"parentFolder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"3dbc2f87-4c1e-4a81-badc-af004e61a5b4"</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"fileId"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"4991e6d7-5217-46ae-af3d-c9174adae924"</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"fileName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"example.mp4"</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"md5"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"10c918b1d01aea85864ee65d9e0c2305"</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+                    </code>
+                  </pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-getContent">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-getContentCollapse" aria-expanded="true" aria-controls="panelsStayOpen-getContentCollapse">
+                                    <span class="badge text-bg-primary me-1">GET</span> https://api.gofile.io/getContent <i class="bi bi-person-fill-lock ms-1"></i></button>
+                            </h2>
+                            <div id="panelsStayOpen-getContentCollapse" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-getContent">
+                                <div class="accordion-body">
+                                    <p>Get a specific content details</p>
+                                    <strong>Parameters</strong><br>
+                                    <ul>
+                                        <li>
+                                            <small><span class="badge text-bg-danger me-1">required</span></small><strong>contentId</strong><br>The content ID. </li>
+                                        <li>
+                                            <small><span class="badge text-bg-danger me-1">required</span></small><strong>token</strong><br>The access token of an account. Can be retrieved from the profile page. </li>
+                                    </ul>
+                                    <p>
+                                        <strong>Curl example</strong><br>
+                                    </p><pre><code class="hljs language-bash">curl https://api.gofile.io/getContent?contentId=aefb20bd-1a19-4194-8c31-e750fbfcf0db&amp;token=ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM</code></pre>
+                                    <p></p>
+                                    <p>
+                                        <strong>JavaScript example</strong><br>
+                                    </p>
+                                    <pre>                    <code class="hljs language-javascript">
+<span class="hljs-title function_">fetch</span>(<span class="hljs-string">`https://api.gofile.io/getContent?contentId=<span class="hljs-subst">${contentId}</span>&amp;token=<span class="hljs-subst">${token}</span>`</span>)
+  .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.<span class="hljs-title function_">json</span>())
+  .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+    <span class="hljs-keyword">if</span> (data.<span class="hljs-property">status</span> === <span class="hljs-string">'ok'</span>) {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data.<span class="hljs-property">data</span>)
+    }
+  })
+  .<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(error))
+                    </code>
+                  </pre>
+                                    <p>
+                                        <strong>Response example</strong><br>
+                                    </p>
+                                    <pre>                    <code class="hljs language-json">
+<span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"ok"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"isOwner"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"3dbc2f87-4c1e-4a81-badc-af004e61a5b4"</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"folder"</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"Z19n9a"</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"parentFolder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"3241d27a-f7e1-4158-bc75-73d057eff5fa"</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"code"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"Z19n9a"</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"createTime"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1648229689</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"public"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"childs"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-string">"4991e6d7-5217-46ae-af3d-c9174adae924"</span>
+    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"totalDownloadCount"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"totalSize"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">9840497</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"contents"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"4991e6d7-5217-46ae-af3d-c9174adae924"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">"id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"4991e6d7-5217-46ae-af3d-c9174adae924"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"type"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"file"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"example.mp4"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"parentFolder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"3dbc2f87-4c1e-4a81-badc-af004e61a5b4"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"createTime"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1648229689</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"size"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">9840497</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"downloadCount"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"md5"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"10c918b1d01aea85864ee65d9e0c2305"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"mimetype"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"video/mp4"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"serverChoosen"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"store4"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"directLink"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"https://store4.gofile.io/download/direct/4991e6d7-5217-46ae-af3d-c9174adae924/example.mp4"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"link"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"https://store4.gofile.io/download/4991e6d7-5217-46ae-af3d-c9174adae924/example.mp4"</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+                    </code>
+                    </pre>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-createFolder">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-createFolderCollapse" aria-expanded="true" aria-controls="panelsStayOpen-createFolderCollapse">
+                                    <span class="badge text-bg-warning me-1">PUT</span> https://api.gofile.io/createFolder <i class="bi bi-person-fill-lock ms-1"></i></button>
+                            </h2>
+                            <div id="panelsStayOpen-createFolderCollapse" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-createFolder">
+                                <div class="accordion-body">
+                                    <p>Create a new folder</p>
+                                    <strong>Parameters</strong><br>
+                                    <ul>
+                                        <li>
+                                            <small><span class="badge text-bg-danger me-1">required</span></small><strong>parentFolderId</strong><br> The parent folder ID. </li>
+                                        <li>
+                                            <small><span class="badge text-bg-danger me-1">required</span></small><strong>folderName</strong><br> The name of the created folder. </li>
+                                        <li>
+                                            <small><span class="badge text-bg-danger me-1">required</span></small><strong>token</strong><br> The access token of an account. Can be retrieved from the profile page. </li>
+                                    </ul>
+                                    <p>
+                                        <strong>Curl example</strong><br>
+                                    </p><pre><code class="hljs language-bash">curl https://api.gofile.io/createFolder -X PUT --data-raw <span class="hljs-string">'parentFolderId=aefb20bd-1a19-4194-8c31-e750fbfcf0db&amp;token=ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM&amp;folderName=myFolder'</span></code></pre>
+                                    <p></p>
+                                    <p>
+                                        <strong>JavaScript example</strong><br>
+                                    </p>
+                                    <pre>                    <code class="hljs language-php">
+<span class="hljs-title function_ invoke__">fetch</span>(<span class="hljs-string">'https://api.gofile.io/createFolder'</span>, {
+  <span class="hljs-attr">method</span>: <span class="hljs-string">'PUT'</span>,
+  <span class="hljs-attr">headers</span>: {
+    <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span>,
+  },
+  <span class="hljs-attr">body</span>: JSON.<span class="hljs-title function_ invoke__">stringify</span>({
+    <span class="hljs-attr">parentFolderId</span>: <span class="hljs-string">'aefb20bd-1a19-4194-8c31-e750fbfcf0db'</span>,
+    <span class="hljs-attr">token</span>: <span class="hljs-string">'ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM'</span>,
+    <span class="hljs-attr">folderName</span>: <span class="hljs-string">'myFolder'</span>,
+  }),
+})
+.<span class="hljs-title function_ invoke__">then</span>(response =&gt; response.<span class="hljs-title function_ invoke__">json</span>())
+.<span class="hljs-title function_ invoke__">then</span>(data =&gt; {
+  <span class="hljs-keyword">if</span> (data.status === <span class="hljs-string">'ok'</span>) {
+    console.<span class="hljs-title function_ invoke__">log</span>(<span class="hljs-string">'Folder created successfully'</span>)
+  }
+})
+.<span class="hljs-keyword">catch</span>(error =&gt; console.<span class="hljs-title function_ invoke__">error</span>(error))
+                    </code>
+                  </pre>
+                                    <p>
+                                        <strong>Response example</strong><br>
+                                    </p><pre>                      <code class="hljs language-json">
+<span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"ok"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+                      </code>
+                    </pre>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-setOption">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-setOptionCollapse" aria-expanded="true" aria-controls="panelsStayOpen-setOptionCollapse">
+                                    <span class="badge text-bg-warning me-1">PUT</span> https://api.gofile.io/setOption <i class="bi bi-person-fill-lock ms-1"></i></button>
+                            </h2>
+                            <div id="panelsStayOpen-setOptionCollapse" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-setOption">
+                                <div class="accordion-body">
+                                    <p>Set an option on a content</p>
+                                    <strong>Parameters</strong><br>
+                                    <ul>
+                                        <li>
+                                            <small><span class="badge text-bg-danger me-1">required</span></small><strong>token</strong><br> The access token of an account. Can be retrieved from the profile page. </li>
+                                        <li>
+                                            <small><span class="badge text-bg-danger me-1">required</span></small><strong>contentId</strong><br> The content ID. </li>
+                                        <li>
+                                            <small><span class="badge text-bg-danger me-1">required</span></small><strong>option</strong><br> Can be "public", "password", "description", "expire", "tags" or "directLink". </li>
+                                        <li>
+                                            <small><span class="badge text-bg-danger me-1">required</span></small><strong>value</strong><br> The value of the option to be defined.<br> For "public", can be "true" or "false". The contentId must be a folder.<br> For "password", must be the password. The contentId must be a folder.<br> For "description", must be the description. The contentId must be a folder.<br> For "expire", must be the expiration date in the form of unix timestamp. The contentId must be a folder.<br> For "tags", must be a comma seperated list of tags. The contentId must be a folder.<br> For "directLink", can be "true" or "false". The contentId must be a file.</li>
+                                    </ul>
+                                    <p>
+                                        <strong>Curl example</strong><br>
+                                    </p><pre><code class="hljs language-bash">curl https://api.gofile.io/setOption -X PUT --data-raw <span class="hljs-string">'contentId=aefb20bd-1a19-4194-8c31-e750fbfcf0db&amp;token=ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM&amp;option=description&amp;value=Test+description'</span></code></pre>
+                                    <p></p>
+                                    <p>
+                                        <strong>JavaScript example</strong><br>
+                                    </p>
+                                    <pre>                    <code class="hljs language-php">
+<span class="hljs-title function_ invoke__">fetch</span>(<span class="hljs-string">'https://api.gofile.io/setOption'</span>, {
+  <span class="hljs-attr">method</span>: <span class="hljs-string">'PUT'</span>,
+  <span class="hljs-attr">headers</span>: {
+    <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span>,
+  },
+  <span class="hljs-attr">body</span>: JSON.<span class="hljs-title function_ invoke__">stringify</span>({
+    <span class="hljs-attr">contentId</span>: <span class="hljs-string">'aefb20bd-1a19-4194-8c31-e750fbfcf0db'</span>,
+    <span class="hljs-attr">token</span>: <span class="hljs-string">'ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM'</span>,
+    <span class="hljs-attr">option</span>: <span class="hljs-string">'description'</span>,
+    <span class="hljs-attr">value</span>: <span class="hljs-string">'Test description'</span>,
+  }),
+})
+.<span class="hljs-title function_ invoke__">then</span>(response =&gt; response.<span class="hljs-title function_ invoke__">json</span>())
+.<span class="hljs-title function_ invoke__">then</span>(data =&gt; {
+  <span class="hljs-keyword">if</span> (data.status === <span class="hljs-string">'ok'</span>) {
+    console.<span class="hljs-title function_ invoke__">log</span>(data.data)
+  }
+})
+.<span class="hljs-keyword">catch</span>(error =&gt; console.<span class="hljs-title function_ invoke__">error</span>(error))
+                    </code>
+                  </pre>
+                                    <p>
+                                        <strong>Response example</strong><br>
+                                    </p><pre>                      <code class="hljs language-json">
+<span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"ok"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+                      </code>
+                    </pre>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-copyContent">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-copyContentCollapse" aria-expanded="true" aria-controls="panelsStayOpen-copyContentCollapse">
+                                    <span class="badge text-bg-warning me-1">PUT</span> https://api.gofile.io/copyContent <i class="bi bi-person-fill-lock ms-1"></i></button>
+                            </h2>
+                            <div id="panelsStayOpen-copyContentCollapse" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-copyContent">
+                                <div class="accordion-body">
+                                    <p>Copy one or multiple contents to another folder</p>
+                                    <strong>Parameters</strong><br>
+                                    <ul>
+                                        <li>
+                                            <small><span class="badge text-bg-danger me-1">required</span></small><strong>contentsId</strong><br> Comma separated contentId to copy (files or folders) </li>
+                                        <li>
+                                            <small><span class="badge text-bg-danger me-1">required</span></small><strong>folderIdDest</strong><br> Destination folder ID </li>
+                                        <li>
+                                            <small><span class="badge text-bg-danger me-1">required</span></small><strong>token</strong><br> The access token of an account. Can be retrieved from the profile page. </li>
+                                    </ul>
+                                    <p>
+                                        <strong>Curl example</strong><br>
+                                    </p><pre><code class="hljs language-kotlin">curl <span class="hljs-string">'https://api.gofile.io/copyContent'</span> -X PUT --<span class="hljs-keyword">data</span>-raw <span class="hljs-string">'contentsId=74cdb7aa-c7e5-4451-5314-f14b4c48c4c1&amp;folderIdDest=18c320d4-c123-4aad-82f5-5ceae39fca1c&amp;token=01n3MXauGU6ZNt347nujBrayPF1hM3nJ'</span></code></pre>
+                                    <p></p>
+                                    <p>
+                                        <strong>JavaScript example</strong><br>
+                                    </p>
+                                    <pre>                    <code class="hljs language-php">
+<span class="hljs-title function_ invoke__">fetch</span>(<span class="hljs-string">'https://api.gofile.io/copyContent'</span>, {
+  <span class="hljs-attr">method</span>: <span class="hljs-string">'PUT'</span>,
+  <span class="hljs-attr">headers</span>: {
+    <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span>,
+  },
+  <span class="hljs-attr">body</span>: JSON.<span class="hljs-title function_ invoke__">stringify</span>({
+    <span class="hljs-attr">contentsId</span>: <span class="hljs-string">'74cdb7aa-c7e5-4451-5314-f14b4c48c4c1'</span>,
+    <span class="hljs-attr">folderIdDest</span>: <span class="hljs-string">'18c320d4-c123-4aad-82f5-5ceae39fca1c'</span>,
+    <span class="hljs-attr">token</span>: <span class="hljs-string">'01n3MXauGU6ZNt347nujBrayPF1hM3nJ'</span>,
+  }),
+})
+.<span class="hljs-title function_ invoke__">then</span>(response =&gt; response.<span class="hljs-title function_ invoke__">json</span>())
+.<span class="hljs-title function_ invoke__">then</span>(data =&gt; {
+  <span class="hljs-keyword">if</span> (data.status === <span class="hljs-string">'ok'</span>) {
+    console.<span class="hljs-title function_ invoke__">log</span>(data.data)
+  }
+})
+.<span class="hljs-keyword">catch</span>(error =&gt; console.<span class="hljs-title function_ invoke__">error</span>(error))
+                    </code>
+                  </pre>
+                                    <p>
+                                        <strong>Response example</strong><br>
+                                    </p><pre>                      <code class="hljs language-json">
+<span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"ok"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+                      </code>
+                    </pre>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-deleteContent">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-deleteContentCollapse" aria-expanded="true" aria-controls="panelsStayOpen-deleteContentCollapse">
+                                    <span class="badge text-bg-danger me-1">DELETE</span> https://api.gofile.io/deleteContent <i class="bi bi-person-fill-lock ms-1"></i></button>
+                            </h2>
+                            <div id="panelsStayOpen-deleteContentCollapse" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-deleteContent">
+                                <div class="accordion-body">
+                                    <p>Delete one or multiple files/folders</p>
+                                    <strong>Parameters</strong><br>
+                                    <ul>
+                                        <li>
+                                            <small><span class="badge text-bg-danger me-1">required</span></small><strong>contentsId</strong><br> Comma separated contentId to delete (files or folders) </li>
+                                        <li>
+                                            <small><span class="badge text-bg-danger me-1">required</span></small><strong>token</strong><br> The access token of an account. Can be retrieved from the profile page. </li>
+                                    </ul>
+                                    <p>
+                                        <strong>Curl example</strong><br>
+                                    </p><pre><code class="hljs language-kotlin">curl <span class="hljs-string">'https://api.gofile.io/deleteContent'</span> -X DELETE --<span class="hljs-keyword">data</span>-raw <span class="hljs-string">'contentsId=41c45aa2-4f81-424d-b943-81e854dbecfd%2C74bdb74f-c7e3-4968-8327-f14c4c48c4c6&amp;token=ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM'</span></code></pre>
+                                    <p></p>
+                                    <p>
+                                        <strong>JavaScript example</strong><br>
+                                    </p>
+                                    <pre>                    <code class="hljs language-javascript">
+<span class="hljs-title function_">fetch</span>(<span class="hljs-string">'https://api.gofile.io/deleteContent'</span>, {
+  <span class="hljs-attr">method</span>: <span class="hljs-string">'DELETE'</span>,
+  <span class="hljs-attr">headers</span>: {
+    <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span>,
+  },
+  <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>({
+    <span class="hljs-attr">contentsId</span>: <span class="hljs-string">'41c45aa2-4f81-424d-b943-81e854dbecfd,74bdb74f-c7e3-4968-8327-f14c4c48c4c6'</span>,
+    <span class="hljs-attr">token</span>: <span class="hljs-string">'ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM'</span>,
+  }),
+})
+.<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.<span class="hljs-title function_">json</span>())
+.<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-keyword">if</span> (data.<span class="hljs-property">status</span> === <span class="hljs-string">'ok'</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data.<span class="hljs-property">data</span>)
+  }
+})
+.<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(error))
+                    </code>
+                  </pre>
+                                    <p>
+                                        <strong>Response example</strong><br>
+                                    </p><pre>                      <code class="hljs language-json">
+<span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"ok"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+                      </code>
+                    </pre>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-getAccountDetails">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-getAccountDetailsCollapse" aria-expanded="true" aria-controls="panelsStayOpen-getAccountDetailsCollapse">
+                                    <span class="badge text-bg-primary me-1">GET</span> https://api.gofile.io/getAccountDetails <i class="bi bi-person-fill-lock ms-1"></i></button>
+                            </h2>
+                            <div id="panelsStayOpen-getAccountDetailsCollapse" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-getAccountDetails">
+                                <div class="accordion-body">
+                                    <p>Retrieving specific account information</p>
+                                    <strong>Parameters</strong>
+                                    <ul>
+                                        <li>
+                                            <small><span class="badge text-bg-danger me-1">required</span></small><strong>token</strong><br> The access token of an account. Can be retrieved from the profile page. </li>
+                                    </ul>
+                                    <p>
+                                        <strong>Curl example</strong><br>
+                                    </p><pre><code class="hljs language-bash">curl https://api.gofile.io/getAccountDetails?token=ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM</code></pre>
+                                    <p></p>
+                                    <p>
+                                        <strong>JavaScript example</strong><br>
+                                    </p>
+                                    <pre>                    <code class="hljs language-javascript">
+<span class="hljs-title function_">fetch</span>(<span class="hljs-string">`https://api.gofile.io/getAccountDetails?token=ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM`</span>)
+  .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.<span class="hljs-title function_">json</span>())
+  .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+    <span class="hljs-keyword">if</span> (data.<span class="hljs-property">status</span> === <span class="hljs-string">'ok'</span>) {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data.<span class="hljs-property">data</span>)
+    }
+  })
+  .<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(error))
+                    </code>
+                  </pre>
+                                    <p>
+                                        <strong>Response example</strong><br>
+                                    </p><pre>                      <code class="hljs language-perl">
+{
+  <span class="hljs-string">"status"</span>: <span class="hljs-string">"ok"</span>,
+  <span class="hljs-string">"data"</span>: {
+    <span class="hljs-string">"token"</span>: <span class="hljs-string">"ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM"</span>,
+    <span class="hljs-string">"email"</span>: <span class="hljs-string">"email@domain.tld"</span>,
+    <span class="hljs-string">"tier"</span>: <span class="hljs-string">"standard"</span>,
+    <span class="hljs-string">"rootFolder"</span>: <span class="hljs-string">"2aecea58-84e6-420d-b2b9-68b4add8418d"</span>,
+    <span class="hljs-string">"foldersCount"</span>: <span class="hljs-number">4</span>,
+    <span class="hljs-string">"filesCount"</span>: <span class="hljs-number">20</span>,
+    <span class="hljs-string">"totalSize"</span>: <span class="hljs-number">67653500</span>,
+    <span class="hljs-string">"totalDownloadCount"</span>: <span class="hljs-number">1</span>
+  }
+}
+                      </code>
+                    </pre>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div></div>

@@ -11,11 +11,9 @@ import kotlinx.serialization.Serializable
  * @property tierAmount Dollars paid monthly.
  * @property rootFolder The root folder id.
  * @property filesCount A number of files.
- * @property filesCountLimit Limit of [filesCount].
+ * @property foldersCount
  * @property totalSize A size of all files.
- * @property totalSizeLimit Limit of [totalSize].
- * @property total30DDLTraffic DDL traffic increases when someone downloads your content through a direct link. It is counted for the last 30 days. Downloads from the website are unlimited.
- * @property total30DDLTrafficLimit Limit of [total30DDLTraffic].
+ * @property totalDownloadCount
  * @see GofileClient.getAccountDetails
  */
 @Serializable
@@ -26,9 +24,7 @@ data class GofileGetAccountDetailsResponse(
     val tierAmount: Int? = null,
     val rootFolder: String,
     val filesCount: Int,
-    val filesCountLimit: Int?,
+    val foldersCount: Int? = null,
     val totalSize: Double,
-    val totalSizeLimit: Double?,
-    val total30DDLTraffic: Double,
-    val total30DDLTrafficLimit: Double?
+    val totalDownloadCount: Int? = null
 )

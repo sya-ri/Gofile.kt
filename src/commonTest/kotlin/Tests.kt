@@ -1,5 +1,5 @@
 import dev.s7a.gofile.GofileClient
-import dev.s7a.gofile.GofileFolderOption
+import dev.s7a.gofile.GofileOption
 import dev.s7a.gofile.GofileStatusException
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
@@ -187,7 +187,7 @@ class Tests {
     }
 
     @Test
-    fun setFolderOption_should_be_successful() {
+    fun setOption_should_be_successful() {
         runTest {
             val mockEngine = MockEngine {
                 respond(
@@ -201,28 +201,30 @@ class Tests {
                     headers = headersOf(HttpHeaders.ContentType, "application/json")
                 )
             }
-            assertTrue(GofileClient(mockEngine).setFolderOption("aefb20bd-1a19-4194-8c31-e750fbfcf0db", GofileFolderOption.Description("Test+description"), "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)
+            assertTrue(GofileClient(mockEngine).setOption("aefb20bd-1a19-4194-8c31-e750fbfcf0db", GofileOption.Description("Test+description"), "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)
         }
     }
 
     @Test
-    fun setFolderOption_can_handle_error() {
+    fun setOption_can_handle_error() {
         runTest {
             val mockEngine = MockEngine {
                 respondError(HttpStatusCode.InternalServerError)
             }
-            assertFalse(GofileClient(mockEngine).setFolderOption("aefb20bd-1a19-4194-8c31-e750fbfcf0db", GofileFolderOption.Description("Test+description"), "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)
+            assertFalse(GofileClient(mockEngine).setOption("aefb20bd-1a19-4194-8c31-e750fbfcf0db", GofileOption.Description("Test+description"), "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)
         }
     }
 
     @Test
-    fun assert_GofileFolderOption() {
-        assertEquals("true", GofileFolderOption.Public(true).value)
-        assertEquals("false", GofileFolderOption.Public(false).value)
-        assertEquals("pass", GofileFolderOption.Password("pass").value)
-        assertEquals("abc", GofileFolderOption.Description("abc").value)
-        assertEquals("1659636061790", GofileFolderOption.Expire(1659636061790).value)
-        assertEquals("abc,def", GofileFolderOption.Tags("abc", "def").value)
+    fun assert_GofileOption() {
+        assertEquals("true", GofileOption.Public(true).value)
+        assertEquals("false", GofileOption.Public(false).value)
+        assertEquals("pass", GofileOption.Password("pass").value)
+        assertEquals("abc", GofileOption.Description("abc").value)
+        assertEquals("1659636061790", GofileOption.Expire(1659636061790).value)
+        assertEquals("abc,def", GofileOption.Tags("abc", "def").value)
+        assertEquals("true", GofileOption.DirectLink(true).value)
+        assertEquals("false", GofileOption.DirectLink(false).value)
     }
 
     @Test
