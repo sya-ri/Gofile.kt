@@ -23,6 +23,7 @@ A native file upload CLI tool.
 ### Dependencies
 
 - `io.ktor:ktor-client-cio`
+- `io.ktor:ktor-client-winhttp`
 - `com.squareup.okio:okio`
 
 ## [e2e](e2e): End-to-End Test
