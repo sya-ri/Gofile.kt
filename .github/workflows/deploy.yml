@@ -24,7 +24,7 @@ jobs:
         run: |
           ./gradlew publish --no-daemon --stacktrace
   deploy-macos:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Clone repository
         uses: actions/checkout@v4
@@ -51,7 +51,7 @@ jobs:
             publishTvosX64PublicationToMavenRepository \
             --no-daemon --stacktrace
   deploy-windows:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Clone repository
         uses: actions/checkout@v4
