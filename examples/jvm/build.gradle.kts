@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
-
 apply(plugin = "kotlin")
 
 plugins {
@@ -10,18 +8,6 @@ plugins {
 dependencies {
     implementation(project(":"))
     implementation("io.ktor:ktor-client-cio:2.3.6")
-}
-
-tasks.withType(KotlinJvmCompile::class.java).configureEach {
-    kotlinOptions.apply {
-        jvmTarget = "1.8"
-    }
-}
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(8)
-    }
 }
 
 application {
