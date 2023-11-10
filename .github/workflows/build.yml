@@ -24,7 +24,7 @@ jobs:
       - name: Run tests
         run: ./gradlew check
   dokka:
-    needs: [build]
+    needs: [test]
     runs-on: ubuntu-latest
     steps:
       - name: Clone Repository (master)
