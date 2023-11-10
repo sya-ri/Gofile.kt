@@ -18,6 +18,8 @@ repositories {
 }
 
 kotlin {
+    explicitApi()
+
     jvm()
 
     js(IR) {
