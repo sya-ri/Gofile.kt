@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform") version "1.9.20"
+    alias(libs.plugins.kotlin.multiplatform)
 }
 
 kotlin {
@@ -24,11 +24,11 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":"))
-                implementation("com.squareup.okio:okio:3.2.0")
+                implementation(libs.okio)
                 if (isMingwX64) {
-                    implementation("io.ktor:ktor-client-winhttp:2.3.6")
+                    implementation(libs.ktor.client.winhttp)
                 } else {
-                    implementation("io.ktor:ktor-client-cio:2.3.6")
+                    implementation(libs.ktor.client.cio)
                 }
             }
         }

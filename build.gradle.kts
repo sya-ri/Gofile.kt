@@ -2,11 +2,11 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
-    kotlin("multiplatform") version "1.9.20"
-    kotlin("plugin.serialization") version "1.9.20"
-    id("org.jetbrains.kotlinx.kover") version "0.7.4"
-    id("org.jetbrains.dokka") version "1.9.10"
-    id("org.jmailen.kotlinter") version "4.0.0"
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotlin.plugin.serialization)
+    alias(libs.plugins.kotlinx.kover)
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.kotlinter)
     `maven-publish`
     signing
 }
@@ -66,17 +66,17 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-                implementation("io.ktor:ktor-client-core:2.3.6")
-                implementation("io.ktor:ktor-client-content-negotiation:2.3.6")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.6")
+                implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.ktor.client.core)
+                implementation(libs.ktor.client.content.negotiation)
+                implementation(libs.ktor.serialization.kotlinx.json)
             }
         }
         commonTest {
             dependencies {
-                implementation(kotlin("test"))
-                implementation("io.ktor:ktor-client-mock:2.3.6")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+                implementation(libs.kotlin.test)
+                implementation(libs.ktor.client.mock)
+                implementation(libs.kotlinx.coroutines.test)
             }
         }
     }
@@ -93,7 +93,7 @@ tasks.withType<DokkaTask>().configureEach {
     val version = version.toString()
 
     dependencies {
-        dokkaPlugin("org.jetbrains.dokka:versioning-plugin:1.9.10")
+        dokkaPlugin(libs.dokka.plugin.versioning)
     }
     outputDirectory.set(file(dokkaDir.resolve(version)))
     pluginsMapConfiguration.set(
