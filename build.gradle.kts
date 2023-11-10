@@ -189,5 +189,9 @@ publishing {
 }
 
 signing {
+    val key = properties["signingKey"]?.toString()?.replace("\\n", "\n")
+    val password = properties["signingPassword"]?.toString()
+
+    useInMemoryPgpKeys(key, password)
     sign(publishing.publications)
 }
