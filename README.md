@@ -21,6 +21,21 @@ A kotlin wrapper for the [Gofile.io](https://gofile.io) API.
   - [x] JVM
   - [x] JS
   - [x] Native
+    - linuxArm64
+    - linuxX64
+    - mingwX64
+    - macosArm64
+    - macosX64
+    - iosArm64
+    - iosSimulatorArm64
+    - iosX64
+    - tvosArm64
+    - tvosSimulatorArm64
+    - tvosX64
+    - watchosArm32
+    - watchosArm64
+    - watchosSimulatorArm64
+    - watchosX64
 - Supports all endpoints. (API Version: 2023-04-20)
   - [x] getServer
   - [x] uploadFile
