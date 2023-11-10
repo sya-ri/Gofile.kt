@@ -36,7 +36,7 @@ class Tests {
                         }
                     """.trimIndent().let(::ByteReadChannel),
                     status = HttpStatusCode.OK,
-                    headers = headersOf(HttpHeaders.ContentType, "application/json")
+                    headers = headersOf(HttpHeaders.ContentType, "application/json"),
                 )
             }
             assertEquals("store1", GofileClient(mockEngine).getServer().getOrNull()?.server)
@@ -55,7 +55,7 @@ class Tests {
                         }
                     """.trimIndent().let(::ByteReadChannel),
                     status = HttpStatusCode.Unauthorized,
-                    headers = headersOf(HttpHeaders.ContentType, "application/json")
+                    headers = headersOf(HttpHeaders.ContentType, "application/json"),
                 )
             }
             val exception = GofileClient(mockEngine).getServer().exceptionOrNull()
@@ -94,7 +94,7 @@ class Tests {
                         }
                     """.trimIndent().let(::ByteReadChannel),
                     status = HttpStatusCode.OK,
-                    headers = headersOf(HttpHeaders.ContentType, "application/json")
+                    headers = headersOf(HttpHeaders.ContentType, "application/json"),
                 )
             }
             val fileName = "test.txt"
@@ -132,7 +132,7 @@ class Tests {
                         }
                     """.trimIndent().let(::ByteReadChannel),
                     status = HttpStatusCode.OK,
-                    headers = headersOf(HttpHeaders.ContentType, "application/json")
+                    headers = headersOf(HttpHeaders.ContentType, "application/json"),
                 )
             }
             assertNotNull(GofileClient(mockEngine).getContent("3dbc2f87-4c1e-4a81-badc-af004e61a5b4", "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").getOrThrow())
@@ -169,7 +169,7 @@ class Tests {
                         }
                     """.trimIndent().let(::ByteReadChannel),
                     status = HttpStatusCode.OK,
-                    headers = headersOf(HttpHeaders.ContentType, "application/json")
+                    headers = headersOf(HttpHeaders.ContentType, "application/json"),
                 )
             }
             assertTrue(GofileClient(mockEngine).createFolder("aefb20bd-1a19-4194-8c31-e750fbfcf0db", "myFolder", "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)
@@ -198,7 +198,7 @@ class Tests {
                         }
                     """.trimIndent().let(::ByteReadChannel),
                     status = HttpStatusCode.OK,
-                    headers = headersOf(HttpHeaders.ContentType, "application/json")
+                    headers = headersOf(HttpHeaders.ContentType, "application/json"),
                 )
             }
             assertTrue(GofileClient(mockEngine).setOption("aefb20bd-1a19-4194-8c31-e750fbfcf0db", GofileOption.Description("Test+description"), "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)
@@ -239,7 +239,7 @@ class Tests {
                         }
                     """.trimIndent().let(::ByteReadChannel),
                     status = HttpStatusCode.OK,
-                    headers = headersOf(HttpHeaders.ContentType, "application/json")
+                    headers = headersOf(HttpHeaders.ContentType, "application/json"),
                 )
             }
             assertTrue(GofileClient(mockEngine).copyContent("74cdb7aa-c7e5-4451-5314-f14b4c48c4c1", "18c320d4-c123-4aad-82f5-5ceae39fca1c", "01n3MXauGU6ZNt347nujBrayPF1hM3nJ").isSuccess)
@@ -268,7 +268,7 @@ class Tests {
                         }
                     """.trimIndent().let(::ByteReadChannel),
                     status = HttpStatusCode.OK,
-                    headers = headersOf(HttpHeaders.ContentType, "application/json")
+                    headers = headersOf(HttpHeaders.ContentType, "application/json"),
                 )
             }
             assertTrue(GofileClient(mockEngine).deleteContent("41c45aa2-4f81-424d-b943-81e854dbecfd%2C74bdb74f-c7e3-4968-8327-f14c4c48c4c6", "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)
@@ -308,7 +308,7 @@ class Tests {
                         }
                     """.trimIndent().let(::ByteReadChannel),
                     status = HttpStatusCode.OK,
-                    headers = headersOf(HttpHeaders.ContentType, "application/json")
+                    headers = headersOf(HttpHeaders.ContentType, "application/json"),
                 )
             }
             assertTrue(GofileClient(mockEngine).getAccountDetails("ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM").isSuccess)

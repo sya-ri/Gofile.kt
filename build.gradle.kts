@@ -6,6 +6,7 @@ plugins {
     kotlin("plugin.serialization") version "1.7.20"
     id("org.jetbrains.kotlinx.kover") version "0.7.4"
     id("org.jetbrains.dokka") version "1.9.10"
+    id("org.jmailen.kotlinter") version "4.0.0"
     `maven-publish`
     signing
 }
@@ -105,8 +106,8 @@ tasks.withType<DokkaTask>().configureEach {
                     "version": "$version",
                     "olderVersionsDir": "$dokkaDir"
                 }
-            """.trimIndent()
-        )
+            """.trimIndent(),
+        ),
     )
 }
 
@@ -128,7 +129,7 @@ tasks.named("dokkaHtml") {
                     <meta charset="utf-8">
                     <meta http-equiv="refresh" content="0; URL=./$version/">
                     <link rel="canonical" href="./$version/">
-                """.trimIndent()
+                """.trimIndent(),
             )
         }
     }
@@ -153,7 +154,7 @@ publishing {
                     "https://s01.oss.sonatype.org/content/repositories/snapshots/"
                 } else {
                     "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-                }
+                },
             )
             credentials {
                 username = project.properties["credentials.username"].toString()

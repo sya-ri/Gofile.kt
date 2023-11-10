@@ -18,5 +18,5 @@ public enum class GofileContentType {
      * Folder.
      */
     @SerialName("folder")
-    Folder
+    Folder,
 }

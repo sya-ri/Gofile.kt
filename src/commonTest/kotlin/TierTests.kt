@@ -12,8 +12,8 @@ class TierTests {
                 GofileTier.serializer(),
                 """
                     "guest"
-                """.trimIndent()
-            )
+                """.trimIndent(),
+            ),
         )
         assertEquals(
             GofileTier.Standard,
@@ -21,8 +21,8 @@ class TierTests {
                 GofileTier.serializer(),
                 """
                     "standard"
-                """.trimIndent()
-            )
+                """.trimIndent(),
+            ),
         )
         assertEquals(
             GofileTier.Donor,
@@ -30,8 +30,8 @@ class TierTests {
                 GofileTier.serializer(),
                 """
                     "donor"
-                """.trimIndent()
-            )
+                """.trimIndent(),
+            ),
         )
         assertEquals(
             GofileTier.Unknown("other"),
@@ -39,8 +39,8 @@ class TierTests {
                 GofileTier.serializer(),
                 """
                     "other"
-                """.trimIndent()
-            )
+                """.trimIndent(),
+            ),
         )
     }
 
@@ -50,25 +50,25 @@ class TierTests {
             """
                 "guest"
             """.trimIndent(),
-            Json.encodeToString(GofileTier.serializer(), GofileTier.Guest)
+            Json.encodeToString(GofileTier.serializer(), GofileTier.Guest),
         )
         assertEquals(
             """
                 "standard"
             """.trimIndent(),
-            Json.encodeToString(GofileTier.serializer(), GofileTier.Standard)
+            Json.encodeToString(GofileTier.serializer(), GofileTier.Standard),
         )
         assertEquals(
             """
                 "donor"
             """.trimIndent(),
-            Json.encodeToString(GofileTier.serializer(), GofileTier.Donor)
+            Json.encodeToString(GofileTier.serializer(), GofileTier.Donor),
         )
         assertEquals(
             """
                 "other"
             """.trimIndent(),
-            Json.encodeToString(GofileTier.serializer(), GofileTier.Unknown("other"))
+            Json.encodeToString(GofileTier.serializer(), GofileTier.Unknown("other")),
         )
     }
 }

@@ -20,5 +20,5 @@ public data class GofileCreateFolderResponse(
     val parentFolder: String,
     val createTime: Long,
     val childs: List<String>,
-    val code: String
+    val code: String,
 )

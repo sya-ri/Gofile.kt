@@ -42,9 +42,9 @@ class ChildContentTests {
                     "_serverChoosen",
                     "_directLink",
                     "_link",
-                    "_thumbnail"
-                )
-            )
+                    "_thumbnail",
+                ),
+            ),
         )
     }
 
@@ -73,9 +73,9 @@ class ChildContentTests {
                     123456789,
                     listOf(),
                     "_code",
-                    public = true
-                )
-            )
+                    public = true,
+                ),
+            ),
         )
     }
 
@@ -112,9 +112,9 @@ class ChildContentTests {
                     password = true,
                     "_description",
                     987654321,
-                    listOf("t", "a", "g", "s")
-                )
-            )
+                    listOf("t", "a", "g", "s"),
+                ),
+            ),
         )
     }
 
@@ -147,12 +147,12 @@ class ChildContentTests {
                     listOf(
                         "_id1",
                         "_id2",
-                        "_id3"
+                        "_id3",
                     ),
                     "_code",
-                    public = true
-                )
-            )
+                    public = true,
+                ),
+            ),
         )
     }
 
@@ -171,7 +171,7 @@ class ChildContentTests {
                 "_serverChoosen",
                 "_directLink",
                 "_link",
-                "_thumbnail"
+                "_thumbnail",
             ),
             json.decodeFromString(
                 GofileChildContent.serializer(),
@@ -191,8 +191,8 @@ class ChildContentTests {
                         "link": "_link",
                         "thumbnail": "_thumbnail"
                     }
-                """.trimIndent()
-            )
+                """.trimIndent(),
+            ),
         )
     }
 
@@ -206,7 +206,7 @@ class ChildContentTests {
                 123456789,
                 listOf(),
                 "_code",
-                public = true
+                public = true,
             ),
             json.decodeFromString(
                 GofileChildContent.serializer(),
@@ -222,8 +222,8 @@ class ChildContentTests {
                         "code": "_code",
                         "public": true
                     }
-                """.trimIndent()
-            )
+                """.trimIndent(),
+            ),
         )
     }
 
@@ -241,7 +241,7 @@ class ChildContentTests {
                 password = true,
                 "_description",
                 987654321,
-                listOf("t", "a", "g", "s")
+                listOf("t", "a", "g", "s"),
             ),
             json.decodeFromString(
                 GofileChildContent.serializer(),
@@ -261,8 +261,8 @@ class ChildContentTests {
                         "expire": 987654321,
                         "tags": "t,a,g,s"
                     }
-                """.trimIndent()
-            )
+                """.trimIndent(),
+            ),
         )
     }
 
@@ -277,10 +277,10 @@ class ChildContentTests {
                 listOf(
                     "_id1",
                     "_id2",
-                    "_id3"
+                    "_id3",
                 ),
                 "_code",
-                public = true
+                public = true,
             ),
             json.decodeFromString(
                 GofileChildContent.serializer(),
@@ -299,8 +299,8 @@ class ChildContentTests {
                         "code": "_code",
                         "public": true
                     }
-                """.trimIndent()
-            )
+                """.trimIndent(),
+            ),
         )
     }
 }

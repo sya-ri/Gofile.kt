@@ -15,7 +15,7 @@ class ContentTests {
             """
                 "not-a-folder"
             """.trimIndent(),
-            json.encodeToString(GofileContent.serializer(), GofileContent.File)
+            json.encodeToString(GofileContent.serializer(), GofileContent.File),
         )
     }
 
@@ -53,9 +53,9 @@ class ContentTests {
                     listOf(),
                     12,
                     123.4,
-                    mapOf()
-                )
-            )
+                    mapOf(),
+                ),
+            ),
         )
     }
 
@@ -139,7 +139,7 @@ class ContentTests {
                     listOf(
                         "_id1",
                         "_id2",
-                        "_id3"
+                        "_id3",
                     ),
                     12,
                     123.4,
@@ -152,10 +152,10 @@ class ContentTests {
                             listOf(
                                 "_id11",
                                 "_id12",
-                                "_id13"
+                                "_id13",
                             ),
                             "_code1",
-                            false
+                            false,
                         ),
                         "_id2" to GofileChildContent.File(
                             "_id2",
@@ -168,7 +168,7 @@ class ContentTests {
                             "_mimetype2",
                             "_serverChoosen2",
                             "_directLink2",
-                            "_link2"
+                            "_link2",
                         ),
                         "_id3" to GofileChildContent.Folder(
                             "_id3",
@@ -181,11 +181,11 @@ class ContentTests {
                             password = true,
                             "_description3",
                             12345,
-                            listOf("t", "a", "g", "s", "3")
-                        )
-                    )
-                )
-            )
+                            listOf("t", "a", "g", "s", "3"),
+                        ),
+                    ),
+                ),
+            ),
         )
     }
 
@@ -197,8 +197,8 @@ class ContentTests {
                 GofileContent.serializer(),
                 """
                     "not-a-folder"
-                """.trimIndent()
-            )
+                """.trimIndent(),
+            ),
         )
     }
 
@@ -216,7 +216,7 @@ class ContentTests {
                 listOf(),
                 12,
                 123.0,
-                mapOf()
+                mapOf(),
             ),
             json.decodeFromString(
                 GofileContent.serializer(),
@@ -237,8 +237,8 @@ class ContentTests {
                         "contents": {
                         }
                     }
-                """.trimIndent()
-            )
+                """.trimIndent(),
+            ),
         )
     }
 
@@ -256,7 +256,7 @@ class ContentTests {
                 listOf(
                     "_id1",
                     "_id2",
-                    "_id3"
+                    "_id3",
                 ),
                 12,
                 123.0,
@@ -269,10 +269,10 @@ class ContentTests {
                         listOf(
                             "_id11",
                             "_id12",
-                            "_id13"
+                            "_id13",
                         ),
                         "_code1",
-                        false
+                        false,
                     ),
                     "_id2" to GofileChildContent.File(
                         "_id2",
@@ -286,7 +286,7 @@ class ContentTests {
                         "_serverChoosen2",
                         "_directLink2",
                         "_link2",
-                        "_thumbnail2"
+                        "_thumbnail2",
                     ),
                     "_id3" to GofileChildContent.Folder(
                         "_id3",
@@ -299,9 +299,9 @@ class ContentTests {
                         password = true,
                         "_description3",
                         12345,
-                        listOf("t", "a", "g", "s", "3")
-                    )
-                )
+                        listOf("t", "a", "g", "s", "3"),
+                    ),
+                ),
             ),
             json.decodeFromString(
                 GofileContent.serializer(),
@@ -369,8 +369,8 @@ class ContentTests {
                             }
                         }
                     }
-                """.trimIndent()
-            )
+                """.trimIndent(),
+            ),
         )
     }
 }

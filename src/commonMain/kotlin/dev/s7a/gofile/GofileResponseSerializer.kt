@@ -28,14 +28,14 @@ internal class GofileResponseSerializer<T>(private val dataSerializer: KSerializ
             buildClassSerialDescriptor("Ok") {
                 element<String>("status")
                 element("data", dataSerializer.descriptor)
-            }
+            },
         )
         element(
             "Error",
             buildClassSerialDescriptor("Error") {
                 element<String>("status")
                 element<JsonObject>("data", isOptional = true)
-            }
+            },
         )
     }
 

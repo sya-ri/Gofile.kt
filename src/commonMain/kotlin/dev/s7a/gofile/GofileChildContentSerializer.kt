@@ -46,7 +46,7 @@ public class GofileChildContentSerializer : KSerializer<GofileChildContent> {
                 element<String>("directLink")
                 element<String>("link")
                 element<String?>("thumbnail", isOptional = true)
-            }
+            },
         )
         element(
             "Folder",
@@ -63,7 +63,7 @@ public class GofileChildContentSerializer : KSerializer<GofileChildContent> {
                 element<String?>("description", isOptional = true)
                 element<Long?>("expire", isOptional = true)
                 element<String>("tags", isOptional = true)
-            }
+            },
         )
     }
 

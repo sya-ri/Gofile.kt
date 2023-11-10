@@ -20,5 +20,5 @@ public data class GofileUploadFileResponse(
     val fileId: String,
     val fileName: String,
     val md5: String,
-    val guestToken: String? = null
+    val guestToken: String? = null,
 )

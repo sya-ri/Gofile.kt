@@ -1,6 +1,5 @@
 import dev.s7a.gofile.GofileGetServerResponse
 import dev.s7a.gofile.GofileResponse
-import dev.s7a.gofile.GofileUploadFileResponse
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json

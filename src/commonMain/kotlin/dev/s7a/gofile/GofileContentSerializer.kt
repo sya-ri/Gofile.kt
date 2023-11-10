@@ -38,7 +38,7 @@ public class GofileContentSerializer : KSerializer<GofileContent> {
     override val descriptor: SerialDescriptor = buildSerialDescriptor("GofileContent", PolymorphicKind.SEALED) {
         element(
             "File",
-            PrimitiveSerialDescriptor("File", PrimitiveKind.STRING)
+            PrimitiveSerialDescriptor("File", PrimitiveKind.STRING),
         )
         element(
             "Folder",
@@ -55,7 +55,7 @@ public class GofileContentSerializer : KSerializer<GofileContent> {
                 element<Int>("totalDownloadCount")
                 element<Double>("totalSize")
                 element("contents", mapSerialDescriptor(String.serializer().descriptor, GofileChildContent.serializer().descriptor))
-            }
+            },
         )
     }
 

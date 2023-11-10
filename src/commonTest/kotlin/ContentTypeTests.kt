@@ -12,13 +12,13 @@ class ContentTypeTests {
             """
                 "file"
             """.trimIndent(),
-            Json.encodeToString(GofileContentType.File)
+            Json.encodeToString(GofileContentType.File),
         )
         assertEquals(
             """
                 "folder"
             """.trimIndent(),
-            Json.encodeToString(GofileContentType.Folder)
+            Json.encodeToString(GofileContentType.Folder),
         )
     }
 
@@ -29,16 +29,16 @@ class ContentTypeTests {
             Json.decodeFromString(
                 """
                     "file"
-                """.trimIndent()
-            )
+                """.trimIndent(),
+            ),
         )
         assertEquals(
             GofileContentType.Folder,
             Json.decodeFromString(
                 """
                     "folder"
-                """.trimIndent()
-            )
+                """.trimIndent(),
+            ),
         )
     }
 }

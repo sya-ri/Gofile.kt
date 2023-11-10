@@ -8,11 +8,8 @@ import io.ktor.http.headersOf
 import io.ktor.utils.io.ByteReadChannel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import java.nio.file.Files
-import kotlin.io.path.Path
 import kotlin.io.path.createTempDirectory
 import kotlin.test.Test
-import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -37,7 +34,7 @@ class TestsJvm {
                         }
                     """.trimIndent().let(::ByteReadChannel),
                     status = HttpStatusCode.OK,
-                    headers = headersOf(HttpHeaders.ContentType, "application/json")
+                    headers = headersOf(HttpHeaders.ContentType, "application/json"),
                 )
             }
             val directory = createTempDirectory()
@@ -46,7 +43,7 @@ class TestsJvm {
                 """
                     Hello!!
                     This is a test message.
-                """.trimIndent()
+                """.trimIndent(),
             )
             assertTrue(GofileClient(mockEngine).uploadFile(file, "text/plain", server = "store1").isSuccess)
         }

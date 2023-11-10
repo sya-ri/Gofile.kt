@@ -54,7 +54,7 @@ public sealed class GofileChildContent {
         val serverChoosen: String,
         val directLink: String,
         val link: String,
-        val thumbnail: String? = null
+        val thumbnail: String? = null,
     ) : GofileChildContent() {
         override val type: GofileContentType = GofileContentType.File
     }
@@ -79,7 +79,7 @@ public sealed class GofileChildContent {
         val password: Boolean = false,
         val description: String? = null,
         val expire: Long? = null,
-        val tags: List<String> = emptyList()
+        val tags: List<String> = emptyList(),
     ) : GofileChildContent() {
         override val type: GofileContentType = GofileContentType.Folder
     }

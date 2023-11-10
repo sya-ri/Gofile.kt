@@ -26,5 +26,5 @@ public data class GofileGetAccountDetailsResponse(
     val filesCount: Int,
     val foldersCount: Int? = null,
     val totalSize: Double,
-    val totalDownloadCount: Int? = null
+    val totalDownloadCount: Int? = null,
 )

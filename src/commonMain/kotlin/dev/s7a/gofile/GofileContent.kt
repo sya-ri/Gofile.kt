@@ -45,7 +45,7 @@ public sealed class GofileContent {
         val childs: List<String>,
         val totalDownloadCount: Int,
         val totalSize: Double,
-        val contents: Map<String, GofileChildContent>
+        val contents: Map<String, GofileChildContent>,
     ) : GofileContent() {
         init {
             require(childs.size == contents.size && childs.toSet() == contents.keys) {
