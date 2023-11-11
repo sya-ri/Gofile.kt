@@ -1,3 +1,4 @@
+import org.gradle.configurationcache.extensions.capitalized
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
@@ -175,6 +176,18 @@ publishing {
             scm {
                 url.set("https://github.com/sya-ri/Gofile.kt")
             }
+        }
+    }
+}
+
+afterEvaluate {
+    val targetNames = kotlin.targets.names.map(String::capitalized)
+    val publishTasks = targetNames.mapNotNull { tasks.findByName("publish${it}ToMavenRepository") }
+    val signTasks = targetNames.mapNotNull { tasks.findByName("sign${it}Publication") }
+
+    publishTasks.forEach { publishTask ->
+        signTasks.forEach { signTask ->
+            publishTask.dependsOn(signTask)
         }
     }
 }
