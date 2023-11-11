@@ -127,16 +127,16 @@ public class GofileClient(private val client: HttpClient) {
     }
 
     /**
-     * Set an option on a folder.
+     * Set an option on a folder or file.
      *
      * `https://api.gofile.io/setOption`
      *
-     * @param folderId The folder ID.
+     * @param contentId The contet ID.
      * @param option The option.
      * @param token The access token of an account. Can be retrieved from the profile page.
      */
-    public suspend fun setOption(folderId: String, option: GofileOption, token: String): Result<Unit> {
-        return request(GofileRequest.SetOption(folderId, option, token))
+    public suspend fun setOption(contentId: String, option: GofileOption, token: String): Result<Unit> {
+        return request(GofileRequest.SetOption(contentId, option, token))
     }
 
     /**
