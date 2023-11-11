@@ -182,7 +182,7 @@ publishing {
 
 afterEvaluate {
     val targetNames = kotlin.targets.names.map(String::capitalized)
-    val publishTasks = targetNames.mapNotNull { tasks.findByName("publish${it}ToMavenRepository") }
+    val publishTasks = targetNames.mapNotNull { tasks.findByName("publish${it}PublicationToMavenRepository") }
     val signTasks = targetNames.mapNotNull { tasks.findByName("sign${it}Publication") }
 
     publishTasks.forEach { publishTask ->
