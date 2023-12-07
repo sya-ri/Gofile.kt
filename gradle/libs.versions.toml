@@ -7,7 +7,7 @@ dokka = "1.9.10"
 shadow = "8.1.1"
 
 # Libraries
-ktor = "2.3.6"
+ktor = "2.3.7"
 kotlinx-coroutines = "1.7.3"
 okio = "3.6.0"
 
