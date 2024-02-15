@@ -8,7 +8,7 @@ shadow = "8.1.1"
 
 # Libraries
 ktor = "2.3.8"
-kotlinx-coroutines = "1.7.3"
+kotlinx-coroutines = "1.8.0"
 okio = "3.8.0"
 
 [libraries]
