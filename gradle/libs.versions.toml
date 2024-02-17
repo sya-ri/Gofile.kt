@@ -2,7 +2,7 @@
 # Plugins
 kotlin = "1.9.22"
 kotlinter = "4.2.0"
-kotlinx-kover = "0.7.5"
+kotlinx-kover = "0.7.6"
 dokka = "1.9.10"
 shadow = "8.1.1"
 
